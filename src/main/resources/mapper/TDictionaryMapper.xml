@@ -7,6 +7,7 @@
     <result column="t_name" jdbcType="VARCHAR" property="tName" />
     <result column="t_description" jdbcType="VARCHAR" property="tDescription" />
   </resultMap>
+
   <insert id="insert" parameterType="com.plz.modules.model.TDictionary">
     insert into `t_dictionary` (t_type, t_code, t_name, `t_description`)
     values (#{tType,jdbcType=VARCHAR}, #{tCode,jdbcType=VARCHAR}, #{tName,jdbcType=VARCHAR}, 

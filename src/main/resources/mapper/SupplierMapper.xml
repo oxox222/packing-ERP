@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.plz.modules.dao.SupplierMapper">
+  <resultMap id="BaseResultMap" type="com.plz.modules.model.Supplier">
+    <result column="t_id" jdbcType="INTEGER" property="tId" />
+    <result column="t_name" jdbcType="VARCHAR" property="tName" />
+    <result column="t_leader" jdbcType="VARCHAR" property="tLeader" />
+    <result column="t_discount" jdbcType="REAL" property="tDiscount" />
+    <result column="t_mobilPhone" jdbcType="VARCHAR" property="tMobilphone" />
+    <result column="t_phone" jdbcType="VARCHAR" property="tPhone" />
+    <result column="t_mail" jdbcType="VARCHAR" property="tMail" />
+    <result column="t_fax" jdbcType="VARCHAR" property="tFax" />
+    <result column="t_website" jdbcType="VARCHAR" property="tWebsite" />
+    <result column="t_addr" jdbcType="VARCHAR" property="tAddr" />
+    <result column="t_addrDetail" jdbcType="VARCHAR" property="tAddrdetail" />
+    <result column="t_bank" jdbcType="VARCHAR" property="tBank" />
+    <result column="t_bank_account" jdbcType="VARCHAR" property="tBankAccount" />
+    <result column="t_bank_accountName" jdbcType="VARCHAR" property="tBankAccountname" />
+    <result column="t_sort" jdbcType="INTEGER" property="tSort" />
+    <result column="t_remark" jdbcType="VARCHAR" property="tRemark" />
+  </resultMap>
+
+  <insert id="insert" parameterType="com.plz.modules.model.Supplier">
+    insert into t_supplier (t_id, t_name, t_leader, 
+      t_discount, t_mobilPhone, t_phone, 
+      t_mail, t_fax, t_website, 
+      t_addr, t_addrDetail, t_bank, 
+      t_bank_account, t_bank_accountName, t_sort, 
+      t_remark)
+    values (#{tId,jdbcType=INTEGER}, #{tName,jdbcType=VARCHAR}, #{tLeader,jdbcType=VARCHAR}, 
+      #{tDiscount,jdbcType=REAL}, #{tMobilphone,jdbcType=VARCHAR}, #{tPhone,jdbcType=VARCHAR}, 
+      #{tMail,jdbcType=VARCHAR}, #{tFax,jdbcType=VARCHAR}, #{tWebsite,jdbcType=VARCHAR}, 
+      #{tAddr,jdbcType=VARCHAR}, #{tAddrdetail,jdbcType=VARCHAR}, #{tBank,jdbcType=VARCHAR}, 
+      #{tBankAccount,jdbcType=VARCHAR}, #{tBankAccountname,jdbcType=VARCHAR}, #{tSort,jdbcType=INTEGER}, 
+      #{tRemark,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.plz.modules.model.Supplier">
+    insert into t_supplier
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        t_id,
+      </if>
+      <if test="tName != null">
+        t_name,
+      </if>
+      <if test="tLeader != null">
+        t_leader,
+      </if>
+      <if test="tDiscount != null">
+        t_discount,
+      </if>
+      <if test="tMobilphone != null">
+        t_mobilPhone,
+      </if>
+      <if test="tPhone != null">
+        t_phone,
+      </if>
+      <if test="tMail != null">
+        t_mail,
+      </if>
+      <if test="tFax != null">
+        t_fax,
+      </if>
+      <if test="tWebsite != null">
+        t_website,
+      </if>
+      <if test="tAddr != null">
+        t_addr,
+      </if>
+      <if test="tAddrdetail != null">
+        t_addrDetail,
+      </if>
+      <if test="tBank != null">
+        t_bank,
+      </if>
+      <if test="tBankAccount != null">
+        t_bank_account,
+      </if>
+      <if test="tBankAccountname != null">
+        t_bank_accountName,
+      </if>
+      <if test="tSort != null">
+        t_sort,
+      </if>
+      <if test="tRemark != null">
+        t_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        #{tId,jdbcType=INTEGER},
+      </if>
+      <if test="tName != null">
+        #{tName,jdbcType=VARCHAR},
+      </if>
+      <if test="tLeader != null">
+        #{tLeader,jdbcType=VARCHAR},
+      </if>
+      <if test="tDiscount != null">
+        #{tDiscount,jdbcType=REAL},
+      </if>
+      <if test="tMobilphone != null">
+        #{tMobilphone,jdbcType=VARCHAR},
+      </if>
+      <if test="tPhone != null">
+        #{tPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="tMail != null">
+        #{tMail,jdbcType=VARCHAR},
+      </if>
+      <if test="tFax != null">
+        #{tFax,jdbcType=VARCHAR},
+      </if>
+      <if test="tWebsite != null">
+        #{tWebsite,jdbcType=VARCHAR},
+      </if>
+      <if test="tAddr != null">
+        #{tAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="tAddrdetail != null">
+        #{tAddrdetail,jdbcType=VARCHAR},
+      </if>
+      <if test="tBank != null">
+        #{tBank,jdbcType=VARCHAR},
+      </if>
+      <if test="tBankAccount != null">
+        #{tBankAccount,jdbcType=VARCHAR},
+      </if>
+      <if test="tBankAccountname != null">
+        #{tBankAccountname,jdbcType=VARCHAR},
+      </if>
+      <if test="tSort != null">
+        #{tSort,jdbcType=INTEGER},
+      </if>
+      <if test="tRemark != null">
+        #{tRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+</mapper>

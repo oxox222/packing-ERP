@@ -1,4 +1,4 @@
-package com.example.sale.util;
+package com.plz.modules.util;
 
 import java.util.UUID;
 

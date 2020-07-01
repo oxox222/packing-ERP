@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.plz.modules.dao.FetchGoodsMapper">
+  <resultMap id="BaseResultMap" type="com.plz.modules.model.FetchGoods">
+    <result column="t_id" jdbcType="INTEGER" property="tId" />
+    <result column="t_recordId" jdbcType="INTEGER" property="tRecordid" />
+    <result column="t_name" jdbcType="VARCHAR" property="tName" />
+    <result column="t_price" jdbcType="DOUBLE" property="tPrice" />
+    <result column="t_discount" jdbcType="REAL" property="tDiscount" />
+    <result column="t_paid" jdbcType="DOUBLE" property="tPaid" />
+    <result column="t_num" jdbcType="INTEGER" property="tNum" />
+    <result column="t_size" jdbcType="VARCHAR" property="tSize" />
+    <result column="t_type" jdbcType="VARCHAR" property="tType" />
+  </resultMap>
+
+  <insert id="insert" parameterType="com.plz.modules.model.FetchGoods">
+    insert into t_fetch_goods (t_id, t_recordId, t_name, 
+      t_price, t_discount, t_paid, 
+      t_num, t_size, t_type)
+    values (#{tId,jdbcType=INTEGER}, #{tRecordid,jdbcType=INTEGER}, #{tName,jdbcType=VARCHAR}, 
+      #{tPrice,jdbcType=DOUBLE}, #{tDiscount,jdbcType=REAL}, #{tPaid,jdbcType=DOUBLE}, 
+      #{tNum,jdbcType=INTEGER}, #{tSize,jdbcType=VARCHAR}, #{tType,jdbcType=VARCHAR})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.plz.modules.model.FetchGoods">
+    insert into t_fetch_goods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        t_id,
+      </if>
+      <if test="tRecordid != null">
+        t_recordId,
+      </if>
+      <if test="tName != null">
+        t_name,
+      </if>
+      <if test="tPrice != null">
+        t_price,
+      </if>
+      <if test="tDiscount != null">
+        t_discount,
+      </if>
+      <if test="tPaid != null">
+        t_paid,
+      </if>
+      <if test="tNum != null">
+        t_num,
+      </if>
+      <if test="tSize != null">
+        t_size,
+      </if>
+      <if test="tType != null">
+        t_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        #{tId,jdbcType=INTEGER},
+      </if>
+      <if test="tRecordid != null">
+        #{tRecordid,jdbcType=INTEGER},
+      </if>
+      <if test="tName != null">
+        #{tName,jdbcType=VARCHAR},
+      </if>
+      <if test="tPrice != null">
+        #{tPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="tDiscount != null">
+        #{tDiscount,jdbcType=REAL},
+      </if>
+      <if test="tPaid != null">
+        #{tPaid,jdbcType=DOUBLE},
+      </if>
+      <if test="tNum != null">
+        #{tNum,jdbcType=INTEGER},
+      </if>
+      <if test="tSize != null">
+        #{tSize,jdbcType=VARCHAR},
+      </if>
+      <if test="tType != null">
+        #{tType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

@@ -24,7 +24,7 @@ public class DictionaryController {
     private DictionaryService dictionaryService;
 
     @RequestMapping(value = "/getAllDictionary", method = RequestMethod.POST)
-    public List<TDictionary> getAllDictionary(@RequestParam("type") String type) {
+    public List<TDictionary> getAllDictionary(@RequestParam String type) {
         return dictionaryService.getAllDictionary(type);
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * @ClassName: DictionaryServiceImpl
- * @Description: TODO
+ * @Description: 字段管理业务层
  * @Author: PANLVZ
  * @Date: 2020/6/30
  */

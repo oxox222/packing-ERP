@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.plz.modules.dao.WarehouseMapper">
+  <resultMap id="BaseResultMap" type="com.plz.modules.model.Warehouse">
+    <result column="t_id" jdbcType="INTEGER" property="tId" />
+    <result column="t_name" jdbcType="VARCHAR" property="tName" />
+    <result column="t_leader" jdbcType="VARCHAR" property="tLeader" />
+    <result column="t_sort" jdbcType="INTEGER" property="tSort" />
+    <result column="t_remark" jdbcType="VARCHAR" property="tRemark" />
+    <result column="t_status" jdbcType="TINYINT" property="tStatus" />
+  </resultMap>
+
+  <resultMap id="WarehouseListResultMap" type="com.plz.modules.vo.WarehouseListVo">
+    <result column="t_id" jdbcType="INTEGER" property="id" />
+    <result column="t_name" jdbcType="VARCHAR" property="name" />
+    <result column="t_leader" jdbcType="VARCHAR" property="leader" />
+  </resultMap>
+
+  <insert id="insert" parameterType="com.plz.modules.model.Warehouse">
+    insert into t_warehouse (t_id, t_name, t_leader, 
+      t_sort, t_remark, t_status
+      )
+    values (#{tId,jdbcType=INTEGER}, #{tName,jdbcType=VARCHAR}, #{tLeader,jdbcType=VARCHAR}, 
+      #{tSort,jdbcType=INTEGER}, #{tRemark,jdbcType=VARCHAR}, #{tStatus,jdbcType=TINYINT}
+      )
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.plz.modules.model.Warehouse">
+    insert into t_warehouse
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        t_id,
+      </if>
+      <if test="tName != null">
+        t_name,
+      </if>
+      <if test="tLeader != null">
+        t_leader,
+      </if>
+      <if test="tSort != null">
+        t_sort,
+      </if>
+      <if test="tRemark != null">
+        t_remark,
+      </if>
+      <if test="tStatus != null">
+        t_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="tId != null">
+        #{tId,jdbcType=INTEGER},
+      </if>
+      <if test="tName != null">
+        #{tName,jdbcType=VARCHAR},
+      </if>
+      <if test="tLeader != null">
+        #{tLeader,jdbcType=VARCHAR},
+      </if>
+      <if test="tSort != null">
+        #{tSort,jdbcType=INTEGER},
+      </if>
+      <if test="tRemark != null">
+        #{tRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="tStatus != null">
+        #{tStatus,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="selectList" resultMap="WarehouseListResultMap">
+    SELECT t_id, t_name, t_leader FROM t_warehouse WHERE 1 = 1
+    <if test="status != null">
+      AND t_status = #{status}
+    </if>
+    ORDER BY t_sort
+  </select>
+  
+  <select id="queryDetails" resultMap="BaseResultMap">
+    SELECT * FROM t_warehouse WHERE t_id = #{id}
+  </select>
+</mapper>
