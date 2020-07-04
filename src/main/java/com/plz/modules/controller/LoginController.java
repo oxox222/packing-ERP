@@ -1,5 +1,6 @@
 package com.plz.modules.controller;
 
+import com.plz.modules.model.Result;
 import com.plz.modules.model.TUser;
 import com.plz.modules.service.LoginService;
 import org.slf4j.Logger;
@@ -29,7 +30,7 @@ public class LoginController {
     private LoginService loginService;
 
     @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
-    public String Login(@RequestBody TUser tUser, HttpSession session) throws LoginException {
+    public Result Login(@RequestBody TUser tUser, HttpSession session) throws LoginException {
         TUser localUser = loginService.getLogin(tUser);
         if (localUser == null) {
             throw new LoginException("该用户不存在");
@@ -38,7 +39,7 @@ public class LoginController {
             throw new LoginException("密码错误");
         }
         session.setAttribute("user", tUser);
-        return "登录成功";
+        return Result.success("登录成功");
     }
 
 }

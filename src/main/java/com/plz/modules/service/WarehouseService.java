@@ -1,8 +1,9 @@
 package com.plz.modules.service;
 
 import com.github.pagehelper.PageInfo;
+import com.plz.modules.model.StatusBaseQuery;
 import com.plz.modules.model.Warehouse;
-import com.plz.modules.vo.WarehouseListVo;
+import com.plz.modules.entity.WarehouseListDTO;
 
 import java.util.List;
 
@@ -16,12 +17,10 @@ public interface WarehouseService {
 
     /**
      * 查询仓库列表
-     * @param status
-     * @param pageNum
-     * @param pageSize
+     * @param statusBaseQuery
      * @return
      */
-    PageInfo<List<WarehouseListVo>> queryWarehouseList(Boolean status, Integer pageNum, Integer pageSize);
+    PageInfo<List<WarehouseListDTO>> queryWarehouseList(StatusBaseQuery statusBaseQuery);
 
     /**
      * 查询仓库详情

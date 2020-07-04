@@ -28,6 +28,8 @@ public class FetchRecord implements Serializable {
 
     private String tType;
 
+    private Integer tCustomid;
+
     private String tPhoto;
 
     private static final long serialVersionUID = 1L;
@@ -126,6 +128,14 @@ public class FetchRecord implements Serializable {
 
     public void settType(String tType) {
         this.tType = tType == null ? null : tType.trim();
+    }
+
+    public Integer gettCustomid() {
+        return tCustomid;
+    }
+
+    public void settCustomid(Integer tCustomid) {
+        this.tCustomid = tCustomid;
     }
 
     public String gettPhoto() {

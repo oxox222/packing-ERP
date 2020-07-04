@@ -6,11 +6,11 @@ CREATE TABLE `t_save_record` (
 `t_warehouseId` int(11) NOT NULL COMMENT '仓库',
 `t_discount` float(11,0) NOT NULL DEFAULT 1.0 COMMENT '折扣',
 `t_paid` double(11,0) NOT NULL DEFAULT 0.00 COMMENT '实付金额',
-`t_create_date` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '业务日期',
 `t_remark` varchar(255) NULL COMMENT '备注',
 `t_photo` longtext NULL COMMENT '图片',
 `t_supplierId` int(255) NOT NULL COMMENT '供应商id',
 `t_type` varchar(11) NOT NULL COMMENT '入库类型',
+`t_create_date` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '业务日期',
 PRIMARY KEY (`t_id`) 
 )
 COMMENT = '入库单表';
@@ -30,7 +30,7 @@ PRIMARY KEY (`t_id`)
 COMMENT = '入库商品表';
 
 CREATE TABLE `t_supplier` (
-`t_id` int(255) NOT NULL COMMENT '主键',
+`t_id` int(255) NOT NULL AUTO_INCREMENT COMMENT '主键',
 `t_name` varchar(255) NOT NULL COMMENT '供应商名称',
 `t_leader` varchar(255) NULL COMMENT '负责人',
 `t_discount` float(11,0) NOT NULL COMMENT '折扣',
@@ -51,7 +51,7 @@ PRIMARY KEY (`t_id`)
 COMMENT = '供应商表';
 
 CREATE TABLE `t_fetch_record` (
-`t_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+`t_id` int(255) NOT NULL AUTO_INCREMENT COMMENT '主键',
 `t_warehouseId` int(11) NOT NULL COMMENT '仓库',
 `t_odd` varchar(255) NOT NULL COMMENT '单号',
 `t_discount` float(11,0) NOT NULL DEFAULT 1.0 COMMENT '折扣',
@@ -59,17 +59,18 @@ CREATE TABLE `t_fetch_record` (
 `t_other_costName` varchar(255) NULL COMMENT '其他费用名称',
 `t_paid` double(11,0) NOT NULL COMMENT '实收金额',
 `t_salesman` varchar(255) NULL COMMENT '销售员',
-`t_create_date` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '业务日期',
 `t_deliverWay` varchar(255) NULL COMMENT '发货方式',
 `t_remake` varchar(255) NULL COMMENT '备注',
 `t_photo` longtext NULL COMMENT '图片',
 `t_type` varchar(11) NOT NULL COMMENT '出库类型',
+`t_customId` int(255) NOT NULL COMMENT '顾客id',
+`t_create_date` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '业务日期',
 PRIMARY KEY (`t_id`) 
 )
 COMMENT = '出库单表';
 
 CREATE TABLE `t_warehouse` (
-`t_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+`t_id` int(255) NOT NULL AUTO_INCREMENT COMMENT '主键',
 `t_name` varchar(255) NOT NULL COMMENT '仓库名称',
 `t_leader` varchar(255) NOT NULL COMMENT '负责人',
 `t_sort` int(255) NULL COMMENT '排序',
@@ -100,4 +101,28 @@ CREATE TABLE `t_dictionary` (
 `t_description` varchar(255) NULL COMMENT '字典描述'
 )
 COMMENT = '字典表';
+
+CREATE TABLE `t_custom` (
+    `t_id` int(255) NOT NULL COMMENT '主键',
+    `t_name` varchar(255) NOT NULL COMMENT '客户名称',
+    `t_contacts` varchar(255) NULL COMMENT '联系人',
+    `t_mobilPhone` varchar(255) NULL COMMENT '联系人手机号码',
+    `t_customType` int(11) NULL COMMENT '客户分类',
+    `t_status` tinyint(11) NOT NULL DEFAULT 1 COMMENT '是否启用',
+    `t_discount` float(11,0) NULL DEFAULT 1 COMMENT '折扣',
+    `t_salesmanId` int(255) NULL COMMENT '所属销售员',
+    `t_phone` varchar(255) NULL COMMENT '电话',
+    `t_mail` varchar(255) NULL COMMENT '邮箱',
+    `t_fax` varchar(255) NULL COMMENT '传真',
+    `t_addr` varchar(255) NULL COMMENT '地区',
+    `t_addrDetail` varchar(255) NULL COMMENT '详细地址',
+    `t_deliverWay` varchar(255) NULL COMMENT '发货方式',
+    `t_bank` varchar(255) NULL COMMENT '开户银行',
+    `t_bankAccountName` varchar(255) NULL COMMENT '银行账户',
+    `t_bankAccount` varchar(255) NULL COMMENT '银行账号',
+    `t_sort` int(255) NULL COMMENT '排序',
+    `t_remark` varchar(255) NULL COMMENT '备注',
+    PRIMARY KEY (`t_id`)
+)
+COMMENT = '客户表';
 

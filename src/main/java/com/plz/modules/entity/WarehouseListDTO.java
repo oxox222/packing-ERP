@@ -1,15 +1,15 @@
-package com.plz.modules.vo;
+package com.plz.modules.entity;
 
 import lombok.Data;
 
 /**
  * @ClassName: WarehouseListVo
- * @Description: 查询仓库列表vo
+ * @Description: 仓库列表
  * @Author: PANLVZ
  * @Date: 2020/6/30
  */
 @Data
-public class WarehouseListVo {
+public class WarehouseListDTO {
 
     private Integer id;
 

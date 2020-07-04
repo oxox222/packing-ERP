@@ -3,9 +3,10 @@ package com.plz.modules.serviceImpl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.plz.modules.dao.*;
+import com.plz.modules.model.StatusBaseQuery;
 import com.plz.modules.model.Warehouse;
 import com.plz.modules.service.WarehouseService;
-import com.plz.modules.vo.WarehouseListVo;
+import com.plz.modules.entity.WarehouseListDTO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -41,9 +42,9 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
-    public PageInfo<List<WarehouseListVo>> queryWarehouseList(Boolean status, Integer pageNum, Integer pageSiz) {
-        PageHelper.startPage(pageNum, pageSiz);
-        List<WarehouseListVo> list = warehouseMapper.selectList();
+    public PageInfo<List<WarehouseListDTO>> queryWarehouseList(StatusBaseQuery statusBaseQuery) {
+        PageHelper.startPage(statusBaseQuery.getPageNum(), statusBaseQuery.getPageSize());
+        List<WarehouseListDTO> list = warehouseMapper.selectList(statusBaseQuery.getStatus());
         PageInfo pageInfo = new PageInfo(list);
         return pageInfo;
     }

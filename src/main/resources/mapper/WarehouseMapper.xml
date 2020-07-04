@@ -10,7 +10,7 @@
     <result column="t_status" jdbcType="TINYINT" property="tStatus" />
   </resultMap>
 
-  <resultMap id="WarehouseListResultMap" type="com.plz.modules.vo.WarehouseListVo">
+  <resultMap id="WarehouseListResultMap" type="com.plz.modules.entity.WarehouseListDTO">
     <result column="t_id" jdbcType="INTEGER" property="id" />
     <result column="t_name" jdbcType="VARCHAR" property="name" />
     <result column="t_leader" jdbcType="VARCHAR" property="leader" />

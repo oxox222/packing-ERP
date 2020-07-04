@@ -4,18 +4,30 @@ import com.plz.modules.emun.ResultEnum;
 
 /**
  * @ClassName: Result
- * @Description: TODO
+ * @Description: 封装返回结果
  * @Author: PANLVZ
  * @Date: 2020-03-06
  */
 public class Result<T> {
 
+    /**
+     * 状态 true成果  false失败
+     */
     private boolean status;
 
+    /**
+     * 状态码
+     */
     private String statusCode;
 
+    /**
+     * 返回信息
+     */
     private String statusMessage;
 
+    /**
+     * 结果集
+     */
     private T result;
 
     public static <T> Result success(T date) {

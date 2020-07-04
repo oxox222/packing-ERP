@@ -14,28 +14,26 @@
     <result column="t_deliverWay" jdbcType="VARCHAR" property="tDeliverway" />
     <result column="t_remake" jdbcType="VARCHAR" property="tRemake" />
     <result column="t_type" jdbcType="VARCHAR" property="tType" />
+    <result column="t_customId" jdbcType="INTEGER" property="tCustomid" />
   </resultMap>
   <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.plz.modules.model.FetchRecord">
     <result column="t_photo" jdbcType="LONGVARCHAR" property="tPhoto" />
   </resultMap>
-
   <sql id="Blob_Column_List">
     t_photo
   </sql>
-
   <insert id="insert" parameterType="com.plz.modules.model.FetchRecord">
     insert into t_fetch_record (t_id, t_warehouseId, t_odd, 
       t_discount, t_other_cost, t_other_costName, 
       t_paid, t_salesman, t_create_date, 
       t_deliverWay, t_remake, t_type, 
-      t_photo)
+      t_customId, t_photo)
     values (#{tId,jdbcType=INTEGER}, #{tWarehouseid,jdbcType=INTEGER}, #{tOdd,jdbcType=VARCHAR}, 
       #{tDiscount,jdbcType=REAL}, #{tOtherCost,jdbcType=DOUBLE}, #{tOtherCostname,jdbcType=VARCHAR}, 
       #{tPaid,jdbcType=DOUBLE}, #{tSalesman,jdbcType=VARCHAR}, #{tCreateDate,jdbcType=TIMESTAMP}, 
       #{tDeliverway,jdbcType=VARCHAR}, #{tRemake,jdbcType=VARCHAR}, #{tType,jdbcType=VARCHAR}, 
-      #{tPhoto,jdbcType=LONGVARCHAR})
+      #{tCustomid,jdbcType=INTEGER}, #{tPhoto,jdbcType=LONGVARCHAR})
   </insert>
-
   <insert id="insertSelective" parameterType="com.plz.modules.model.FetchRecord">
     insert into t_fetch_record
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -74,6 +72,9 @@
       </if>
       <if test="tType != null">
         t_type,
+      </if>
+      <if test="tCustomid != null">
+        t_customId,
       </if>
       <if test="tPhoto != null">
         t_photo,
@@ -115,6 +116,9 @@
       </if>
       <if test="tType != null">
         #{tType,jdbcType=VARCHAR},
+      </if>
+      <if test="tCustomid != null">
+        #{tCustomid,jdbcType=INTEGER},
       </if>
       <if test="tPhoto != null">
         #{tPhoto,jdbcType=LONGVARCHAR},

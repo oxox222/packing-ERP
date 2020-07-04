@@ -1,9 +1,14 @@
 package com.plz.modules.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.plz.modules.model.Supplier;
 
-public interface SupplierMapper {
+import java.util.List;
+
+public interface SupplierMapper extends BaseMapper<Supplier> {
     int insert(Supplier record);
 
     int insertSelective(Supplier record);
+
+    List<Supplier> queryList();
 }

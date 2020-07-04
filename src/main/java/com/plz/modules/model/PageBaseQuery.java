@@ -11,15 +11,15 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class PageBase {
+public class PageBaseQuery {
 
     /**
      * 当前页
      */
-    private int pageNum;
+    private int pageNum = 1;
 
     /**
      * 每页大小
      */
-    private int pageSize;
+    private int pageSize = 10;
 }

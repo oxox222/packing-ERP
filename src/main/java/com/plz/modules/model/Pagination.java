@@ -19,7 +19,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Pagination<T> extends PageBase implements Serializable {
+public class Pagination<T> extends PageBaseQuery implements Serializable {
 
     private static final long serialVersionUID = -5500682167471390525L;
 

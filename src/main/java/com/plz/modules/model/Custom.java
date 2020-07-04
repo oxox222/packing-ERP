@@ -7,8 +7,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 
-@TableName(value = "t_supplier")
-public class Supplier implements Serializable {
+@TableName("t_custom")
+public class Custom implements Serializable {
 
     /**
      * 主键
@@ -17,16 +17,34 @@ public class Supplier implements Serializable {
     private Integer tId;
 
     /**
-     * 供应商名称
+     * 客户名称
      */
     @TableField(value = "t_name")
     private String tName;
 
     /**
-     * 负责人
+     * 联系人
      */
-    @TableField(value = "t_leader")
-    private String tLeader;
+    @TableField(value = "t_contacts")
+    private String tContacts;
+
+    /**
+     * 联系人手机号码
+     */
+    @TableField(value = "t_mobilPhone")
+    private String tMobilphone;
+
+    /**
+     * 客户类型
+     */
+    @TableField(value = "t_customType")
+    private Integer tCustomtype;
+
+    /**
+     * 是否启用
+     */
+    @TableField(value = "t_status")
+    private Boolean tStatus;
 
     /**
      * 折扣
@@ -35,13 +53,13 @@ public class Supplier implements Serializable {
     private Float tDiscount;
 
     /**
-     * 手机号
+     * 所属销售员
      */
-    @TableField(value = "t_mobilPhone")
-    private String tMobilphone;
+    @TableField(value = "t_salesmanId")
+    private Integer tSalesmanid;
 
     /**
-     * 电话号
+     * 电话
      */
     @TableField(value = "t_phone")
     private String tPhone;
@@ -53,19 +71,13 @@ public class Supplier implements Serializable {
     private String tMail;
 
     /**
-     * 传真号码
+     * 传真
      */
     @TableField(value = "t_fax")
     private String tFax;
 
     /**
-     * 网址
-     */
-    @TableField(value = "t_website")
-    private String tWebsite;
-
-    /**
-     * 地区 ,分割
+     * 所属地区
      */
     @TableField(value = "t_addr")
     private String tAddr;
@@ -77,25 +89,31 @@ public class Supplier implements Serializable {
     private String tAddrdetail;
 
     /**
+     * 送货方式
+     */
+    @TableField(value = "t_deliverWay")
+    private String tDeliverway;
+
+    /**
      * 开户银行
      */
     @TableField(value = "t_bank")
     private String tBank;
 
     /**
+     * 银行账户
+     */
+    @TableField(value = "t_bankAccountName")
+    private String tBankaccountname;
+
+    /**
      * 银行账号
      */
-    @TableField(value = "t_bank_account")
-    private String tBankAccount;
+    @TableField(value = "t_bankAccount")
+    private String tBankaccount;
 
     /**
-     * 银行账户名
-     */
-    @TableField(value = "t_bank_accountName")
-    private String tBankAccountname;
-
-    /**
-     * 排序字段
+     * 排序
      */
     @TableField(value = "t_sort")
     private Integer tSort;
@@ -124,12 +142,36 @@ public class Supplier implements Serializable {
         this.tName = tName == null ? null : tName.trim();
     }
 
-    public String gettLeader() {
-        return tLeader;
+    public String gettContacts() {
+        return tContacts;
     }
 
-    public void settLeader(String tLeader) {
-        this.tLeader = tLeader == null ? null : tLeader.trim();
+    public void settContacts(String tContacts) {
+        this.tContacts = tContacts == null ? null : tContacts.trim();
+    }
+
+    public String gettMobilphone() {
+        return tMobilphone;
+    }
+
+    public void settMobilphone(String tMobilphone) {
+        this.tMobilphone = tMobilphone == null ? null : tMobilphone.trim();
+    }
+
+    public Integer gettCustomtype() {
+        return tCustomtype;
+    }
+
+    public void settCustomtype(Integer tCustomtype) {
+        this.tCustomtype = tCustomtype;
+    }
+
+    public Boolean gettStatus() {
+        return tStatus;
+    }
+
+    public void settStatus(Boolean tStatus) {
+        this.tStatus = tStatus;
     }
 
     public Float gettDiscount() {
@@ -140,12 +182,12 @@ public class Supplier implements Serializable {
         this.tDiscount = tDiscount;
     }
 
-    public String gettMobilphone() {
-        return tMobilphone;
+    public Integer gettSalesmanid() {
+        return tSalesmanid;
     }
 
-    public void settMobilphone(String tMobilphone) {
-        this.tMobilphone = tMobilphone == null ? null : tMobilphone.trim();
+    public void settSalesmanid(Integer tSalesmanid) {
+        this.tSalesmanid = tSalesmanid;
     }
 
     public String gettPhone() {
@@ -172,14 +214,6 @@ public class Supplier implements Serializable {
         this.tFax = tFax == null ? null : tFax.trim();
     }
 
-    public String gettWebsite() {
-        return tWebsite;
-    }
-
-    public void settWebsite(String tWebsite) {
-        this.tWebsite = tWebsite == null ? null : tWebsite.trim();
-    }
-
     public String gettAddr() {
         return tAddr;
     }
@@ -196,6 +230,14 @@ public class Supplier implements Serializable {
         this.tAddrdetail = tAddrdetail == null ? null : tAddrdetail.trim();
     }
 
+    public String gettDeliverway() {
+        return tDeliverway;
+    }
+
+    public void settDeliverway(String tDeliverway) {
+        this.tDeliverway = tDeliverway == null ? null : tDeliverway.trim();
+    }
+
     public String gettBank() {
         return tBank;
     }
@@ -204,20 +246,20 @@ public class Supplier implements Serializable {
         this.tBank = tBank == null ? null : tBank.trim();
     }
 
-    public String gettBankAccount() {
-        return tBankAccount;
+    public String gettBankaccountname() {
+        return tBankaccountname;
     }
 
-    public void settBankAccount(String tBankAccount) {
-        this.tBankAccount = tBankAccount == null ? null : tBankAccount.trim();
+    public void settBankaccountname(String tBankaccountname) {
+        this.tBankaccountname = tBankaccountname == null ? null : tBankaccountname.trim();
     }
 
-    public String gettBankAccountname() {
-        return tBankAccountname;
+    public String gettBankaccount() {
+        return tBankaccount;
     }
 
-    public void settBankAccountname(String tBankAccountname) {
-        this.tBankAccountname = tBankAccountname == null ? null : tBankAccountname.trim();
+    public void settBankaccount(String tBankaccount) {
+        this.tBankaccount = tBankaccount == null ? null : tBankaccount.trim();
     }
 
     public Integer gettSort() {

@@ -1,10 +1,12 @@
 package com.plz.modules.controller;
 
 import com.github.pagehelper.PageInfo;
+import com.plz.modules.entity.WarehouseListDTO;
 import com.plz.modules.model.Pagination;
+import com.plz.modules.model.Result;
+import com.plz.modules.model.StatusBaseQuery;
 import com.plz.modules.model.Warehouse;
 import com.plz.modules.service.WarehouseService;
-import com.plz.modules.vo.WarehouseListVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -27,24 +29,21 @@ public class WarehouseController {
      * 新增仓库
      * @param warehouse
      */
-    @RequestMapping(value = "/addWarehouse", method = RequestMethod.POST)
-    public void addWarehouse(@RequestBody Warehouse warehouse) {
+    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    public Result addWarehouse(@RequestBody Warehouse warehouse) {
         warehouseService.addWarehouse(warehouse);
+        return Result.success(null);
     }
 
     /**
      * 查询仓库列表
-     * @param status
-     * @param pageNum
-     * @param pageSize
+     * @param statusBaseQuery
      * @return
      */
-    @RequestMapping(value = "/queryWarehouseList", method = RequestMethod.POST)
-    public Pagination queryWarehouseList(@RequestParam Boolean status,
-                                         @RequestParam(required = false, defaultValue = "1") Integer pageNum,
-                                         @RequestParam(required = false, defaultValue = "10") Integer pageSize) {
-        PageInfo<List<WarehouseListVo>> result = warehouseService.queryWarehouseList(status, pageNum, pageSize);
-        return Pagination.of(result);
+    @RequestMapping(value = "/queryList", method = RequestMethod.POST)
+    public Result queryWarehouseList(@RequestBody StatusBaseQuery statusBaseQuery) {
+        PageInfo<List<WarehouseListDTO>> result = warehouseService.queryWarehouseList(statusBaseQuery);
+        return Result.success(Pagination.of(result));
     }
 
     /**
@@ -52,17 +51,19 @@ public class WarehouseController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/queryWarehouseDetails/{id}", method = RequestMethod.GET)
-    public Warehouse queryWarehouseDetails(@PathVariable("id") int id) {
-        return warehouseService.queryWarehouseDetails(id);
+    @RequestMapping(value = "/details/{id}", method = RequestMethod.GET)
+    public Result queryWarehouseDetails(@PathVariable("id") int id) {
+        return Result.success(warehouseService.queryWarehouseDetails(id));
     }
 
     /**
      * 编辑仓库信息
      * @param warehouse
      */
-    @RequestMapping(value = "/updateWarehouse", method = RequestMethod.PUT)
-    public void updateWarehouse(@RequestBody Warehouse warehouse) {
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    public Result updateWarehouse(@RequestBody Warehouse warehouse) {
         warehouseService.updateWarehouse(warehouse);
+        return Result.success(null);
     }
+
 }

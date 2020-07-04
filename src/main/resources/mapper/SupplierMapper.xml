@@ -20,6 +20,12 @@
     <result column="t_remark" jdbcType="VARCHAR" property="tRemark" />
   </resultMap>
 
+  <resultMap id="SupplierListResultMap" type="com.plz.modules.entity.SupplierListDTO">
+    <result column="t_id" jdbcType="INTEGER" property="id" />
+    <result column="t_name" jdbcType="VARCHAR" property="name" />
+    <result column="t_leader" jdbcType="VARCHAR" property="leader" />
+  </resultMap>
+
   <insert id="insert" parameterType="com.plz.modules.model.Supplier">
     insert into t_supplier (t_id, t_name, t_leader, 
       t_discount, t_mobilPhone, t_phone, 
@@ -138,4 +144,10 @@
       </if>
     </trim>
   </insert>
+
+  <select id="queryList" resultMap="SupplierListResultMap">
+    SELECT t_id, t_name, t_leader FROM t_supplier
+    WHERE 1 = 1
+    ORDER BY t_sort
+  </select>
 </mapper>

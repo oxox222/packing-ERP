@@ -2,7 +2,7 @@ package com.plz.modules.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.plz.modules.model.Warehouse;
-import com.plz.modules.vo.WarehouseListVo;
+import com.plz.modules.entity.WarehouseListDTO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public interface WarehouseMapper extends BaseMapper<Warehouse> {
 
     int insertSelective(Warehouse record);
 
-    List<WarehouseListVo> selectList();
+    List<WarehouseListDTO> selectList(@Param("status") Boolean status);
 
     Warehouse queryDetails(@Param("id") int id);
 }
