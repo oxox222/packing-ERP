@@ -11,14 +11,10 @@
     <result column="t_remark" jdbcType="VARCHAR" property="tRemark" />
     <result column="t_supplierId" jdbcType="INTEGER" property="tSupplierid" />
     <result column="t_type" jdbcType="VARCHAR" property="tType" />
-  </resultMap>
-  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.plz.modules.model.SaveRecord">
     <result column="t_photo" jdbcType="LONGVARCHAR" property="tPhoto" />
+    <collection property="goods" javaType="java.util.ArrayList" ofType="com.plz.modules.model.SaveGoods"
+                select="com.plz.modules.dao.SaveGoodsMapper.selectById" column="{recordId=t_id}"/>
   </resultMap>
-
-  <sql id="Blob_Column_List">
-    t_photo
-  </sql>
 
   <insert id="insert" parameterType="com.plz.modules.model.SaveRecord">
     insert into t_save_record (t_id, t_odd, t_warehouseId, 
@@ -98,4 +94,26 @@
       </if>
     </trim>
   </insert>
+
+  <select id="selectList" resultType="com.plz.modules.entity.SaveRecordListDto">
+    SELECT
+      record.t_id AS id,
+      record.t_odd AS odd,
+      record.t_paid AS paid,
+      record.t_create_date AS createTime,
+      w.t_name AS warehouse
+    FROM t_save_record record
+    LEFT JOIN t_warehouse w ON record.t_warehouseId = w.t_id
+    LEFT JOIN t_supplier s ON record.t_supplierId = s.t_id
+    WHERE 1=1
+    ORDER BY record.t_create_date DESC
+  </select>
+
+  <select id="details" resultMap="BaseResultMap">
+    SELECT t_id, t_odd, t_warehouseId, t_discount, t_paid, t_create_date, t_remark,
+           t_photo, t_supplierId, t_type
+    FROM t_save_record
+    WHERE t_id = #{id}
+  </select>
+
 </mapper>

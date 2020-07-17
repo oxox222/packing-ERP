@@ -6,7 +6,7 @@ import com.plz.modules.dao.*;
 import com.plz.modules.model.StatusBaseQuery;
 import com.plz.modules.model.Warehouse;
 import com.plz.modules.service.WarehouseService;
-import com.plz.modules.entity.WarehouseListDTO;
+import com.plz.modules.entity.WarehouseListDto;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,19 +22,8 @@ import java.util.List;
 public class WarehouseServiceImpl implements WarehouseService {
 
     @Resource
-    private SaveRecordMapper saveRecordMapper;
-
-    @Resource
-    private SaveGoodsMapper saveGoodsMapper;
-
-    @Resource
-    private FetchRecordMapper fetchRecordMapper;
-
-    @Resource
-    private FetchGoodsMapper fetchGoodsMapper;
-
-    @Resource
     private WarehouseMapper warehouseMapper;
+
 
     @Override
     public void addWarehouse(Warehouse warehouse) {
@@ -42,9 +31,9 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
-    public PageInfo<List<WarehouseListDTO>> queryWarehouseList(StatusBaseQuery statusBaseQuery) {
+    public PageInfo<List<WarehouseListDto>> queryWarehouseList(StatusBaseQuery statusBaseQuery) {
         PageHelper.startPage(statusBaseQuery.getPageNum(), statusBaseQuery.getPageSize());
-        List<WarehouseListDTO> list = warehouseMapper.selectList(statusBaseQuery.getStatus());
+        List<WarehouseListDto> list = warehouseMapper.selectList(statusBaseQuery.getStatus());
         PageInfo pageInfo = new PageInfo(list);
         return pageInfo;
     }

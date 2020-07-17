@@ -2,6 +2,7 @@ package com.plz.modules.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class FetchRecord implements Serializable {
     private Integer tId;
@@ -31,6 +32,10 @@ public class FetchRecord implements Serializable {
     private Integer tCustomid;
 
     private String tPhoto;
+
+    private Integer tState;
+
+    private List<FetchGoods> goods;
 
     private static final long serialVersionUID = 1L;
 
@@ -144,5 +149,21 @@ public class FetchRecord implements Serializable {
 
     public void settPhoto(String tPhoto) {
         this.tPhoto = tPhoto == null ? null : tPhoto.trim();
+    }
+
+    public Integer gettState() {
+        return tState;
+    }
+
+    public void settState(Integer tState) {
+        this.tState = tState;
+    }
+
+    public List<FetchGoods> getGoods() {
+        return goods;
+    }
+
+    public void setGoods(List<FetchGoods> goods) {
+        this.goods = goods;
     }
 }

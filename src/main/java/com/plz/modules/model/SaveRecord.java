@@ -2,6 +2,7 @@ package com.plz.modules.model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 public class SaveRecord implements Serializable {
     private Integer tId;
@@ -25,6 +26,8 @@ public class SaveRecord implements Serializable {
     private String tPhoto;
 
     private static final long serialVersionUID = 1L;
+
+    private List<SaveGoods> goods;
 
     public Integer gettId() {
         return tId;
@@ -104,5 +107,13 @@ public class SaveRecord implements Serializable {
 
     public void settPhoto(String tPhoto) {
         this.tPhoto = tPhoto == null ? null : tPhoto.trim();
+    }
+
+    public List<SaveGoods> getGoods() {
+        return goods;
+    }
+
+    public void setGoods(List<SaveGoods> goods) {
+        this.goods = goods;
     }
 }

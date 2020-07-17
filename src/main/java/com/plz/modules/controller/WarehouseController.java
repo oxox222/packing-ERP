@@ -1,7 +1,7 @@
 package com.plz.modules.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.plz.modules.entity.WarehouseListDTO;
+import com.plz.modules.entity.WarehouseListDto;
 import com.plz.modules.model.Pagination;
 import com.plz.modules.model.Result;
 import com.plz.modules.model.StatusBaseQuery;
@@ -42,7 +42,7 @@ public class WarehouseController {
      */
     @RequestMapping(value = "/queryList", method = RequestMethod.POST)
     public Result queryWarehouseList(@RequestBody StatusBaseQuery statusBaseQuery) {
-        PageInfo<List<WarehouseListDTO>> result = warehouseService.queryWarehouseList(statusBaseQuery);
+        PageInfo<List<WarehouseListDto>> result = warehouseService.queryWarehouseList(statusBaseQuery);
         return Result.success(Pagination.of(result));
     }
 

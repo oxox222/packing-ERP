@@ -10,7 +10,7 @@ CREATE TABLE `t_save_record` (
 `t_photo` longtext NULL COMMENT '图片',
 `t_supplierId` int(255) NOT NULL COMMENT '供应商id',
 `t_type` varchar(11) NOT NULL COMMENT '入库类型',
-`t_create_date` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '业务日期',
+`t_create_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '业务日期',
 PRIMARY KEY (`t_id`) 
 )
 COMMENT = '入库单表';
@@ -64,7 +64,8 @@ CREATE TABLE `t_fetch_record` (
 `t_photo` longtext NULL COMMENT '图片',
 `t_type` varchar(11) NOT NULL COMMENT '出库类型',
 `t_customId` int(255) NOT NULL COMMENT '顾客id',
-`t_create_date` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '业务日期',
+`t_create_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '业务日期',
+`t_state` int(2) NOT NULL DEFAULT '1' COMMENT '订单状态',
 PRIMARY KEY (`t_id`) 
 )
 COMMENT = '出库单表';

@@ -13,7 +13,7 @@
     <result column="t_type" jdbcType="VARCHAR" property="tType" />
   </resultMap>
 
-  <insert id="insert" parameterType="com.plz.modules.model.FetchGoods">
+  <insert id="insert" parameterType="com.plz.modules.model.FetchGoods" useGeneratedKeys="true" keyProperty="tId">
     insert into t_fetch_goods (t_id, t_recordId, t_name, 
       t_price, t_discount, t_paid, 
       t_num, t_size, t_type)
@@ -84,4 +84,28 @@
     </trim>
   </insert>
 
+  <insert id="insertBatch">
+    INSERT INTO t_fetch_goods
+        (t_id, t_recordId, t_name, t_price, t_discount, t_paid, t_num, t_size, t_type)
+    VALUES
+        (
+        <foreach collection="list" item="item" separator=",">
+          #{item.tId},
+          #{item.tRecordid},
+          #{item.tName},
+          #{item.tPrice},
+          #{item.tDiscount},
+          #{item.tPaid},
+          #{item.tNum},
+          #{item.tSize},
+          #{item.tType}
+        </foreach>
+        )
+  </insert>
+  
+  <select id="selectById" resultMap="BaseResultMap">
+    SELECT t_id, t_recordId, t_name, t_price, t_discount, t_paid, t_num, t_size, t_type
+    FROM t_fetch_goods
+    WHERE t_id = #{recordId}
+  </select>
 </mapper>

@@ -20,7 +20,7 @@
     <result column="t_remark" jdbcType="VARCHAR" property="tRemark" />
   </resultMap>
 
-  <resultMap id="SupplierListResultMap" type="com.plz.modules.entity.SupplierListDTO">
+  <resultMap id="SupplierListResultMap" type="com.plz.modules.entity.SupplierListDto">
     <result column="t_id" jdbcType="INTEGER" property="id" />
     <result column="t_name" jdbcType="VARCHAR" property="name" />
     <result column="t_leader" jdbcType="VARCHAR" property="leader" />

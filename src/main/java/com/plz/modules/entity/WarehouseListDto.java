@@ -9,7 +9,7 @@ import lombok.Data;
  * @Date: 2020/6/30
  */
 @Data
-public class WarehouseListDTO {
+public class WarehouseListDto {
 
     private Integer id;
 

@@ -8,7 +8,7 @@ import java.util.UUID;
  * @Author: PANLVZ
  * @Date: 2020-03-04
  */
-public class UuidUtil {
+public class UuidUtils {
 
     static String uuid = new String();
 

@@ -3,7 +3,7 @@ package com.plz.modules.service;
 import com.github.pagehelper.PageInfo;
 import com.plz.modules.model.StatusBaseQuery;
 import com.plz.modules.model.Warehouse;
-import com.plz.modules.entity.WarehouseListDTO;
+import com.plz.modules.entity.WarehouseListDto;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public interface WarehouseService {
      * @param statusBaseQuery
      * @return
      */
-    PageInfo<List<WarehouseListDTO>> queryWarehouseList(StatusBaseQuery statusBaseQuery);
+    PageInfo<List<WarehouseListDto>> queryWarehouseList(StatusBaseQuery statusBaseQuery);
 
     /**
      * 查询仓库详情
@@ -34,4 +34,5 @@ public interface WarehouseService {
      * @param warehouse
      */
     void updateWarehouse(Warehouse warehouse);
+
 }
