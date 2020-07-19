@@ -24,4 +24,10 @@ public interface SupplierService {
      * @param supplier
      */
     void updateSupplier(Supplier supplier);
+
+    /**
+     * 根据id删除
+     * @param id
+     */
+    void deleteById(int id);
 }

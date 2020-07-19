@@ -18,5 +18,5 @@ public class StatusBaseQuery extends PageBaseQuery {
     /**
      * 状态
      */
-    private Boolean status = true;
+    private Boolean status;
 }

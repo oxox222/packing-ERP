@@ -39,4 +39,9 @@ public class SupplierServiceImpl implements SupplierService {
     public void updateSupplier(Supplier supplier) {
         supplierMapper.updateById(supplier);
     }
+
+    @Override
+    public void deleteById(int id) {
+        supplierMapper.deleteById(id);
+    }
 }

@@ -39,8 +39,8 @@ public class SupplierController {
      * @param pageBaseQuery
      * @return
      */
-    @RequestMapping(value = "/queryList", method = RequestMethod.POST)
-    public Result querySupplierList(@RequestBody PageBaseQuery pageBaseQuery) {
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public Result querySupplierList(PageBaseQuery pageBaseQuery) {
         PageInfo<List<Supplier>> result = supplierService.querySupplierList(pageBaseQuery.getPageNum(), pageBaseQuery.getPageSize());
         return Result.success(Pagination.of(result));
     }
@@ -52,6 +52,17 @@ public class SupplierController {
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public Result updateSupplier(@RequestBody Supplier supplier) {
         supplierService.updateSupplier(supplier);
+        return Result.success(null);
+    }
+
+    /**
+     * 根据id删除
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public Result deleteById(@PathVariable("id") int id) {
+        supplierService.deleteById(id);
         return Result.success(null);
     }
 

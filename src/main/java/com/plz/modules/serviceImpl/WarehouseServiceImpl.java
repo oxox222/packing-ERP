@@ -47,4 +47,9 @@ public class WarehouseServiceImpl implements WarehouseService {
     public void updateWarehouse(Warehouse warehouse) {
         warehouseMapper.updateById(warehouse);
     }
+
+    @Override
+    public void deleteById(int id) {
+        warehouseMapper.deleteById(id);
+    }
 }

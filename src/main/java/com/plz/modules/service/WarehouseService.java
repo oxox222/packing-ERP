@@ -35,4 +35,9 @@ public interface WarehouseService {
      */
     void updateWarehouse(Warehouse warehouse);
 
+    /**
+     * 根据id删除
+     * @param id
+     */
+    void deleteById(int id);
 }

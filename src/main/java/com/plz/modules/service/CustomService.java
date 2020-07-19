@@ -21,4 +21,10 @@ public interface CustomService {
     void updateCustom(Custom custom);
 
     PageInfo<List<Custom>> queryCustom(StatusBaseQuery statusBaseQuery);
+
+    /**
+     * 根据id删除
+     * @param id
+     */
+    void deleteById(int id);
 }

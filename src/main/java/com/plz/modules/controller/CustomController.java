@@ -6,10 +6,7 @@ import com.plz.modules.model.Pagination;
 import com.plz.modules.model.Result;
 import com.plz.modules.model.StatusBaseQuery;
 import com.plz.modules.service.CustomService;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -53,9 +50,20 @@ public class CustomController {
      * @param statusBaseQuery
      * @return
      */
-    @RequestMapping(value = "/list", method = RequestMethod.POST)
-    public Result queryList(@RequestBody StatusBaseQuery statusBaseQuery) {
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public Result queryList(StatusBaseQuery statusBaseQuery) {
         PageInfo<List<Custom>> result = customService.queryCustom(statusBaseQuery);
         return Result.success(Pagination.of(result));
+    }
+
+    /**
+     * 根据id删除
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public Result deleteById(@PathVariable("id") int id) {
+        customService.deleteById(id);
+        return Result.success(null);
     }
 }

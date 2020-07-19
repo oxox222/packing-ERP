@@ -1,11 +1,12 @@
 package com.plz.modules.dao;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.plz.modules.model.TDictionary;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface TDictionaryMapper {
+public interface TDictionaryMapper extends BaseMapper<TDictionary> {
 
     int insert(TDictionary record);
 

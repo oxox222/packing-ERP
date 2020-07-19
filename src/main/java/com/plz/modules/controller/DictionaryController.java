@@ -2,10 +2,7 @@ package com.plz.modules.controller;
 
 import com.plz.modules.model.Result;
 import com.plz.modules.service.DictionaryService;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -22,8 +19,22 @@ public class DictionaryController {
     @Resource
     private DictionaryService dictionaryService;
 
-    @RequestMapping(value = "/getAllDictionary", method = RequestMethod.GET)
-    public Result getAllDictionary(@RequestParam String type) {
-        return Result.success(dictionaryService.getAllDictionary(type));
+    /**
+     * 根据type获取字典
+     * @param type
+     * @return
+     */
+    @RequestMapping(value = "/{type}", method = RequestMethod.GET)
+    public Result getDictionaryByType(@PathVariable(value = "type") String type) {
+        return Result.success(dictionaryService.getDictionaryByType(type));
+    }
+
+    /**
+     * 获取全部字典
+     * @return
+     */
+    @RequestMapping(value = "/all", method = RequestMethod.GET)
+    public Result getAllDictionary() {
+        return Result.success(dictionaryService.getAllDictionary());
     }
 }

@@ -40,8 +40,8 @@ public class WarehouseController {
      * @param statusBaseQuery
      * @return
      */
-    @RequestMapping(value = "/queryList", method = RequestMethod.POST)
-    public Result queryWarehouseList(@RequestBody StatusBaseQuery statusBaseQuery) {
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    public Result queryWarehouseList(StatusBaseQuery statusBaseQuery) {
         PageInfo<List<WarehouseListDto>> result = warehouseService.queryWarehouseList(statusBaseQuery);
         return Result.success(Pagination.of(result));
     }
@@ -63,6 +63,17 @@ public class WarehouseController {
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
     public Result updateWarehouse(@RequestBody Warehouse warehouse) {
         warehouseService.updateWarehouse(warehouse);
+        return Result.success(null);
+    }
+
+    /**
+     * 根据id删除
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    public Result deleteById(@PathVariable("id") int id) {
+        warehouseService.deleteById(id);
         return Result.success(null);
     }
 

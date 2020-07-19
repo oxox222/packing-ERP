@@ -21,8 +21,13 @@ public class DictionaryServiceImpl implements DictionaryService {
     private TDictionaryMapper tDictionaryMapper;
 
     @Override
-    public List<TDictionary> getAllDictionary(String type) {
+    public List<TDictionary> getDictionaryByType(String type) {
         List<TDictionary> list = tDictionaryMapper.selectByType(type);
         return list;
+    }
+
+    @Override
+    public List<TDictionary> getAllDictionary() {
+        return tDictionaryMapper.selectList(null);
     }
 }

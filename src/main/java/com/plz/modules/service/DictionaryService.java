@@ -6,5 +6,16 @@ import java.util.List;
 
 public interface DictionaryService {
 
-    List<TDictionary> getAllDictionary(String type);
+    /**
+     * 根据type获取字典
+     * @param type
+     * @return
+     */
+    List<TDictionary> getDictionaryByType(String type);
+
+    /**
+     * 获取所有字典
+     * @return
+     */
+    List<TDictionary> getAllDictionary();
 }

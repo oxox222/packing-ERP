@@ -40,4 +40,9 @@ public class CustomServiceImpl implements CustomService {
         PageInfo pageInfo = new PageInfo(list);
         return pageInfo;
     }
+
+    @Override
+    public void deleteById(int id) {
+        customMapper.deleteById(id);
+    }
 }
