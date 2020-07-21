@@ -1,6 +1,8 @@
 package com.plz.modules.model;
 
 import com.plz.modules.emun.ResultEnum;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * @ClassName: Result
@@ -8,26 +10,31 @@ import com.plz.modules.emun.ResultEnum;
  * @Author: PANLVZ
  * @Date: 2020-03-06
  */
+@ApiModel("封装返回结果")
 public class Result<T> {
 
     /**
      * 状态 true成果  false失败
      */
+    @ApiModelProperty("状态 true成果  false失败")
     private boolean status;
 
     /**
      * 状态码
      */
+    @ApiModelProperty("状态码")
     private String statusCode;
 
     /**
      * 返回信息
      */
+    @ApiModelProperty("返回信息")
     private String statusMessage;
 
     /**
      * 结果集
      */
+    @ApiModelProperty("结果集")
     private T result;
 
     public static <T> Result success(T date) {

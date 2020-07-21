@@ -1,24 +1,38 @@
 package com.plz.modules.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 
+@ApiModel(value = "出库商品")
 public class FetchGoods implements Serializable {
+
+    @ApiModelProperty(value = "主键", required = true)
     private Integer tId;
 
+    @ApiModelProperty(value = "入库表id", required = true)
     private Integer tRecordid;
 
+    @ApiModelProperty(value = "商品名", required = true)
     private String tName;
 
+    @ApiModelProperty(value = "单价", required = true)
     private Double tPrice;
 
+    @ApiModelProperty(value = "折扣", required = true)
     private Float tDiscount;
 
+    @ApiModelProperty(value = "实付金额", required = true)
     private Double tPaid;
 
+    @ApiModelProperty(value = "数量", required = true)
     private Integer tNum;
 
+    @ApiModelProperty(value = "规格", required = true)
     private String tSize;
 
+    @ApiModelProperty(value = "出库类型", required = true)
     private String tType;
 
     private static final long serialVersionUID = 1L;

@@ -164,8 +164,15 @@
   </insert>
 
   <select id="queryList" resultMap="BaseResultMap">
-    SELECT * FROM t_custom
-    WHERE t_status = #{status}
+    SELECT
+        t_id, t_name, t_contacts, t_mobilPhone, t_customType, t_status, t_discount,
+        t_salesmanId, t_phone, t_mail, t_fax, t_addr, t_addrDetail, t_deliverWay,
+        t_bank, t_bankAccountName, t_bankAccount, t_sort, t_remark
+    FROM t_custom
+    WHERE 1=1
+    <if test="status != null">
+        t_status = #{status}
+    </if>
     ORDER BY t_sort
   </select>
 </mapper>

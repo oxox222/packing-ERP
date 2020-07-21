@@ -6,6 +6,8 @@ import com.plz.modules.model.Pagination;
 import com.plz.modules.model.Result;
 import com.plz.modules.model.StatusBaseQuery;
 import com.plz.modules.service.CustomService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,6 +21,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/custom")
+@Api(tags = "客户管理")
 public class CustomController {
 
     @Resource
@@ -30,6 +33,7 @@ public class CustomController {
      * @param custom
      */
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    @ApiOperation("新增客户")
     public Result addCustom(@RequestBody Custom custom) {
         customService.addCustom(custom);
         return Result.success(null);
@@ -40,6 +44,7 @@ public class CustomController {
      * @param custom
      */
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    @ApiOperation("编辑客户信息")
     public Result updateCustom(@RequestBody Custom custom) {
         customService.updateCustom(custom);
         return Result.success(null);
@@ -51,6 +56,7 @@ public class CustomController {
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @ApiOperation("查询客户列表")
     public Result queryList(StatusBaseQuery statusBaseQuery) {
         PageInfo<List<Custom>> result = customService.queryCustom(statusBaseQuery);
         return Result.success(Pagination.of(result));
@@ -62,6 +68,7 @@ public class CustomController {
      * @return
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ApiOperation("根据id删除")
     public Result deleteById(@PathVariable("id") int id) {
         customService.deleteById(id);
         return Result.success(null);

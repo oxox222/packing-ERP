@@ -4,106 +4,125 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 import java.io.Serializable;
 
 @TableName(value = "t_supplier")
+@ApiModel(value = "供应商")
 public class Supplier implements Serializable {
 
     /**
      * 主键
      */
     @TableId(value = "t_id", type = IdType.AUTO)
+    @ApiModelProperty(value = "主键", required = true)
     private Integer tId;
 
     /**
      * 供应商名称
      */
     @TableField(value = "t_name")
+    @ApiModelProperty(value = "供应商名称", required = true)
     private String tName;
 
     /**
      * 负责人
      */
     @TableField(value = "t_leader")
+    @ApiModelProperty(value = "负责人")
     private String tLeader;
 
     /**
      * 折扣
      */
     @TableField(value = "t_discount")
+    @ApiModelProperty(value = "折扣", required = true)
     private Float tDiscount;
 
     /**
      * 手机号
      */
     @TableField(value = "t_mobilPhone")
+    @ApiModelProperty(value = "手机号")
     private String tMobilphone;
 
     /**
      * 电话号
      */
     @TableField(value = "t_phone")
+    @ApiModelProperty(value = "电话号")
     private String tPhone;
 
     /**
      * 邮箱
      */
     @TableField(value = "t_mail")
+    @ApiModelProperty(value = "邮箱")
     private String tMail;
 
     /**
      * 传真号码
      */
     @TableField(value = "t_fax")
+    @ApiModelProperty(value = "传真号码")
     private String tFax;
 
     /**
      * 网址
      */
     @TableField(value = "t_website")
+    @ApiModelProperty(value = "网址")
     private String tWebsite;
 
     /**
      * 地区 ,分割
      */
     @TableField(value = "t_addr")
+    @ApiModelProperty(value = "地区 ,分割")
     private String tAddr;
 
     /**
      * 详细地址
      */
     @TableField(value = "t_addrDetail")
+    @ApiModelProperty(value = "详细地址")
     private String tAddrdetail;
 
     /**
      * 开户银行
      */
     @TableField(value = "t_bank")
+    @ApiModelProperty(value = "开户银行")
     private String tBank;
 
     /**
      * 银行账号
      */
     @TableField(value = "t_bank_account")
+    @ApiModelProperty(value = "银行账号")
     private String tBankAccount;
 
     /**
      * 银行账户名
      */
     @TableField(value = "t_bank_accountName")
+    @ApiModelProperty(value = "银行账户名")
     private String tBankAccountname;
 
     /**
      * 排序字段
      */
     @TableField(value = "t_sort")
+    @ApiModelProperty(value = "排序字段")
     private Integer tSort;
 
     /**
      * 备注
      */
     @TableField(value = "t_remark")
+    @ApiModelProperty(value = "备注")
     private String tRemark;
 
     private static final long serialVersionUID = 1L;

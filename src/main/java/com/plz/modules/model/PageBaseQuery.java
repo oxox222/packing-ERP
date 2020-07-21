@@ -1,5 +1,6 @@
 package com.plz.modules.model;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,10 +17,12 @@ public class PageBaseQuery {
     /**
      * 当前页
      */
+    @ApiModelProperty(value = "当前页")
     private int pageNum = 1;
 
     /**
      * 每页大小
      */
+    @ApiModelProperty("每页大小")
     private int pageSize = 10;
 }

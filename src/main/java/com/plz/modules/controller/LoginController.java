@@ -3,6 +3,8 @@ package com.plz.modules.controller;
 import com.plz.modules.model.Result;
 import com.plz.modules.model.TUser;
 import com.plz.modules.service.LoginService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,6 +24,7 @@ import javax.servlet.http.HttpSession;
  */
 @RestController
 @RequestMapping("/login")
+@Api(tags = "登录接口")
 public class LoginController {
 
     private static Logger logger = LoggerFactory.getLogger(LoginController.class);
@@ -30,6 +33,7 @@ public class LoginController {
     private LoginService loginService;
 
     @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
+    @ApiOperation("登录")
     public Result Login(@RequestBody TUser tUser, HttpSession session) throws LoginException {
         TUser localUser = loginService.getLogin(tUser);
         if (localUser == null) {

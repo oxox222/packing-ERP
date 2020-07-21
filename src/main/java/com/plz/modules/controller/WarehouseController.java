@@ -7,6 +7,8 @@ import com.plz.modules.model.Result;
 import com.plz.modules.model.StatusBaseQuery;
 import com.plz.modules.model.Warehouse;
 import com.plz.modules.service.WarehouseService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -20,6 +22,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/warehouse")
+@Api(tags = "仓库管理")
 public class WarehouseController {
 
     @Resource
@@ -30,6 +33,7 @@ public class WarehouseController {
      * @param warehouse
      */
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    @ApiOperation("新增仓库")
     public Result addWarehouse(@RequestBody Warehouse warehouse) {
         warehouseService.addWarehouse(warehouse);
         return Result.success(null);
@@ -41,6 +45,7 @@ public class WarehouseController {
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @ApiOperation("查询仓库列表")
     public Result queryWarehouseList(StatusBaseQuery statusBaseQuery) {
         PageInfo<List<WarehouseListDto>> result = warehouseService.queryWarehouseList(statusBaseQuery);
         return Result.success(Pagination.of(result));
@@ -52,6 +57,7 @@ public class WarehouseController {
      * @return
      */
     @RequestMapping(value = "/details/{id}", method = RequestMethod.GET)
+    @ApiOperation("查询仓库详细信息")
     public Result queryWarehouseDetails(@PathVariable("id") int id) {
         return Result.success(warehouseService.queryWarehouseDetails(id));
     }
@@ -61,6 +67,7 @@ public class WarehouseController {
      * @param warehouse
      */
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    @ApiOperation("编辑仓库信息")
     public Result updateWarehouse(@RequestBody Warehouse warehouse) {
         warehouseService.updateWarehouse(warehouse);
         return Result.success(null);
@@ -72,6 +79,7 @@ public class WarehouseController {
      * @return
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+    @ApiOperation("根据id删除")
     public Result deleteById(@PathVariable("id") int id) {
         warehouseService.deleteById(id);
         return Result.success(null);

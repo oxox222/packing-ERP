@@ -1,5 +1,6 @@
 package com.plz.modules.model;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,5 +19,6 @@ public class StatusBaseQuery extends PageBaseQuery {
     /**
      * 状态
      */
+    @ApiModelProperty(value = "状态")
     private Boolean status;
 }

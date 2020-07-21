@@ -1,40 +1,64 @@
 package com.plz.modules.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.plz.modules.util.DateFormatUtils;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+@ApiModel("出库单")
 public class FetchRecord implements Serializable {
+
+    @ApiModelProperty(value = "主键", required = true)
     private Integer tId;
 
+    @ApiModelProperty(value = "仓库", required = true)
     private Integer tWarehouseid;
 
+    @ApiModelProperty(value = "单号", required = true)
     private String tOdd;
 
+    @ApiModelProperty(value = "折扣", required = true)
     private Float tDiscount;
 
+    @ApiModelProperty(value = "其他费用")
     private Double tOtherCost;
 
+    @ApiModelProperty(value = "其他费用名称")
     private String tOtherCostname;
 
+    @ApiModelProperty(value = "实收金额", required = true)
     private Double tPaid;
 
+    @ApiModelProperty(value = "销售员")
     private String tSalesman;
 
+    @ApiModelProperty(value = "创建时间", required = true)
+    @JsonFormat(pattern = DateFormatUtils.NORMAL_DATETIME_FORMAT)
     private Date tCreateDate;
 
+    @ApiModelProperty(value = "发货方式")
     private String tDeliverway;
 
+    @ApiModelProperty(value = "备注")
     private String tRemake;
 
+    @ApiModelProperty(value = "出库类型", required = true)
     private String tType;
 
+    @ApiModelProperty(value = "顾客id", required = true)
     private Integer tCustomid;
 
+    @ApiModelProperty(value = "图片")
     private String tPhoto;
 
+    @ApiModelProperty(value = "订单状态", required = true)
     private Integer tState;
 
+    @ApiModelProperty(value = "出库商品", required = true)
     private List<FetchGoods> goods;
 
     private static final long serialVersionUID = 1L;

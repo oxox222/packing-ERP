@@ -7,6 +7,8 @@ import com.plz.modules.model.Result;
 import com.plz.modules.model.SaveRecord;
 import com.plz.modules.service.RepertoryService;
 import com.plz.modules.vo.RecordQueryVo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,6 +21,7 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("/repertory")
+@Api(tags = "库存管理")
 public class RepertoryController {
 
     @Resource
@@ -30,6 +33,7 @@ public class RepertoryController {
      * @return
      */
     @RequestMapping(value = "/saveRecord", method = RequestMethod.PUT)
+    @ApiOperation("新增入库单")
     public Result insertSaveRecord(@RequestBody SaveRecord saveRecord) {
         repertoryService.insertSaveRecord(saveRecord);
         return Result.success(null);
@@ -41,6 +45,7 @@ public class RepertoryController {
      * @return
      */
     @RequestMapping(value = "/fetchRecord", method = RequestMethod.PUT)
+    @ApiOperation("新增出库单")
     public Result insertFetchRecord(@RequestBody FetchRecord fetchRecord) {
         repertoryService.insertFetchRecord(fetchRecord);
         return Result.success(null);
@@ -52,6 +57,7 @@ public class RepertoryController {
      * @return
      */
     @GetMapping("/fetchRecord")
+    @ApiOperation("查询出库单列表")
     public Result fetchRecordList(RecordQueryVo query) {
         PageInfo pageInfo = repertoryService.getFetchRecordList(query);
         return Result.success(Pagination.of(pageInfo));
@@ -63,6 +69,7 @@ public class RepertoryController {
      * @return
      */
     @GetMapping("/saveRecord")
+    @ApiOperation("查询入库单列表")
     public Result saveRecordList(RecordQueryVo query) {
         PageInfo pageInfo = repertoryService.getSaveRecordList(query);
         return Result.success(Pagination.of(pageInfo));
@@ -74,6 +81,7 @@ public class RepertoryController {
      * @return
      */
     @GetMapping("/fetchRecord/detail/{id}")
+    @ApiOperation("查询出库单详情")
     public Result fetchRecordDetails(@PathVariable("id") int id) {
         FetchRecord fetchRecord = repertoryService.fetchRecordDetails(id);
         return Result.success(fetchRecord);
@@ -85,6 +93,7 @@ public class RepertoryController {
      * @return
      */
     @GetMapping("/saveRecord/detail/{id}")
+    @ApiOperation("查询入库单详情")
     public Result saveRecordDetails(@PathVariable("id") int id) {
         SaveRecord saveRecord = repertoryService.saveRecordDetails(id);
         return Result.success(saveRecord);

@@ -80,7 +80,7 @@ public class RepertoryServiceImpl implements RepertoryService {
 
     @Override
     public FetchRecord fetchRecordDetails(int id) {
-        return null;
+        return fetchRecordMapper.details(id);
     }
 
     @Override
