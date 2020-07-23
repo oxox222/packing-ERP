@@ -1,7 +1,6 @@
 package com.plz.modules.config;
 
 
-import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -12,12 +11,12 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  * @Author: PANLVZ
  * @Date: 2020-03-13
  */
-@Configuration
+//@Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new com.example.sale.config.LoginInterceptor())
+        registry.addInterceptor(new com.plz.modules.config.LoginInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/swagger-resources/**", "/webjars/**", "/v2/**", "/swagger-ui.html/**")
                 .excludePathPatterns("/login/**");

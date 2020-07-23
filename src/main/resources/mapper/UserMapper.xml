@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.plz.modules.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.plz.modules.model.User">
+        <result column="uid" jdbcType="INTEGER" property="uid" />
+        <result column="userName" jdbcType="VARCHAR" property="userName" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+        <collection property="roles" ofType="com.plz.modules.model.Role">
+            <id column="rid" property="rid" />
+            <result column="name" property="name" />
+            <collection property="permissions" ofType="com.plz.modules.model.Permission">
+                <id column="pid" property="pid" />
+                <result column="name" property="name" />
+                <result column="url" property="url" />
+            </collection>
+        </collection>
+    </resultMap>
+
+
+    <select id="findByUserName" resultMap="BaseResultMap">
+        SELECT u.*, r.*, p.*
+        FROM t_user u
+            INNER JOIN t_user_role ur ON ur.uid = u.uid
+            INNER JOIN t_role r ON r.rid = ur.rid
+            INNER JOIN t_role_permission rp ON rp.rid = r.rid
+            INNER JOIN t_permission p ON p.pid = rp.pid
+        WHERE u.userName = #{userName}
+    </select>
+</mapper>

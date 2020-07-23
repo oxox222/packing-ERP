@@ -127,3 +127,51 @@ CREATE TABLE `t_custom` (
 )
 COMMENT = '客户表';
 
+-- 用户表 --
+CREATE TABLE `t_user` (
+    `uid` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `userName` varchar(255) NOT NULL COMMENT '用户名',
+    `password` varchar(255) NOT NULL COMMENT '密码',
+    `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `last_login_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP COMMENT '最后登录时间',
+    PRIMARY KEY (`uid`),
+    KEY index_userName(`userName`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户表';
+
+-- 角色表 --
+CREATE TABLE `t_role` (
+    `rid` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `name` VARCHAR(255) NOT NULL COMMENT '角色',
+    PRIMARY KEY (`rid`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '角色表';
+
+-- 权限表 --
+CREATE TABLE `t_permission` (
+    `pid` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `name` VARCHAR(255) NOT NULL DEFAULT '权限',
+    `url` varchar(255) DEFAULT NULL COMMENT '路径',
+    PRIMARY KEY (`pid`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '权限表';
+
+-- 用户角色关系表 --
+CREATE TABLE `t_user_role` (
+    `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `uid` int(11) NOT NULL COMMENT '用户表uid',
+    `rid` int(11) NOT NULL COMMENT '角色表rid',
+    PRIMARY KEY (`id`),
+    KEY index_uid(`uid`),
+    KEY index_rid(`rid`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '用户角色关系表';
+
+-- 角色权限关系表 --
+CREATE TABLE `t_role_permission` (
+    `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `rid` int(11) NOT NULL COMMENT '角色表rid',
+    `pid` int(11) NOT NULL COMMENT '权限表uid',
+    PRIMARY KEY (`id`),
+    KEY index_rid(`rid`),
+    KEY index_uid(`pid`)
+) ENGINE = InnoDB DEFAULT CHARSET = utf8 COMMENT '角色权限关系表';
+
+
+

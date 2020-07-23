@@ -1,4 +1,4 @@
-package com.example.sale.config;
+package com.plz.modules.config;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 
