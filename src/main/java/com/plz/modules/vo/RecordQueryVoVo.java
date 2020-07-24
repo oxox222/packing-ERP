@@ -1,6 +1,5 @@
 package com.plz.modules.vo;
 
-import com.plz.modules.model.PageBaseQuery;
 import lombok.Data;
 
 /**
@@ -10,7 +9,7 @@ import lombok.Data;
  * @Date: 2020/7/17
  */
 @Data
-public class RecordQueryVo extends PageBaseQuery {
+public class RecordQueryVoVo extends PageBaseQueryVo {
 
     /**
      * 状态

@@ -6,7 +6,7 @@ import com.plz.modules.model.Pagination;
 import com.plz.modules.model.Result;
 import com.plz.modules.model.SaveRecord;
 import com.plz.modules.service.RepertoryService;
-import com.plz.modules.vo.RecordQueryVo;
+import com.plz.modules.vo.RecordQueryVoVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -58,7 +58,7 @@ public class RepertoryController {
      */
     @GetMapping("/fetchRecord")
     @ApiOperation("查询出库单列表")
-    public Result fetchRecordList(RecordQueryVo query) {
+    public Result fetchRecordList(RecordQueryVoVo query) {
         PageInfo pageInfo = repertoryService.getFetchRecordList(query);
         return Result.success(Pagination.of(pageInfo));
     }
@@ -70,7 +70,7 @@ public class RepertoryController {
      */
     @GetMapping("/saveRecord")
     @ApiOperation("查询入库单列表")
-    public Result saveRecordList(RecordQueryVo query) {
+    public Result saveRecordList(RecordQueryVoVo query) {
         PageInfo pageInfo = repertoryService.getSaveRecordList(query);
         return Result.success(Pagination.of(pageInfo));
     }

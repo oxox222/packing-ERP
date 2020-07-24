@@ -1,8 +1,8 @@
-package com.plz.modules.dao;
+package com.plz.modules.mapper;
 
 import com.plz.modules.entity.SaveRecordListDto;
 import com.plz.modules.model.SaveRecord;
-import com.plz.modules.vo.RecordQueryVo;
+import com.plz.modules.vo.RecordQueryVoVo;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -18,7 +18,7 @@ public interface SaveRecordMapper {
      * @param query
      * @return
      */
-    List<SaveRecordListDto> selectList(@Param("query") RecordQueryVo query);
+    List<SaveRecordListDto> selectList(@Param("query") RecordQueryVoVo query);
 
     /**
      * 查询详情

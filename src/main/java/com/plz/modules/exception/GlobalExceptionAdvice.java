@@ -1,4 +1,4 @@
-package com.plz.modules.config;
+package com.plz.modules.exception;
 
 import com.plz.modules.model.Result;
 import org.slf4j.Logger;

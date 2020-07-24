@@ -1,6 +1,6 @@
-package com.plz.modules.serviceImpl;
+package com.plz.modules.service.impl;
 
-import com.plz.modules.dao.TDictionaryMapper;
+import com.plz.modules.mapper.TDictionaryMapper;
 import com.plz.modules.model.TDictionary;
 import com.plz.modules.service.DictionaryService;
 import org.springframework.stereotype.Service;

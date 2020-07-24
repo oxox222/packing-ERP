@@ -4,7 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.plz.modules.model.Custom;
 import com.plz.modules.model.Pagination;
 import com.plz.modules.model.Result;
-import com.plz.modules.model.StatusBaseQuery;
+import com.plz.modules.vo.StatusBaseQueryVoVo;
 import com.plz.modules.service.CustomService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -52,13 +52,13 @@ public class CustomController {
 
     /**
      * 查询客户列表
-     * @param statusBaseQuery
+     * @param statusBaseQueryVo
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ApiOperation("查询客户列表")
-    public Result queryList(StatusBaseQuery statusBaseQuery) {
-        PageInfo<List<Custom>> result = customService.queryCustom(statusBaseQuery);
+    public Result queryList(StatusBaseQueryVoVo statusBaseQueryVo) {
+        PageInfo<List<Custom>> result = customService.queryCustom(statusBaseQueryVo);
         return Result.success(Pagination.of(result));
     }
 

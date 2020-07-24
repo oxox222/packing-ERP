@@ -1,8 +1,8 @@
-package com.plz.modules.serviceImpl;
+package com.plz.modules.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.plz.modules.dao.SupplierMapper;
+import com.plz.modules.mapper.SupplierMapper;
 import com.plz.modules.model.Supplier;
 import com.plz.modules.service.SupplierService;
 import org.springframework.stereotype.Service;

@@ -1,9 +1,9 @@
-package com.plz.modules.serviceImpl;
+package com.plz.modules.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.plz.modules.dao.*;
-import com.plz.modules.model.StatusBaseQuery;
+import com.plz.modules.mapper.*;
+import com.plz.modules.vo.StatusBaseQueryVoVo;
 import com.plz.modules.model.Warehouse;
 import com.plz.modules.service.WarehouseService;
 import com.plz.modules.entity.WarehouseListDto;
@@ -31,9 +31,9 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
-    public PageInfo<List<WarehouseListDto>> queryWarehouseList(StatusBaseQuery statusBaseQuery) {
-        PageHelper.startPage(statusBaseQuery.getPageNum(), statusBaseQuery.getPageSize());
-        List<WarehouseListDto> list = warehouseMapper.selectList(statusBaseQuery.getStatus());
+    public PageInfo<List<WarehouseListDto>> queryWarehouseList(StatusBaseQueryVoVo statusBaseQueryVo) {
+        PageHelper.startPage(statusBaseQueryVo.getPageNum(), statusBaseQueryVo.getPageSize());
+        List<WarehouseListDto> list = warehouseMapper.selectList(statusBaseQueryVo.getStatus());
         PageInfo pageInfo = new PageInfo(list);
         return pageInfo;
     }

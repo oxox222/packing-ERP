@@ -2,7 +2,7 @@ package com.plz.modules.service;
 
 import com.github.pagehelper.PageInfo;
 import com.plz.modules.model.Custom;
-import com.plz.modules.model.StatusBaseQuery;
+import com.plz.modules.vo.StatusBaseQueryVoVo;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public interface CustomService {
      */
     void updateCustom(Custom custom);
 
-    PageInfo<List<Custom>> queryCustom(StatusBaseQuery statusBaseQuery);
+    PageInfo<List<Custom>> queryCustom(StatusBaseQueryVoVo statusBaseQueryVo);
 
     /**
      * 根据id删除

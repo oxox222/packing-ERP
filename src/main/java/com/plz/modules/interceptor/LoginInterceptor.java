@@ -1,4 +1,4 @@
-package com.plz.modules.config;
+package com.plz.modules.interceptor;
 
 import org.springframework.web.servlet.HandlerInterceptor;
 

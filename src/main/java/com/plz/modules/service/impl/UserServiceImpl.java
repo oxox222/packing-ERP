@@ -1,6 +1,6 @@
-package com.plz.modules.serviceImpl;
+package com.plz.modules.service.impl;
 
-import com.plz.modules.dao.UserMapper;
+import com.plz.modules.mapper.UserMapper;
 import com.plz.modules.model.User;
 import com.plz.modules.service.UserService;
 import org.springframework.stereotype.Service;

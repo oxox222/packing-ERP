@@ -1,6 +1,7 @@
 package com.plz.modules.model;
 
 import com.github.pagehelper.PageInfo;
+import com.plz.modules.vo.PageBaseQueryVo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -19,7 +20,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Pagination<T> extends PageBaseQuery implements Serializable {
+public class Pagination<T> extends PageBaseQueryVo implements Serializable {
 
     private static final long serialVersionUID = -5500682167471390525L;
 

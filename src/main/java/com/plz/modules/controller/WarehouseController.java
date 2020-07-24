@@ -4,7 +4,7 @@ import com.github.pagehelper.PageInfo;
 import com.plz.modules.entity.WarehouseListDto;
 import com.plz.modules.model.Pagination;
 import com.plz.modules.model.Result;
-import com.plz.modules.model.StatusBaseQuery;
+import com.plz.modules.vo.StatusBaseQueryVoVo;
 import com.plz.modules.model.Warehouse;
 import com.plz.modules.service.WarehouseService;
 import io.swagger.annotations.Api;
@@ -41,13 +41,13 @@ public class WarehouseController {
 
     /**
      * 查询仓库列表
-     * @param statusBaseQuery
+     * @param statusBaseQueryVo
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ApiOperation("查询仓库列表")
-    public Result queryWarehouseList(StatusBaseQuery statusBaseQuery) {
-        PageInfo<List<WarehouseListDto>> result = warehouseService.queryWarehouseList(statusBaseQuery);
+    public Result queryWarehouseList(StatusBaseQueryVoVo statusBaseQueryVo) {
+        PageInfo<List<WarehouseListDto>> result = warehouseService.queryWarehouseList(statusBaseQueryVo);
         return Result.success(Pagination.of(result));
     }
 

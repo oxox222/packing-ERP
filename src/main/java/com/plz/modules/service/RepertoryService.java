@@ -5,7 +5,7 @@ import com.plz.modules.entity.FetchRecordListDto;
 import com.plz.modules.entity.SaveRecordListDto;
 import com.plz.modules.model.FetchRecord;
 import com.plz.modules.model.SaveRecord;
-import com.plz.modules.vo.RecordQueryVo;
+import com.plz.modules.vo.RecordQueryVoVo;
 
 import java.util.List;
 
@@ -28,14 +28,14 @@ public interface RepertoryService {
      * @param query
      * @return
      */
-    PageInfo<List<FetchRecordListDto>> getFetchRecordList(RecordQueryVo query);
+    PageInfo<List<FetchRecordListDto>> getFetchRecordList(RecordQueryVoVo query);
 
     /**
      * 查询入库单列表
      * @param query
      * @return
      */
-    PageInfo<List<SaveRecordListDto>> getSaveRecordList(RecordQueryVo query);
+    PageInfo<List<SaveRecordListDto>> getSaveRecordList(RecordQueryVoVo query);
 
     /**
      * 查询出库单详情

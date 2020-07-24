@@ -1,4 +1,4 @@
-package com.plz.modules.dao;
+package com.plz.modules.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.plz.modules.model.TDictionary;

@@ -1,10 +1,10 @@
-package com.plz.modules.serviceImpl;
+package com.plz.modules.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.plz.modules.dao.CustomMapper;
+import com.plz.modules.mapper.CustomMapper;
 import com.plz.modules.model.Custom;
-import com.plz.modules.model.StatusBaseQuery;
+import com.plz.modules.vo.StatusBaseQueryVoVo;
 import com.plz.modules.service.CustomService;
 import org.springframework.stereotype.Service;
 
@@ -34,9 +34,9 @@ public class CustomServiceImpl implements CustomService {
     }
 
     @Override
-    public PageInfo<List<Custom>> queryCustom(StatusBaseQuery statusBaseQuery) {
-        PageHelper.startPage(statusBaseQuery.getPageNum(), statusBaseQuery.getPageSize());
-        List<Custom> list = customMapper.queryList(statusBaseQuery.getStatus());
+    public PageInfo<List<Custom>> queryCustom(StatusBaseQueryVoVo statusBaseQueryVo) {
+        PageHelper.startPage(statusBaseQueryVo.getPageNum(), statusBaseQueryVo.getPageSize());
+        List<Custom> list = customMapper.queryList(statusBaseQueryVo.getStatus());
         PageInfo pageInfo = new PageInfo(list);
         return pageInfo;
     }

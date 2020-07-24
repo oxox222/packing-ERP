@@ -1,4 +1,4 @@
-package com.plz.modules.dao;
+package com.plz.modules.mapper;
 
 import com.plz.modules.model.SaveGoods;
 import org.apache.ibatis.annotations.Param;

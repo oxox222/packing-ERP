@@ -1,4 +1,4 @@
-package com.plz.modules.model;
+package com.plz.modules.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -14,7 +14,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class StatusBaseQuery extends PageBaseQuery {
+public class StatusBaseQueryVoVo extends PageBaseQueryVo {
 
     /**
      * 状态

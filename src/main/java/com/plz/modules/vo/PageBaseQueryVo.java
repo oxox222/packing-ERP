@@ -1,4 +1,4 @@
-package com.plz.modules.model;
+package com.plz.modules.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class PageBaseQuery {
+public class PageBaseQueryVo {
 
     /**
      * 当前页

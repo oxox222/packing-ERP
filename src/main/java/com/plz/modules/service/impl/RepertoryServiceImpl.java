@@ -1,11 +1,11 @@
-package com.plz.modules.serviceImpl;
+package com.plz.modules.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.plz.modules.dao.FetchGoodsMapper;
-import com.plz.modules.dao.FetchRecordMapper;
-import com.plz.modules.dao.SaveGoodsMapper;
-import com.plz.modules.dao.SaveRecordMapper;
+import com.plz.modules.mapper.FetchGoodsMapper;
+import com.plz.modules.mapper.FetchRecordMapper;
+import com.plz.modules.mapper.SaveGoodsMapper;
+import com.plz.modules.mapper.SaveRecordMapper;
 import com.plz.modules.entity.FetchRecordListDto;
 import com.plz.modules.entity.SaveRecordListDto;
 import com.plz.modules.model.FetchGoods;
@@ -13,7 +13,7 @@ import com.plz.modules.model.FetchRecord;
 import com.plz.modules.model.SaveGoods;
 import com.plz.modules.model.SaveRecord;
 import com.plz.modules.service.RepertoryService;
-import com.plz.modules.vo.RecordQueryVo;
+import com.plz.modules.vo.RecordQueryVoVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -63,7 +63,7 @@ public class RepertoryServiceImpl implements RepertoryService {
     }
 
     @Override
-    public PageInfo<List<FetchRecordListDto>> getFetchRecordList(RecordQueryVo query) {
+    public PageInfo<List<FetchRecordListDto>> getFetchRecordList(RecordQueryVoVo query) {
         PageHelper.startPage(query.getPageNum(), query.getPageSize());
         List<FetchRecordListDto> list = fetchRecordMapper.selectList(query);
         PageInfo pageInfo = new PageInfo(list);
@@ -71,7 +71,7 @@ public class RepertoryServiceImpl implements RepertoryService {
     }
 
     @Override
-    public PageInfo<List<SaveRecordListDto>> getSaveRecordList(RecordQueryVo query) {
+    public PageInfo<List<SaveRecordListDto>> getSaveRecordList(RecordQueryVoVo query) {
         PageHelper.startPage(query.getPageNum(), query.getPageSize());
         List<SaveRecordListDto> list = saveRecordMapper.selectList(query);
         PageInfo pageInfo = new PageInfo(list);

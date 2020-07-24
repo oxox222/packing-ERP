@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.plz.modules.dao.SaveGoodsMapper">
+<mapper namespace="com.plz.modules.mapper.SaveGoodsMapper">
   <resultMap id="BaseResultMap" type="com.plz.modules.model.SaveGoods">
     <result column="t_id" jdbcType="INTEGER" property="tId" />
     <result column="t_recordId" jdbcType="INTEGER" property="tRecordid" />

@@ -1,7 +1,7 @@
 package com.plz.modules.controller;
 
 import com.github.pagehelper.PageInfo;
-import com.plz.modules.model.PageBaseQuery;
+import com.plz.modules.vo.PageBaseQueryVo;
 import com.plz.modules.model.Pagination;
 import com.plz.modules.model.Result;
 import com.plz.modules.model.Supplier;
@@ -40,13 +40,13 @@ public class SupplierController {
 
     /**
      * 查询供货商信息
-     * @param pageBaseQuery
+     * @param pageBaseQueryVo
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ApiOperation("查询供货商信息")
-    public Result querySupplierList(PageBaseQuery pageBaseQuery) {
-        PageInfo<List<Supplier>> result = supplierService.querySupplierList(pageBaseQuery.getPageNum(), pageBaseQuery.getPageSize());
+    public Result querySupplierList(PageBaseQueryVo pageBaseQueryVo) {
+        PageInfo<List<Supplier>> result = supplierService.querySupplierList(pageBaseQueryVo.getPageNum(), pageBaseQueryVo.getPageSize());
         return Result.success(Pagination.of(result));
     }
 

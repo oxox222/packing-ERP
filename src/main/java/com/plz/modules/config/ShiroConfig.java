@@ -1,5 +1,7 @@
-package com.plz.modules.shiro;
+package com.plz.modules.config;
 
+import com.plz.modules.shiro.AuthRealm;
+import com.plz.modules.shiro.CredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
