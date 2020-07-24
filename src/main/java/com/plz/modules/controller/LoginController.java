@@ -24,7 +24,6 @@ import javax.servlet.http.HttpSession;
  * @Date: 2020-03-13
  */
 @RestController
-@RequestMapping("/login")
 @Api(tags = "登录接口")
 public class LoginController {
 
@@ -32,7 +31,7 @@ public class LoginController {
 
 
     @ApiOperation("登录")
-    @RequestMapping(value = "/userLogin", method = RequestMethod.POST)
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Result Login(@RequestParam("userName") String userName,
                         @RequestParam("password") String password,
                         HttpSession session) throws LoginException {

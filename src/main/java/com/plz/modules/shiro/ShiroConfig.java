@@ -30,19 +30,18 @@ public class ShiroConfig {
         ShiroFilterFactoryBean bean = new ShiroFilterFactoryBean();
         bean.setSecurityManager(securityManager);
 
-        bean.setLoginUrl("/login");
-        bean.setSuccessUrl("/index");
-
-        LinkedHashMap<String, String> filterMap = new LinkedHashMap<>();
+        LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         // 登录
-        filterMap.put("/login/**", "anon");
+        filterChainDefinitionMap.put("/login", "anon");
+        //登出
+        filterChainDefinitionMap.put("/logout", "logout");
         // swagger
-        filterMap.put("/swagger**/**", "anon");
-        filterMap.put("/webjars/**", "anon");
-        filterMap.put("/v2/**", "anon");
+        filterChainDefinitionMap.put("/swagger**/**", "anon");
+        filterChainDefinitionMap.put("/webjars/**", "anon");
+        filterChainDefinitionMap.put("/v2/**", "anon");
         // 对所有用户认证
-        filterMap.put("/**", "authc");
-        bean.setFilterChainDefinitionMap(filterMap);
+        filterChainDefinitionMap.put("/**", "authc");
+        bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
         return bean;
     }
