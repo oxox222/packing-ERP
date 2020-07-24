@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author panlvzhang
  */
 @SpringBootApplication
-@MapperScan(basePackages = "com.plz.modules.dao")
+@MapperScan(basePackages = "com.plz.modules.mapper")
 public class Application {
 
     public static void main(String[] args) {
