@@ -2,11 +2,11 @@ package com.plz.modules.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.plz.modules.mapper.*;
-import com.plz.modules.vo.StatusBaseQueryVoVo;
+import com.plz.modules.entity.WarehouseListDto;
+import com.plz.modules.mapper.WarehouseMapper;
 import com.plz.modules.model.Warehouse;
 import com.plz.modules.service.WarehouseService;
-import com.plz.modules.entity.WarehouseListDto;
+import com.plz.modules.vo.StatusBaseQueryVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -31,7 +31,7 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
-    public PageInfo<List<WarehouseListDto>> queryWarehouseList(StatusBaseQueryVoVo statusBaseQueryVo) {
+    public PageInfo<List<WarehouseListDto>> queryWarehouseList(StatusBaseQueryVo statusBaseQueryVo) {
         PageHelper.startPage(statusBaseQueryVo.getPageNum(), statusBaseQueryVo.getPageSize());
         List<WarehouseListDto> list = warehouseMapper.selectList(statusBaseQueryVo.getStatus());
         PageInfo pageInfo = new PageInfo(list);

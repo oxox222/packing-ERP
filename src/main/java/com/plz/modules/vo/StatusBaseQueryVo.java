@@ -14,7 +14,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class StatusBaseQueryVoVo extends PageBaseQueryVo {
+public class StatusBaseQueryVo extends PageBaseQueryVo {
 
     /**
      * 状态
