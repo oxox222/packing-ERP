@@ -2,177 +2,43 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.plz.modules.mapper.CustomMapper">
   <resultMap id="BaseResultMap" type="com.plz.modules.model.Custom">
-    <result column="t_id" jdbcType="INTEGER" property="tId" />
-    <result column="t_name" jdbcType="VARCHAR" property="tName" />
-    <result column="t_contacts" jdbcType="VARCHAR" property="tContacts" />
-    <result column="t_mobilPhone" jdbcType="VARCHAR" property="tMobilphone" />
-    <result column="t_customType" jdbcType="INTEGER" property="tCustomtype" />
-    <result column="t_status" jdbcType="TINYINT" property="tStatus" />
-    <result column="t_discount" jdbcType="REAL" property="tDiscount" />
-    <result column="t_salesmanId" jdbcType="INTEGER" property="tSalesmanid" />
-    <result column="t_phone" jdbcType="VARCHAR" property="tPhone" />
-    <result column="t_mail" jdbcType="VARCHAR" property="tMail" />
-    <result column="t_fax" jdbcType="VARCHAR" property="tFax" />
-    <result column="t_addr" jdbcType="VARCHAR" property="tAddr" />
-    <result column="t_addrDetail" jdbcType="VARCHAR" property="tAddrdetail" />
-    <result column="t_deliverWay" jdbcType="VARCHAR" property="tDeliverway" />
-    <result column="t_bank" jdbcType="VARCHAR" property="tBank" />
-    <result column="t_bankAccountName" jdbcType="VARCHAR" property="tBankaccountname" />
-    <result column="t_bankAccount" jdbcType="VARCHAR" property="tBankaccount" />
-    <result column="t_sort" jdbcType="INTEGER" property="tSort" />
-    <result column="t_remark" jdbcType="VARCHAR" property="tRemark" />
+    <result column="t_id" jdbcType="INTEGER" property="id" />
+    <result column="t_name" jdbcType="VARCHAR" property="name" />
+    <result column="t_leader" jdbcType="VARCHAR" property="leader" />
+    <result column="t_leader_phone" jdbcType="VARCHAR" property="leaderPhone" />
+    <result column="t_status" jdbcType="TINYINT" property="status" />
+    <result column="t_phone" jdbcType="VARCHAR" property="phone" />
+    <result column="t_mail" jdbcType="VARCHAR" property="mail" />
+    <result column="t_fax" jdbcType="VARCHAR" property="fax" />
+    <result column="t_addr" jdbcType="VARCHAR" property="address" />
+    <result column="t_addr_detail" jdbcType="VARCHAR" property="addressDetail" />
+    <result column="t_bank" jdbcType="VARCHAR" property="bank" />
+    <result column="t_bank_account_name" jdbcType="VARCHAR" property="bankAccountName" />
+    <result column="t_bank_account" jdbcType="VARCHAR" property="bankAccount" />
+    <result column="t_sort" jdbcType="TINYINT" property="sort" />
+    <result column="t_remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
 
-
-  <insert id="insert" parameterType="com.plz.modules.model.Custom">
-    insert into t_custom (t_id, t_name, t_contacts, 
-      t_mobilPhone, t_customType, t_status, 
-      t_discount, t_salesmanId, t_phone, 
-      t_mail, t_fax, t_addr, 
-      t_addrDetail, t_deliverWay, t_bank, 
-      t_bankAccountName, t_bankAccount, t_sort, 
-      t_remark)
-    values (#{tId,jdbcType=INTEGER}, #{tName,jdbcType=VARCHAR}, #{tContacts,jdbcType=VARCHAR}, 
-      #{tMobilphone,jdbcType=VARCHAR}, #{tCustomtype,jdbcType=INTEGER}, #{tStatus,jdbcType=TINYINT}, 
-      #{tDiscount,jdbcType=REAL}, #{tSalesmanid,jdbcType=INTEGER}, #{tPhone,jdbcType=VARCHAR}, 
-      #{tMail,jdbcType=VARCHAR}, #{tFax,jdbcType=VARCHAR}, #{tAddr,jdbcType=VARCHAR}, 
-      #{tAddrdetail,jdbcType=VARCHAR}, #{tDeliverway,jdbcType=VARCHAR}, #{tBank,jdbcType=VARCHAR}, 
-      #{tBankaccountname,jdbcType=VARCHAR}, #{tBankaccount,jdbcType=VARCHAR}, #{tSort,jdbcType=INTEGER}, 
-      #{tRemark,jdbcType=VARCHAR})
-  </insert>
-
-  <insert id="insertSelective" parameterType="com.plz.modules.model.Custom">
-    insert into t_custom
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="tId != null">
-        t_id,
-      </if>
-      <if test="tName != null">
-        t_name,
-      </if>
-      <if test="tContacts != null">
-        t_contacts,
-      </if>
-      <if test="tMobilphone != null">
-        t_mobilPhone,
-      </if>
-      <if test="tCustomtype != null">
-        t_customType,
-      </if>
-      <if test="tStatus != null">
-        t_status,
-      </if>
-      <if test="tDiscount != null">
-        t_discount,
-      </if>
-      <if test="tSalesmanid != null">
-        t_salesmanId,
-      </if>
-      <if test="tPhone != null">
-        t_phone,
-      </if>
-      <if test="tMail != null">
-        t_mail,
-      </if>
-      <if test="tFax != null">
-        t_fax,
-      </if>
-      <if test="tAddr != null">
-        t_addr,
-      </if>
-      <if test="tAddrdetail != null">
-        t_addrDetail,
-      </if>
-      <if test="tDeliverway != null">
-        t_deliverWay,
-      </if>
-      <if test="tBank != null">
-        t_bank,
-      </if>
-      <if test="tBankaccountname != null">
-        t_bankAccountName,
-      </if>
-      <if test="tBankaccount != null">
-        t_bankAccount,
-      </if>
-      <if test="tSort != null">
-        t_sort,
-      </if>
-      <if test="tRemark != null">
-        t_remark,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="tId != null">
-        #{tId,jdbcType=INTEGER},
-      </if>
-      <if test="tName != null">
-        #{tName,jdbcType=VARCHAR},
-      </if>
-      <if test="tContacts != null">
-        #{tContacts,jdbcType=VARCHAR},
-      </if>
-      <if test="tMobilphone != null">
-        #{tMobilphone,jdbcType=VARCHAR},
-      </if>
-      <if test="tCustomtype != null">
-        #{tCustomtype,jdbcType=INTEGER},
-      </if>
-      <if test="tStatus != null">
-        #{tStatus,jdbcType=TINYINT},
-      </if>
-      <if test="tDiscount != null">
-        #{tDiscount,jdbcType=REAL},
-      </if>
-      <if test="tSalesmanid != null">
-        #{tSalesmanid,jdbcType=INTEGER},
-      </if>
-      <if test="tPhone != null">
-        #{tPhone,jdbcType=VARCHAR},
-      </if>
-      <if test="tMail != null">
-        #{tMail,jdbcType=VARCHAR},
-      </if>
-      <if test="tFax != null">
-        #{tFax,jdbcType=VARCHAR},
-      </if>
-      <if test="tAddr != null">
-        #{tAddr,jdbcType=VARCHAR},
-      </if>
-      <if test="tAddrdetail != null">
-        #{tAddrdetail,jdbcType=VARCHAR},
-      </if>
-      <if test="tDeliverway != null">
-        #{tDeliverway,jdbcType=VARCHAR},
-      </if>
-      <if test="tBank != null">
-        #{tBank,jdbcType=VARCHAR},
-      </if>
-      <if test="tBankaccountname != null">
-        #{tBankaccountname,jdbcType=VARCHAR},
-      </if>
-      <if test="tBankaccount != null">
-        #{tBankaccount,jdbcType=VARCHAR},
-      </if>
-      <if test="tSort != null">
-        #{tSort,jdbcType=INTEGER},
-      </if>
-      <if test="tRemark != null">
-        #{tRemark,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
+  <sql id="Base_Column">
+    t_id, t_name, t_leader, t_leader_phone, t_status, t_phone, t_mail, t_fax,
+    t_addr, t_addr_detail, t_bank, t_bank_account_name, t_bank_account,
+    t_sort, t_remark
+  </sql>
 
   <select id="queryList" resultMap="BaseResultMap">
     SELECT
-        t_id, t_name, t_contacts, t_mobilPhone, t_customType, t_status, t_discount,
-        t_salesmanId, t_phone, t_mail, t_fax, t_addr, t_addrDetail, t_deliverWay,
-        t_bank, t_bankAccountName, t_bankAccount, t_sort, t_remark
-    FROM t_custom
+        <include refid="Base_Column"/>
+    FROM
+        t_custom
     WHERE 1=1
-    <if test="status != null">
-        t_status = #{status}
+    <if test="query.name != null and query.name != ''">
+        AND t_name LIKE concat('%', #{query.name}, '%')
     </if>
-    ORDER BY t_sort
+    <if test="query.status != null">
+        AND t_status = #{query.status}
+    </if>
+    ORDER BY t_sort DESC
   </select>
+
+
 </mapper>

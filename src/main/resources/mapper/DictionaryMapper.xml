@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.plz.modules.mapper.DictionaryMapper">
+  <resultMap id="BaseResultMap" type="com.plz.modules.model.Dictionary">
+    <result column="t_type" jdbcType="VARCHAR" property="type" />
+    <result column="t_code" jdbcType="VARCHAR" property="code" />
+    <result column="t_name" jdbcType="VARCHAR" property="name" />
+    <result column="t_description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+
+  <select id="selectByType" resultMap="BaseResultMap">
+    SELECT
+        t_type, t_code, t_name, t_description
+    FROM
+        t_dictionary
+    WHERE t_type = #{type}
+  </select>
+</mapper>

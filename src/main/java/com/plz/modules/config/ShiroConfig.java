@@ -34,7 +34,7 @@ public class ShiroConfig {
 
         LinkedHashMap<String, String> filterChainDefinitionMap = new LinkedHashMap<>();
         // 登录
-        filterChainDefinitionMap.put("/login", "anon");
+        filterChainDefinitionMap.put("/user/login", "anon");
         //登出
         filterChainDefinitionMap.put("/logout", "logout");
         // swagger

@@ -1,11 +1,9 @@
 package com.plz.modules.controller;
 
-import com.github.pagehelper.PageInfo;
-import com.plz.modules.vo.PageBaseQueryVo;
-import com.plz.modules.model.Pagination;
 import com.plz.modules.model.Result;
 import com.plz.modules.model.Supplier;
 import com.plz.modules.service.SupplierService;
+import com.plz.modules.vo.SupplierQueryVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -40,14 +38,14 @@ public class SupplierController {
 
     /**
      * 查询供货商信息
-     * @param pageBaseQueryVo
+     * @param query
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ApiOperation("查询供货商信息")
-    public Result querySupplierList(PageBaseQueryVo pageBaseQueryVo) {
-        PageInfo<List<Supplier>> result = supplierService.querySupplierList(pageBaseQueryVo.getPageNum(), pageBaseQueryVo.getPageSize());
-        return Result.success(Pagination.of(result));
+    public Result querySupplierList(SupplierQueryVo query) {
+        List<Supplier> result = supplierService.querySupplierList(query);
+        return Result.success(result);
     }
 
     /**

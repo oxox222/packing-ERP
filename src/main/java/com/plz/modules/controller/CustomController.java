@@ -1,11 +1,9 @@
 package com.plz.modules.controller;
 
-import com.github.pagehelper.PageInfo;
 import com.plz.modules.model.Custom;
-import com.plz.modules.model.Pagination;
 import com.plz.modules.model.Result;
-import com.plz.modules.vo.StatusBaseQueryVo;
 import com.plz.modules.service.CustomService;
+import com.plz.modules.vo.CustomQueryVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -52,14 +50,14 @@ public class CustomController {
 
     /**
      * 查询客户列表
-     * @param statusBaseQueryVo
+     * @param query
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ApiOperation("查询客户列表")
-    public Result queryList(StatusBaseQueryVo statusBaseQueryVo) {
-        PageInfo<List<Custom>> result = customService.queryCustom(statusBaseQueryVo);
-        return Result.success(Pagination.of(result));
+    public Result queryList(CustomQueryVo query) {
+        List<Custom> result = customService.queryCustom(query);
+        return Result.success(result);
     }
 
     /**

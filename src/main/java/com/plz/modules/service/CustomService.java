@@ -1,8 +1,7 @@
 package com.plz.modules.service;
 
-import com.github.pagehelper.PageInfo;
 import com.plz.modules.model.Custom;
-import com.plz.modules.vo.StatusBaseQueryVo;
+import com.plz.modules.vo.CustomQueryVo;
 
 import java.util.List;
 
@@ -20,7 +19,7 @@ public interface CustomService {
      */
     void updateCustom(Custom custom);
 
-    PageInfo<List<Custom>> queryCustom(StatusBaseQueryVo statusBaseQueryVo);
+    List<Custom> queryCustom(CustomQueryVo query);
 
     /**
      * 根据id删除

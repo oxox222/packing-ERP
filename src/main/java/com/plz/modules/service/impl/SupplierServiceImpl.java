@@ -1,10 +1,9 @@
 package com.plz.modules.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.plz.modules.mapper.SupplierMapper;
 import com.plz.modules.model.Supplier;
 import com.plz.modules.service.SupplierService;
+import com.plz.modules.vo.SupplierQueryVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,15 +23,13 @@ public class SupplierServiceImpl implements SupplierService {
 
     @Override
     public void addSupplier(Supplier supplier) {
-        supplierMapper.insertSelective(supplier);
+        supplierMapper.insert(supplier);
     }
 
     @Override
-    public PageInfo<List<Supplier>> querySupplierList(int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
-        List<Supplier> list = supplierMapper.queryList();
-        PageInfo pageInfo = new PageInfo(list);
-        return pageInfo;
+    public List<Supplier> querySupplierList(SupplierQueryVo query) {
+        List<Supplier> list = supplierMapper.list(query);
+        return list;
     }
 
     @Override

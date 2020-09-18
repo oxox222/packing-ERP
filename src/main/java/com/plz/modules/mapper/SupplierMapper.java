@@ -2,13 +2,12 @@ package com.plz.modules.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.plz.modules.model.Supplier;
+import com.plz.modules.vo.SupplierQueryVo;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 public interface SupplierMapper extends BaseMapper<Supplier> {
-    int insert(Supplier record);
 
-    int insertSelective(Supplier record);
-
-    List<Supplier> queryList();
+    List<Supplier> list(@Param("query") SupplierQueryVo query);
 }

@@ -1,6 +1,6 @@
 package com.plz.modules.service;
 
-import com.plz.modules.model.TDictionary;
+import com.plz.modules.model.Dictionary;
 
 import java.util.List;
 
@@ -11,11 +11,11 @@ public interface DictionaryService {
      * @param type
      * @return
      */
-    List<TDictionary> getDictionaryByType(String type);
+    List<Dictionary> getDictionaryByType(String type);
 
     /**
      * 获取所有字典
      * @return
      */
-    List<TDictionary> getAllDictionary();
+    List<Dictionary> getAllDictionary();
 }

@@ -1,7 +1,7 @@
 package com.plz.modules.service.impl;
 
-import com.plz.modules.mapper.TDictionaryMapper;
-import com.plz.modules.model.TDictionary;
+import com.plz.modules.mapper.DictionaryMapper;
+import com.plz.modules.model.Dictionary;
 import com.plz.modules.service.DictionaryService;
 import org.springframework.stereotype.Service;
 
@@ -18,16 +18,16 @@ import java.util.List;
 public class DictionaryServiceImpl implements DictionaryService {
 
     @Resource
-    private TDictionaryMapper tDictionaryMapper;
+    private DictionaryMapper dictionaryMapper;
 
     @Override
-    public List<TDictionary> getDictionaryByType(String type) {
-        List<TDictionary> list = tDictionaryMapper.selectByType(type);
+    public List<Dictionary> getDictionaryByType(String type) {
+        List<Dictionary> list = dictionaryMapper.selectByType(type);
         return list;
     }
 
     @Override
-    public List<TDictionary> getAllDictionary() {
-        return tDictionaryMapper.selectList(null);
+    public List<Dictionary> getAllDictionary() {
+        return dictionaryMapper.selectList(null);
     }
 }

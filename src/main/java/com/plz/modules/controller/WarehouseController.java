@@ -1,12 +1,9 @@
 package com.plz.modules.controller;
 
-import com.github.pagehelper.PageInfo;
-import com.plz.modules.entity.WarehouseListDto;
-import com.plz.modules.model.Pagination;
 import com.plz.modules.model.Result;
-import com.plz.modules.vo.StatusBaseQueryVo;
 import com.plz.modules.model.Warehouse;
 import com.plz.modules.service.WarehouseService;
+import com.plz.modules.vo.WarehouseQueryVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -41,25 +38,14 @@ public class WarehouseController {
 
     /**
      * 查询仓库列表
-     * @param statusBaseQueryVo
+     * @param query
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ApiOperation("查询仓库列表")
-    public Result queryWarehouseList(StatusBaseQueryVo statusBaseQueryVo) {
-        PageInfo<List<WarehouseListDto>> result = warehouseService.queryWarehouseList(statusBaseQueryVo);
-        return Result.success(Pagination.of(result));
-    }
-
-    /**
-     * 查询仓库详细信息
-     * @param id
-     * @return
-     */
-    @RequestMapping(value = "/details/{id}", method = RequestMethod.GET)
-    @ApiOperation("查询仓库详细信息")
-    public Result queryWarehouseDetails(@PathVariable("id") int id) {
-        return Result.success(warehouseService.queryWarehouseDetails(id));
+    public Result queryWarehouseList(WarehouseQueryVo query) {
+        List<Warehouse> result = warehouseService.queryWarehouseList(query);
+        return Result.success(result);
     }
 
     /**

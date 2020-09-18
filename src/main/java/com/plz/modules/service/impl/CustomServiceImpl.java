@@ -1,11 +1,9 @@
 package com.plz.modules.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.plz.modules.mapper.CustomMapper;
 import com.plz.modules.model.Custom;
-import com.plz.modules.vo.StatusBaseQueryVo;
 import com.plz.modules.service.CustomService;
+import com.plz.modules.vo.CustomQueryVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -25,7 +23,7 @@ public class CustomServiceImpl implements CustomService {
 
     @Override
     public void addCustom(Custom custom) {
-        customMapper.insertSelective(custom);
+        customMapper.insert(custom);
     }
 
     @Override
@@ -34,11 +32,9 @@ public class CustomServiceImpl implements CustomService {
     }
 
     @Override
-    public PageInfo<List<Custom>> queryCustom(StatusBaseQueryVo statusBaseQueryVo) {
-        PageHelper.startPage(statusBaseQueryVo.getPageNum(), statusBaseQueryVo.getPageSize());
-        List<Custom> list = customMapper.queryList(statusBaseQueryVo.getStatus());
-        PageInfo pageInfo = new PageInfo(list);
-        return pageInfo;
+    public List<Custom> queryCustom(CustomQueryVo query) {
+        List<Custom> list = customMapper.queryList(query);
+        return list;
     }
 
     @Override

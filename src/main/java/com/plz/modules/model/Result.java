@@ -46,10 +46,6 @@ public class Result<T> {
         return new Result(true, resultEnum.getStatusCode(), resultEnum.getMessage(), date);
     }
 
-    public static Result success(String message) {
-        return new Result(true, "201", message, (Object) null);
-    }
-
     public static Result error(String statusCode, String message) {
         return new Result(false, statusCode, message, null);
     }

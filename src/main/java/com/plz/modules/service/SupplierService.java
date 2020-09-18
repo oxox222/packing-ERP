@@ -1,7 +1,7 @@
 package com.plz.modules.service;
 
-import com.github.pagehelper.PageInfo;
 import com.plz.modules.model.Supplier;
+import com.plz.modules.vo.SupplierQueryVo;
 
 import java.util.List;
 
@@ -17,7 +17,7 @@ public interface SupplierService {
      * 查询供应商列表
      * @return
      */
-    PageInfo<List<Supplier>> querySupplierList(int pageNum, int pageSize);
+    List<Supplier> querySupplierList(SupplierQueryVo query);
 
     /**
      * 编辑供应商信息
