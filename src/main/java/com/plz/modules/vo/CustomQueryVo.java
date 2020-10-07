@@ -15,9 +15,4 @@ public class CustomQueryVo {
      * 客户姓名
      */
     private String name;
-
-    /**
-     * 状态 是否启用(1启用, 0不启用)
-     */
-    private Byte status;
 }

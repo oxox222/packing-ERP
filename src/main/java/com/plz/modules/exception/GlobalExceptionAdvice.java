@@ -29,6 +29,7 @@ public class GlobalExceptionAdvice extends ResponseEntityExceptionHandler {
         if (e instanceof LoginException) {
             result.setStatusCode("401");
         } else {
+            e.printStackTrace();
             logger.error(e.getMessage());
             result.setStatusCode("500");
         }

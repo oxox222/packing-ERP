@@ -22,23 +22,23 @@ public class SupplierServiceImpl implements SupplierService {
     private SupplierMapper supplierMapper;
 
     @Override
-    public void addSupplier(Supplier supplier) {
+    public void insert(Supplier supplier) {
         supplierMapper.insert(supplier);
     }
 
     @Override
-    public List<Supplier> querySupplierList(SupplierQueryVo query) {
+    public List<Supplier> list(SupplierQueryVo query) {
         List<Supplier> list = supplierMapper.list(query);
         return list;
     }
 
     @Override
-    public void updateSupplier(Supplier supplier) {
+    public void update(Supplier supplier) {
         supplierMapper.updateById(supplier);
     }
 
     @Override
-    public void deleteById(int id) {
+    public void delete(int id) {
         supplierMapper.deleteById(id);
     }
 }

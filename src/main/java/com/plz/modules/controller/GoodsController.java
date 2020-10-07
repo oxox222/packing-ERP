@@ -1,16 +1,10 @@
 package com.plz.modules.controller;
 
-import com.github.pagehelper.PageInfo;
 import com.plz.modules.model.Goods;
-import com.plz.modules.model.Pagination;
 import com.plz.modules.model.Result;
 import com.plz.modules.service.GoodsService;
-import com.plz.modules.vo.BaseQueryVo;
-import io.swagger.annotations.Api;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import com.plz.modules.vo.GoodsQueryVo;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -23,7 +17,6 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/goods")
-@Api(tags = "商品管理")
 public class GoodsController {
 
     @Resource
@@ -34,9 +27,9 @@ public class GoodsController {
      * @param goods
      * @return
      */
-    @RequestMapping(value = "/goods", method = RequestMethod.POST)
-    public Result insertGoods(@RequestBody Goods goods) {
-        goodsService.insertGoods(goods);
+    @RequestMapping(value = "/insert", method = RequestMethod.POST)
+    public Result insert(@RequestBody Goods goods) {
+        goodsService.insert(goods);
         return Result.success(null);
     }
 
@@ -45,9 +38,9 @@ public class GoodsController {
      * @param goods
      * @return
      */
-    @RequestMapping(value = "/goods", method = RequestMethod.PUT)
-    public Result updateGoods(@RequestBody Goods goods) {
-        goodsService.updateGoods(goods);
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    public Result update(@RequestBody Goods goods) {
+        goodsService.update(goods);
         return Result.success(null);
     }
 
@@ -57,8 +50,19 @@ public class GoodsController {
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    public Result findGoodsList(BaseQueryVo query) {
-        PageInfo<List<Goods>> pageInfo = goodsService.findGoodsList(query);
-        return Result.success(Pagination.of(pageInfo));
+    public Result list(GoodsQueryVo query) {
+        List<Goods> list = goodsService.list(query);
+        return Result.success(list);
+    }
+
+    /**
+     * 删除商品
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public Result delete(@PathVariable("id") Integer id) {
+        goodsService.delete(id);
+        return Result.success(null);
     }
 }

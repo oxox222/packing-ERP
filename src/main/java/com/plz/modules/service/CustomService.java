@@ -19,6 +19,11 @@ public interface CustomService {
      */
     void updateCustom(Custom custom);
 
+    /**
+     * 查询客户列表
+     * @param query
+     * @return
+     */
     List<Custom> queryCustom(CustomQueryVo query);
 
     /**

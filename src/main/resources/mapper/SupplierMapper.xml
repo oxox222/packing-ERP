@@ -19,12 +19,6 @@
     <result column="t_remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
 
-  <resultMap id="SupplierListResultMap" type="com.plz.modules.entity.SupplierListDto">
-    <result column="t_id" jdbcType="INTEGER" property="id" />
-    <result column="t_name" jdbcType="VARCHAR" property="name" />
-    <result column="t_leader" jdbcType="VARCHAR" property="leader" />
-  </resultMap>
-
   <sql id="Base_Column">
     t_id, t_name, t_leader, t_leader_phone, t_phone, t_mail, t_fax, t_website, t_addr,
     t_addr_detail, t_bank, t_bank_account, t_bank_accountname, t_sort, t_remark

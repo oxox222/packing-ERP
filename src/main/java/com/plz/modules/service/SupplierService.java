@@ -11,23 +11,23 @@ public interface SupplierService {
      * 新增供货商
      * @param supplier
      */
-    void addSupplier(Supplier supplier);
+    void insert(Supplier supplier);
 
     /**
      * 查询供应商列表
      * @return
      */
-    List<Supplier> querySupplierList(SupplierQueryVo query);
+    List<Supplier> list(SupplierQueryVo query);
 
     /**
      * 编辑供应商信息
      * @param supplier
      */
-    void updateSupplier(Supplier supplier);
+    void update(Supplier supplier);
 
     /**
      * 根据id删除
      * @param id
      */
-    void deleteById(int id);
+    void delete(int id);
 }

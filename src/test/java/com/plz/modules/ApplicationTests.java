@@ -1,6 +1,5 @@
 package com.plz.modules;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -12,7 +11,6 @@ class ApplicationTests {
     }
 
     public static void main(String[] args) {
-        System.out.println(RandomStringUtils.random(10));
     }
 
 }

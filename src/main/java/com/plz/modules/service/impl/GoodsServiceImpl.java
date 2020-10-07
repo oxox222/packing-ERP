@@ -1,11 +1,9 @@
 package com.plz.modules.service.impl;
 
-import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.PageInfo;
 import com.plz.modules.mapper.GoodsMapper;
 import com.plz.modules.model.Goods;
 import com.plz.modules.service.GoodsService;
-import com.plz.modules.vo.BaseQueryVo;
+import com.plz.modules.vo.GoodsQueryVo;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,20 +22,24 @@ public class GoodsServiceImpl implements GoodsService {
     private GoodsMapper goodsMapper;
 
     @Override
-    public void insertGoods(Goods goods) {
+    public void insert(Goods goods) {
         goodsMapper.insert(goods);
+
     }
 
     @Override
-    public void updateGoods(Goods goods) {
+    public void update(Goods goods) {
         goodsMapper.updateById(goods);
     }
 
     @Override
-    public PageInfo findGoodsList(BaseQueryVo query) {
-        PageHelper.startPage(query.getPageNum(), query.getPageSize());
+    public List<Goods> list(GoodsQueryVo query) {
         List<Goods> list = goodsMapper.list(query);
-        PageInfo pageInfo = new PageInfo(list);
-        return pageInfo;
+        return list;
+    }
+
+    @Override
+    public void delete(Integer id) {
+        goodsMapper.deleteById(id);
     }
 }

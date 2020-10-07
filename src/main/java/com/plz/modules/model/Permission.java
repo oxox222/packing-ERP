@@ -1,6 +1,5 @@
 package com.plz.modules.model;
 
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 /**
@@ -12,12 +11,18 @@ import lombok.Data;
 @Data
 public class Permission {
 
-    @ApiModelProperty(value = "主键")
+    /**
+     * 主键
+     */
     private Integer pid;
 
-    @ApiModelProperty(value = "权限")
+    /**
+     * 权限
+     */
     private String name;
 
-    @ApiModelProperty(value = "路径")
+    /**
+     * 路径
+     */
     private String url;
 }

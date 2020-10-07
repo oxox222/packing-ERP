@@ -2,158 +2,58 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.plz.modules.mapper.FetchRecordMapper">
   <resultMap id="BaseResultMap" type="com.plz.modules.model.FetchRecord">
-    <result column="t_id" jdbcType="INTEGER" property="tId" />
-    <result column="t_warehouseId" jdbcType="INTEGER" property="tWarehouseid" />
-    <result column="t_odd" jdbcType="VARCHAR" property="tOdd" />
-    <result column="t_discount" jdbcType="REAL" property="tDiscount" />
-    <result column="t_other_cost" jdbcType="DOUBLE" property="tOtherCost" />
-    <result column="t_other_costName" jdbcType="VARCHAR" property="tOtherCostname" />
-    <result column="t_paid" jdbcType="DOUBLE" property="tPaid" />
-    <result column="t_salesman" jdbcType="VARCHAR" property="tSalesman" />
-    <result column="t_create_date" jdbcType="TIMESTAMP" property="tCreateDate" />
-    <result column="t_deliverWay" jdbcType="VARCHAR" property="tDeliverway" />
-    <result column="t_remake" jdbcType="VARCHAR" property="tRemake" />
-    <result column="t_type" jdbcType="VARCHAR" property="tType" />
-    <result column="t_customId" jdbcType="INTEGER" property="tCustomid" />
-    <result column="t_state" jdbcType="INTEGER" property="tState" />
-    <result column="t_photo" jdbcType="LONGVARCHAR" property="tPhoto" />
-    <collection property="goods" javaType="java.util.ArrayList" ofType="com.plz.modules.model.FetchGoods"
-                select="mapper.FetchGoodsMapper.selectById" column="t_id"/>
+    <result column="t_id" jdbcType="INTEGER" property="id" />
+    <result column="t_odd" jdbcType="VARCHAR" property="odd" />
+    <result column="t_warehouseId" jdbcType="INTEGER" property="warehouseId" />
+    <result column="t_discount" jdbcType="FLOAT" property="discount" />
+    <result column="t_other_cost" jdbcType="DOUBLE" property="otherCost" />
+    <result column="t_other_costName" jdbcType="VARCHAR" property="otherCostName" />
+    <result column="t_paid" jdbcType="DOUBLE" property="paid" />
+    <result column="t_remake" jdbcType="VARCHAR" property="remark" />
+    <result column="t_customId" jdbcType="INTEGER" property="customId" />
+    <result column="t_signer" jdbcType="VARCHAR" property="signer" />
+    <result column="t_receiver" jdbcType="VARCHAR" property="receiver" />
+    <result column="t_receiver_phone" jdbcType="VARCHAR" property="receiverPhone" />
+    <result column="t_receivedId" jdbcType="INTEGER" property="receiverId" />
+    <result column="t_received_address" jdbcType="VARCHAR" property="receivedAddress" />
+    <result column="t_received_time" jdbcType="TIMESTAMP" property="receivedTime" />
+    <result column="t_deal_time" jdbcType="TIMESTAMP" property="dealTime" />
+    <result column="t_state" jdbcType="TINYINT" property="state" />
+    <result column="t_create_date" jdbcType="TIMESTAMP" property="createTime" />
+    <collection property="fetchGoodsRecordList" javaType="java.util.ArrayList" ofType="com.plz.modules.model.FetchGoodsRecord"
+                select="com.plz.modules.mapper.FetchGoodsRecordMapper.selectByRecordId" column="{recordId=t_id}"/>
   </resultMap>
 
-  <insert id="insert" parameterType="com.plz.modules.model.FetchRecord">
-    insert into t_fetch_record (t_id, t_warehouseId, t_odd, 
-      t_discount, t_other_cost, t_other_costName, 
-      t_paid, t_salesman, t_create_date, 
-      t_deliverWay, t_remake, t_type, 
-      t_customId, t_photo, t_state)
-    values (#{tId,jdbcType=INTEGER}, #{tWarehouseid,jdbcType=INTEGER}, #{tOdd,jdbcType=VARCHAR}, 
-      #{tDiscount,jdbcType=REAL}, #{tOtherCost,jdbcType=DOUBLE}, #{tOtherCostname,jdbcType=VARCHAR}, 
-      #{tPaid,jdbcType=DOUBLE}, #{tSalesman,jdbcType=VARCHAR}, #{tCreateDate,jdbcType=TIMESTAMP}, 
-      #{tDeliverway,jdbcType=VARCHAR}, #{tRemake,jdbcType=VARCHAR}, #{tType,jdbcType=VARCHAR}, 
-      #{tCustomid,jdbcType=INTEGER}, #{tPhoto,jdbcType=LONGVARCHAR}, #{tState,jdbcType=INTEGER})
-  </insert>
+  <sql id="Base_Column">
+    t_id, t_odd, t_warehouseId, t_discount, t_other_cost, t_other_cost_name, t_paid, t_remark, t_customId,
+    t_signer, t_receiver, t_receiver_phone, t_receivedId, t_received_address, t_received_time, t_deal_time,
+    t_state, t_create_time
+  </sql>
 
-  <insert id="insertSelective" parameterType="com.plz.modules.model.FetchRecord">
-    insert into t_fetch_record
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="tId != null">
-        t_id,
-      </if>
-      <if test="tWarehouseid != null">
-        t_warehouseId,
-      </if>
-      <if test="tOdd != null">
-        t_odd,
-      </if>
-      <if test="tDiscount != null">
-        t_discount,
-      </if>
-      <if test="tOtherCost != null">
-        t_other_cost,
-      </if>
-      <if test="tOtherCostname != null">
-        t_other_costName,
-      </if>
-      <if test="tPaid != null">
-        t_paid,
-      </if>
-      <if test="tSalesman != null">
-        t_salesman,
-      </if>
-      <if test="tCreateDate != null">
-        t_create_date,
-      </if>
-      <if test="tDeliverway != null">
-        t_deliverWay,
-      </if>
-      <if test="tRemake != null">
-        t_remake,
-      </if>
-      <if test="tType != null">
-        t_type,
-      </if>
-      <if test="tCustomid != null">
-        t_customId,
-      </if>
-      <if test="tPhoto != null">
-        t_photo,
-      </if>
-      <if test="t_state != null">
-        t_state,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="tId != null">
-        #{tId,jdbcType=INTEGER},
-      </if>
-      <if test="tWarehouseid != null">
-        #{tWarehouseid,jdbcType=INTEGER},
-      </if>
-      <if test="tOdd != null">
-        #{tOdd,jdbcType=VARCHAR},
-      </if>
-      <if test="tDiscount != null">
-        #{tDiscount,jdbcType=REAL},
-      </if>
-      <if test="tOtherCost != null">
-        #{tOtherCost,jdbcType=DOUBLE},
-      </if>
-      <if test="tOtherCostname != null">
-        #{tOtherCostname,jdbcType=VARCHAR},
-      </if>
-      <if test="tPaid != null">
-        #{tPaid,jdbcType=DOUBLE},
-      </if>
-      <if test="tSalesman != null">
-        #{tSalesman,jdbcType=VARCHAR},
-      </if>
-      <if test="tCreateDate != null">
-        #{tCreateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="tDeliverway != null">
-        #{tDeliverway,jdbcType=VARCHAR},
-      </if>
-      <if test="tRemake != null">
-        #{tRemake,jdbcType=VARCHAR},
-      </if>
-      <if test="tType != null">
-        #{tType,jdbcType=VARCHAR},
-      </if>
-      <if test="tCustomid != null">
-        #{tCustomid,jdbcType=INTEGER},
-      </if>
-      <if test="tPhoto != null">
-        #{tPhoto,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="tState != null">
-        #{tState,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-
-  <select id="selectList" resultType="com.plz.modules.entity.FetchRecordListDto">
+  <select id="list" resultMap="BaseResultMap">
     SELECT
-      record.t_id AS id,
-      record.t_odd AS odd,
-      record.t_salesman AS salesman,
-      record.t_state AS state,
-      record.t_paid AS paid,
-      record.t_create_date AS createTime,
-      w.t_name AS warehouse,
-      c.t_name AS custom
-    FROM t_fetch_record record
-    LEFT JOIN t_warehouse w ON record.t_warehouseId = w.t_id
-    LEFT JOIN t_custom c ON record.t_customId = c.t_id
+        <include refid="Base_Column" />
+    FROM
+        t_fetch_record
     WHERE 1=1
-    ORDER BY record.t_create_date DESC
+    <if test="query.warehouseId != null" >
+        AND t_warehouseId = #{query.warehouseId}
+    </if>
+    <if test="query.odd != null and query.odd != ''" >
+        AND t_odd LIKE concat('%', #{query.odd}, '%')
+    </if>
+    <if test="query.customId != null" >
+        AND t_customId = #{query.customId}
+    </if>
+    ORDER BY t_create_time DESC
   </select>
 
-  <select id="details" resultMap="BaseResultMap">
-    SELECT t_id, t_warehouseId, t_odd, t_discount, t_other_cost, t_other_costName,
-           t_paid, t_salesman, t_create_date, t_deliverWay, t_remake, t_photo, t_type,
-           t_customId, t_state
-    FROM t_fetch_record
-    WHERE t_id = #{id}
-  </select>
+  <update id="deliver">
+    UPDATE t_fetch_record SET t_state = 2 WHERE t_id = #{id}
+  </update>
+
+  <update id="sign">
+    UPDATE t_fetch_record SET t_state = 3 WHERE t_id = #{id}
+  </update>
+
 </mapper>

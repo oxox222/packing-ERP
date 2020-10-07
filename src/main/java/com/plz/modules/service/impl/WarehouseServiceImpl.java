@@ -1,8 +1,11 @@
 package com.plz.modules.service.impl;
 
+import com.plz.modules.entity.RepertoryDto;
+import com.plz.modules.mapper.RepertoryMapper;
 import com.plz.modules.mapper.WarehouseMapper;
 import com.plz.modules.model.Warehouse;
 import com.plz.modules.service.WarehouseService;
+import com.plz.modules.vo.RepertoryQueryVo;
 import com.plz.modules.vo.WarehouseQueryVo;
 import org.springframework.stereotype.Service;
 
@@ -21,25 +24,34 @@ public class WarehouseServiceImpl implements WarehouseService {
     @Resource
     private WarehouseMapper warehouseMapper;
 
+    @Resource
+    private RepertoryMapper repertoryMapper;
+
 
     @Override
-    public void addWarehouse(Warehouse warehouse) {
+    public void insert(Warehouse warehouse) {
         warehouseMapper.insert(warehouse);
     }
 
     @Override
-    public List<Warehouse> queryWarehouseList(WarehouseQueryVo query) {
+    public List<Warehouse> list(WarehouseQueryVo query) {
         List<Warehouse> list = warehouseMapper.list(query);
         return list;
     }
 
     @Override
-    public void updateWarehouse(Warehouse warehouse) {
+    public void update(Warehouse warehouse) {
         warehouseMapper.updateById(warehouse);
     }
 
     @Override
-    public void deleteById(int id) {
+    public void delete(int id) {
         warehouseMapper.deleteById(id);
+    }
+
+    @Override
+    public List<RepertoryDto> getRepertory(RepertoryQueryVo query) {
+        List<RepertoryDto> list = repertoryMapper.getRepertory(query);
+        return list;
     }
 }

@@ -4,25 +4,24 @@
   <resultMap id="BaseResultMap" type="com.plz.modules.model.Goods">
     <result column="t_id" jdbcType="INTEGER" property="id" />
     <result column="t_name" jdbcType="VARCHAR" property="name" />
-    <result column="t_price" jdbcType="DOUBLE" property="price" />
-    <result column="t_discount" jdbcType="REAL" property="discount" />
-    <result column="t_paid" jdbcType="DOUBLE" property="paid" />
     <result column="t_size" jdbcType="VARCHAR" property="size" />
+    <result column="t_brand" jdbcType="VARCHAR" property="brand" />
+    <result column="t_texture" jdbcType="VARCHAR" property="texture" />
+    <result column="t_remark" jdbcType="VARCHAR" property="remark" />
   </resultMap>
 
   <sql id="Base_Column_List">
-    t_id, t_name, t_price, t_discount, t_paid, t_size
+    t_id, t_name, t_size, t_brand, t_texture, t_remark
   </sql>
 
   <select id="list" resultMap="BaseResultMap">
-    SELECT <include refid="Base_Column_List"/>
-    FROM t_goods
+    SELECT
+        <include refid="Base_Column_List"/>
+    FROM
+        t_goods
     WHERE 1 = 1
-    <if test="query.id != null and query.id != ''">
-      AND t_id = #{query.id}
-    </if>
     <if test="query.name != null and query.name != ''">
-      AND t_name = #{query.name}
+        AND t_name = #{query.name}
     </if>
     ORDER BY t_id
   </select>

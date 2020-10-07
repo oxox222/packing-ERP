@@ -20,9 +20,4 @@ public class WarehouseQueryVo {
      * 仓库负责人
      */
     private String leader;
-
-    /**
-     * 状态 (1启用, 0不启用)
-     */
-    private Byte status;
 }

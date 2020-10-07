@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.plz.modules.mapper.SaveGoodsRecordMapper">
+    <resultMap id="BaseResultMap" type="com.plz.modules.model.SaveGoodsRecord">
+        <result column="t_id" jdbcType="INTEGER" property="id" />
+        <result column="t_goodsId" jdbcType="INTEGER" property="goodsId" />
+        <result column="t_recordId" jdbcType="INTEGER" property="recordId" />
+        <result column="t_num" jdbcType="INTEGER" property="num" />
+        <result column="t_price" jdbcType="DOUBLE" property="price" />
+        <result column="t_discount" jdbcType="FLOAT" property="discount" />
+        <result column="t_paid" jdbcType="DOUBLE" property="paid" />
+    </resultMap>
+
+    <sql id="Base_Column">
+        t_goodsId, t_recordId, t_num, t_price, t_discount, t_paid
+    </sql>
+    
+    <insert id="insertOfBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO t_save_goods_record
+            (<include refid="Base_Column" />)
+        VALUES
+            <foreach collection="list" index="index" item="item" open="(" close=")" separator=",">
+                #{item.goodsId},
+                #{item.recordId},
+                #{item.num},
+                #{item.price},
+                #{item.discount},
+                #{item.paid}
+            </foreach>
+    </insert>
+
+    <delete id="deleteByRecordId">
+        DELETE FROM t_save_goods_record WHERE t_recordId = #{recordId}
+    </delete>
+
+    <select id="selectByRecordId" resultType="com.plz.modules.entity.SaveGoodsRecordDto">
+        SELECT
+            s.t_id AS id,
+            s.t_goodsId AS goodsId,
+            s.t_num AS num,
+            s.t_price AS price,
+            s.t_discount AS discount,
+            s.t_paid AS paid,
+            g.t_name AS name,
+            g.t_size AS size,
+            g.t_brand AS brand,
+            g.t_texture AS texture,
+            g.t_remark AS remark
+        FROM
+            t_save_goods_record s
+            LEFT JOIN t_goods g ON s.t_goodsId = g.t_id
+        WHERE t_recordId = #{recordId}
+    </select>
+
+</mapper>

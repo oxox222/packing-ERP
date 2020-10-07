@@ -9,5 +9,11 @@ import java.util.List;
 
 public interface WarehouseMapper extends BaseMapper<Warehouse> {
 
+    /**
+     * 查询仓库列表
+     * @param query
+     * @return
+     */
     List<Warehouse> list(@Param("query") WarehouseQueryVo query);
+
 }

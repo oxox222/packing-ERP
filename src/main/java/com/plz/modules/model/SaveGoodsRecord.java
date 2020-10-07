@@ -1,10 +1,8 @@
 package com.plz.modules.model;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -15,25 +13,52 @@ import java.io.Serializable;
  * @Author: PANLVZ
  * @Date: 2020/8/19
  */
-@ApiModel("入库商品记录")
 @Data
+@TableName("t_save_goods_record")
 public class SaveGoodsRecord implements Serializable {
 
     private static final long serialVersionUID = 2411711269861108946L;
 
-    @TableId(value = "t_id", type = IdType.AUTO)
-    @ApiModelProperty(value = "主键", required = true)
+    /**
+     * 主键
+     */
+    @TableId("t_id")
     private Integer id;
 
-    @TableField(value = "t_goods")
-    @ApiModelProperty(value = "商品号", required = true)
-    private Integer goods;
+    /**
+     * 商品id
+     */
+    @TableField("t_goodsId")
+    private Integer goodsId;
 
-    @TableField(value = "num")
-    @ApiModelProperty(value = "数量", required = true)
+    /**
+     * 入库单表id
+     */
+    @TableField("t_recordId")
+    private Integer recordId;
+
+    /**
+     * 数量
+     */
+    @TableField("t_num")
     private Integer num;
 
-    @TableField(value = "type")
-    @ApiModelProperty(value = "商品类型", required = true)
-    private Byte type;
+    /**
+     * 单价
+     */
+    @TableField("t_price")
+    private Double price;
+
+    /**
+     * 折扣
+     */
+    @TableField("t_discount")
+    private Float discount;
+
+    /**
+     * 实付金额
+     */
+    @TableField("t_paid")
+    private Double paid;
+
 }

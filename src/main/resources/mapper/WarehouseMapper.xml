@@ -8,11 +8,10 @@
     <result column="t_leader_phone" jdbcType="VARCHAR" property="leaderPhone" />
     <result column="t_sort" jdbcType="TINYINT" property="sort" />
     <result column="t_remark" jdbcType="VARCHAR" property="remark" />
-    <result column="t_status" jdbcType="TINYINT" property="status" />
   </resultMap>
 
   <sql id="Base_Column">
-    t_id, t_name, t_leader, t_leader_phone, t_sort, t_remark, t_status
+    t_id, t_name, t_leader, t_leader_phone, t_sort, t_remark
   </sql>
 
   <select id="list" resultMap="BaseResultMap">
@@ -23,9 +22,6 @@
     WHERE 1=1
     <if test="query.name != null and query.name != ''">
         AND t_name LIKE concat('%', #{query.name}, '%')
-    </if>
-    <if test="query.status != null">
-        AND t_status = #{query.status}
     </if>
     ORDER BY t_sort DESC
   </select>

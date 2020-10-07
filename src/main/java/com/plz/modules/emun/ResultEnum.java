@@ -3,6 +3,9 @@ package com.plz.modules.emun;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * 操作结果返回枚举类
+ */
 @Getter
 @AllArgsConstructor
 public enum ResultEnum {

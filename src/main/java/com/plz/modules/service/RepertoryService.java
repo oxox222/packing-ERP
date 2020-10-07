@@ -1,13 +1,10 @@
 package com.plz.modules.service;
 
-import com.github.pagehelper.PageInfo;
-import com.plz.modules.entity.FetchRecordListDto;
-import com.plz.modules.entity.SaveRecordListDto;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.plz.modules.model.FetchRecord;
 import com.plz.modules.model.SaveRecord;
-import com.plz.modules.vo.RecordQueryVoVo;
-
-import java.util.List;
+import com.plz.modules.vo.FetchRecordQueryVo;
+import com.plz.modules.vo.SaveRecordQueryVo;
 
 public interface RepertoryService {
 
@@ -24,30 +21,51 @@ public interface RepertoryService {
     void insertFetchRecord(FetchRecord fetchRecord);
 
     /**
-     * 查询出库单列表
-     * @param query
-     * @return
+     * 编辑入库单
+     * @param saveRecord
      */
-    PageInfo<List<FetchRecordListDto>> getFetchRecordList(RecordQueryVoVo query);
+    void updateSaveRecord(SaveRecord saveRecord);
+
+    /**
+     * 编辑出库单
+     * @param fetchRecord
+     */
+    void updateFetchRecord(FetchRecord fetchRecord);
 
     /**
      * 查询入库单列表
-     * @param query
      * @return
      */
-    PageInfo<List<SaveRecordListDto>> getSaveRecordList(RecordQueryVoVo query);
+    Page<SaveRecord> getSaveRecordList(SaveRecordQueryVo query, Page page);
 
     /**
-     * 查询出库单详情
-     * @param id 主键
+     * 查询出库单列表
      * @return
      */
-    FetchRecord fetchRecordDetails(int id);
+    Page<FetchRecord> getFetchRecordList(FetchRecordQueryVo query, Page page);
 
     /**
-     * 查询入库单详情
-     * @param id 主键
-     * @return
+     * 删除入库单
+     * @param id
      */
-    SaveRecord saveRecordDetails(int id);
+    void deleteSaveRecord(Integer id);
+
+    /**
+     * 删除出库单
+     * @param id
+     */
+    void deleteFetchRecord(Integer id);
+
+    /**
+     * 发货
+     * @param id
+     */
+    void deliver(Integer id);
+
+    /**
+     * 签收
+     * @param id
+     */
+    void sign(Integer id);
+
 }

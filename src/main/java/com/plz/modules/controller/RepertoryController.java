@@ -1,14 +1,13 @@
 package com.plz.modules.controller;
 
-import com.github.pagehelper.PageInfo;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.plz.modules.model.FetchRecord;
 import com.plz.modules.model.Pagination;
 import com.plz.modules.model.Result;
 import com.plz.modules.model.SaveRecord;
 import com.plz.modules.service.RepertoryService;
-import com.plz.modules.vo.RecordQueryVoVo;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.plz.modules.vo.FetchRecordQueryVo;
+import com.plz.modules.vo.SaveRecordQueryVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -21,7 +20,6 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("/repertory")
-@Api(tags = "库存管理")
 public class RepertoryController {
 
     @Resource
@@ -32,8 +30,7 @@ public class RepertoryController {
      * @param saveRecord
      * @return
      */
-    @RequestMapping(value = "/saveRecord", method = RequestMethod.PUT)
-    @ApiOperation("新增入库单")
+    @RequestMapping(value = "/saveRecord/insert", method = RequestMethod.POST)
     public Result insertSaveRecord(@RequestBody SaveRecord saveRecord) {
         repertoryService.insertSaveRecord(saveRecord);
         return Result.success(null);
@@ -44,58 +41,98 @@ public class RepertoryController {
      * @param fetchRecord
      * @return
      */
-    @RequestMapping(value = "/fetchRecord", method = RequestMethod.PUT)
-    @ApiOperation("新增出库单")
+    @RequestMapping(value = "/fetchRecord/insert", method = RequestMethod.POST)
     public Result insertFetchRecord(@RequestBody FetchRecord fetchRecord) {
         repertoryService.insertFetchRecord(fetchRecord);
         return Result.success(null);
     }
 
     /**
-     * 查询出库单列表
-     * @param query
+     * 编辑入库单
+     * @param saveRecord
      * @return
      */
-    @GetMapping("/fetchRecord")
-    @ApiOperation("查询出库单列表")
-    public Result fetchRecordList(RecordQueryVoVo query) {
-        PageInfo pageInfo = repertoryService.getFetchRecordList(query);
-        return Result.success(Pagination.of(pageInfo));
+    @RequestMapping(value = "/saveRecord/update", method = RequestMethod.PUT)
+    public Result updateSaveRecord(@RequestBody SaveRecord saveRecord) {
+        repertoryService.updateSaveRecord(saveRecord);
+        return Result.success(null);
+    }
+
+    /**
+     * 编辑入库单
+     * @param fetchRecord
+     * @return
+     */
+    @RequestMapping(value = "/fetchRecord/update", method = RequestMethod.PUT)
+    public Result updateFetchRecord(@RequestBody FetchRecord fetchRecord) {
+        repertoryService.updateFetchRecord(fetchRecord);
+        return Result.success(null);
     }
 
     /**
      * 查询入库单列表
-     * @param query
      * @return
      */
-    @GetMapping("/saveRecord")
-    @ApiOperation("查询入库单列表")
-    public Result saveRecordList(RecordQueryVoVo query) {
-        PageInfo pageInfo = repertoryService.getSaveRecordList(query);
+    @GetMapping("/saveRecord/list")
+    public Result saveRecordList(SaveRecordQueryVo query) {
+        Page<SaveRecord> pageInfo = repertoryService.
+                getSaveRecordList(query, new Page(query.getPageNum(), query.getPageSize()));
         return Result.success(Pagination.of(pageInfo));
     }
 
     /**
-     * 查询出库单详情
-     * @param id
+     * 查询出库单列表
      * @return
      */
-    @GetMapping("/fetchRecord/detail/{id}")
-    @ApiOperation("查询出库单详情")
-    public Result fetchRecordDetails(@PathVariable("id") int id) {
-        FetchRecord fetchRecord = repertoryService.fetchRecordDetails(id);
-        return Result.success(fetchRecord);
+    @GetMapping("/fetchRecord/list")
+    public Result fetchRecordList(FetchRecordQueryVo query) {
+        Page<FetchRecord> pageInfo = repertoryService.
+                getFetchRecordList(query, new Page(query.getPageNum(), query.getPageSize()));
+        return Result.success(Pagination.of(pageInfo));
     }
 
     /**
-     * 查询入库单详情
+     * 删除入库单
      * @param id
      * @return
      */
-    @GetMapping("/saveRecord/detail/{id}")
-    @ApiOperation("查询入库单详情")
-    public Result saveRecordDetails(@PathVariable("id") int id) {
-        SaveRecord saveRecord = repertoryService.saveRecordDetails(id);
-        return Result.success(saveRecord);
+    @RequestMapping(value = "/saveRecord/delete/{id}", method = RequestMethod.DELETE)
+    public Result deleteSaveRecord(@PathVariable("id") Integer id) {
+        repertoryService.deleteSaveRecord(id);
+        return Result.success(null);
     }
+
+    /**
+     * 删除出库单
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/fetchRecord/delete/{id}", method = RequestMethod.DELETE)
+    public Result deleteRetchRecord(@PathVariable("id") Integer id) {
+        repertoryService.deleteFetchRecord(id);
+        return Result.success(null);
+    }
+
+    /**
+     * 发货
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/fetchRecord/deliver/{id}", method = RequestMethod.PUT)
+    public Result deliver(@PathVariable("id") Integer id) {
+        repertoryService.deliver(id);
+        return Result.success(null);
+    }
+
+    /**
+     * 签收
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/fetchRecord/sign/{id}", method = RequestMethod.PUT)
+    public Result sign(@PathVariable("id") Integer id) {
+        repertoryService.sign(id);
+        return Result.success(null);
+    }
+
 }

@@ -1,7 +1,7 @@
 package com.plz.modules.model;
 
-import com.github.pagehelper.PageInfo;
-import com.plz.modules.vo.PageBaseQueryVo;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.plz.modules.entity.PageBase;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +20,7 @@ import java.util.Objects;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Pagination<T> extends PageBaseQueryVo implements Serializable {
+public class Pagination<T> extends PageBase implements Serializable {
 
     private static final long serialVersionUID = -5500682167471390525L;
 
@@ -34,13 +34,13 @@ public class Pagination<T> extends PageBaseQueryVo implements Serializable {
      */
     private List<T> data = Collections.emptyList();
 
-    public static <T> Pagination<T> of(PageInfo<T> pageInfo) {
+    public static <T> Pagination<T> of(Page page) {
         Pagination<T> pagination = new Pagination<>();
-        if (Objects.nonNull(pageInfo)) {
-            pagination.setPageNum(pageInfo.getPageNum());
-            pagination.setPageSize(pageInfo.getPageSize());
-            pagination.setData(pageInfo.getList());
-            pagination.setTotal(pageInfo.getTotal());
+        if (Objects.nonNull(page)) {
+            pagination.setPageNum(page.getCurrent());
+            pagination.setPageSize(page.getSize());
+            pagination.setData(page.getRecords());
+            pagination.setTotal(page.getTotal());
         }
 
         return pagination;

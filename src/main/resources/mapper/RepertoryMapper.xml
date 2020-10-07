@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.plz.modules.mapper.RepertoryMapper">
+
+    <select id="getRepertory" resultType="com.plz.modules.entity.RepertoryDto">
+        SELECT
+            r.t_warehouseId AS warehouseId,
+            w.t_name AS warehouseName,
+            r.t_goodsId AS goodId,
+            g.t_name AS goodName,
+            g.t_size AS goodSize,
+            g.t_brand AS goodBrand,
+            g.t_texture AS goodTexture,
+            g.t_remark AS goodRemark,
+            r.t_num AS num
+        FROM
+            v_repertory r
+            LEFT JOIN t_goods g ON r.t_goodsId = g.t_id
+            LEFT JOIN t_warehouse w ON r.t_warehouseId = w.t_id
+        WHERE 1=1
+            <if test="query.warehouseId != null">
+                AND r.t_warehouseId = #{query.warehouseId}
+            </if>
+            <if test="query.goodId != null">
+                AND r.t_goodsId = #{query.goodId}
+            </if>
+        ORDER BY r.t_num DESC
+    </select>
+</mapper>

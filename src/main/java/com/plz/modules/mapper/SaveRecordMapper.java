@@ -1,29 +1,17 @@
 package com.plz.modules.mapper;
 
-import com.plz.modules.entity.SaveRecordListDto;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.plz.modules.model.SaveRecord;
-import com.plz.modules.vo.RecordQueryVoVo;
+import com.plz.modules.vo.SaveRecordQueryVo;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
-
-public interface SaveRecordMapper {
-
-    int insert(SaveRecord record);
-
-    int insertSelective(SaveRecord record);
+public interface SaveRecordMapper extends BaseMapper<SaveRecord> {
 
     /**
-     * 列表查询
-     * @param query
+     * 查询入库单列表
      * @return
      */
-    List<SaveRecordListDto> selectList(@Param("query") RecordQueryVoVo query);
+    Page<SaveRecord> list(@Param("query") SaveRecordQueryVo query, @Param("page") Page page);
 
-    /**
-     * 查询详情
-     * @param id
-     * @return
-     */
-    SaveRecord details(@Param("id") int id);
 }

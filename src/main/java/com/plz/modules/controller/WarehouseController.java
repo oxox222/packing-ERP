@@ -1,11 +1,11 @@
 package com.plz.modules.controller;
 
+import com.plz.modules.entity.RepertoryDto;
 import com.plz.modules.model.Result;
 import com.plz.modules.model.Warehouse;
 import com.plz.modules.service.WarehouseService;
+import com.plz.modules.vo.RepertoryQueryVo;
 import com.plz.modules.vo.WarehouseQueryVo;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -19,7 +19,6 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/warehouse")
-@Api(tags = "仓库管理")
 public class WarehouseController {
 
     @Resource
@@ -30,9 +29,8 @@ public class WarehouseController {
      * @param warehouse
      */
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
-    @ApiOperation("新增仓库")
-    public Result addWarehouse(@RequestBody Warehouse warehouse) {
-        warehouseService.addWarehouse(warehouse);
+    public Result insert(@RequestBody Warehouse warehouse) {
+        warehouseService.insert(warehouse);
         return Result.success(null);
     }
 
@@ -42,9 +40,8 @@ public class WarehouseController {
      * @return
      */
     @RequestMapping(value = "/list", method = RequestMethod.GET)
-    @ApiOperation("查询仓库列表")
-    public Result queryWarehouseList(WarehouseQueryVo query) {
-        List<Warehouse> result = warehouseService.queryWarehouseList(query);
+    public Result list(WarehouseQueryVo query) {
+        List<Warehouse> result = warehouseService.list(query);
         return Result.success(result);
     }
 
@@ -53,9 +50,8 @@ public class WarehouseController {
      * @param warehouse
      */
     @RequestMapping(value = "/update", method = RequestMethod.PUT)
-    @ApiOperation("编辑仓库信息")
-    public Result updateWarehouse(@RequestBody Warehouse warehouse) {
-        warehouseService.updateWarehouse(warehouse);
+    public Result update(@RequestBody Warehouse warehouse) {
+        warehouseService.update(warehouse);
         return Result.success(null);
     }
 
@@ -64,11 +60,16 @@ public class WarehouseController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    @ApiOperation("根据id删除")
-    public Result deleteById(@PathVariable("id") int id) {
-        warehouseService.deleteById(id);
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.DELETE)
+    public Result delete(@PathVariable("id") int id) {
+        warehouseService.delete(id);
         return Result.success(null);
+    }
+
+    @RequestMapping(value = "/repertory", method = RequestMethod.GET)
+    public Result repertory(RepertoryQueryVo query) {
+        List<RepertoryDto> list = warehouseService.getRepertory(query);
+        return Result.success(list);
     }
 
 }

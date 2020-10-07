@@ -1,29 +1,29 @@
 package com.plz.modules.mapper;
 
-import com.plz.modules.entity.FetchRecordListDto;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.plz.modules.model.FetchRecord;
-import com.plz.modules.vo.RecordQueryVoVo;
+import com.plz.modules.vo.FetchRecordQueryVo;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
-
-public interface FetchRecordMapper {
-
-    int insert(FetchRecord record);
-
-    int insertSelective(FetchRecord record);
+public interface FetchRecordMapper extends BaseMapper<FetchRecord> {
 
     /**
-     * 列表查询
+     * 查询出库单列表
      * @param query
      * @return
      */
-    List<FetchRecordListDto> selectList(@Param("query") RecordQueryVoVo query);
+    Page<FetchRecord> list(@Param("query") FetchRecordQueryVo query, @Param("page") Page page);
 
     /**
-     * 查询详情
+     * 发货
      * @param id
-     * @return
      */
-    FetchRecord details(@Param("id") int id);
+    void deliver(@Param("id") int id);
+
+    /**
+     * 签收
+     * @param id
+     */
+    void sign(@Param("id") int id);
 }

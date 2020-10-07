@@ -2,118 +2,37 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.plz.modules.mapper.SaveRecordMapper">
   <resultMap id="BaseResultMap" type="com.plz.modules.model.SaveRecord">
-    <result column="t_id" jdbcType="INTEGER" property="tId" />
-    <result column="t_odd" jdbcType="VARCHAR" property="tOdd" />
-    <result column="t_warehouseId" jdbcType="INTEGER" property="tWarehouseid" />
-    <result column="t_discount" jdbcType="REAL" property="tDiscount" />
-    <result column="t_paid" jdbcType="DOUBLE" property="tPaid" />
-    <result column="t_create_date" jdbcType="TIMESTAMP" property="tCreateDate" />
-    <result column="t_remark" jdbcType="VARCHAR" property="tRemark" />
-    <result column="t_supplierId" jdbcType="INTEGER" property="tSupplierid" />
-    <result column="t_type" jdbcType="VARCHAR" property="tType" />
-    <result column="t_photo" jdbcType="LONGVARCHAR" property="tPhoto" />
-    <collection property="goods" javaType="java.util.ArrayList" ofType="com.plz.modules.model.SaveGoods"
-                select="com.plz.modules.mapper.SaveGoodsMapper.selectById" column="{recordId=t_id}"/>
+    <result column="t_id" jdbcType="INTEGER" property="id" />
+    <result column="t_odd" jdbcType="VARCHAR" property="odd" />
+    <result column="t_warehouseId" jdbcType="INTEGER" property="warehouseId" />
+    <result column="t_discount" jdbcType="FLOAT" property="discount" />
+    <result column="t_paid" jdbcType="DOUBLE" property="paid" />
+    <result column="t_remake" jdbcType="VARCHAR" property="remark" />
+    <result column="t_supplierId" jdbcType="INTEGER" property="supplierId" />
+    <result column="t_signer" jdbcType="VARCHAR" property="signer" />
+    <result column="t_received_time" jdbcType="TIMESTAMP" property="receivedTime" />
+    <result column="t_create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <collection property="saveGoodsRecordList" javaType="java.util.ArrayList"
+                select="com.plz.modules.mapper.SaveGoodsRecordMapper.selectByRecordId" column="{recordId=t_id}"/>
   </resultMap>
 
-  <insert id="insert" parameterType="com.plz.modules.model.SaveRecord">
-    insert into t_save_record (t_id, t_odd, t_warehouseId, 
-      t_discount, t_paid, t_create_date, 
-      t_remark, t_supplierId, t_type, 
-      t_photo)
-    values (#{tId,jdbcType=INTEGER}, #{tOdd,jdbcType=VARCHAR}, #{tWarehouseid,jdbcType=INTEGER}, 
-      #{tDiscount,jdbcType=REAL}, #{tPaid,jdbcType=DOUBLE}, #{tCreateDate,jdbcType=TIMESTAMP}, 
-      #{tRemark,jdbcType=VARCHAR}, #{tSupplierid,jdbcType=INTEGER}, #{tType,jdbcType=VARCHAR}, 
-      #{tPhoto,jdbcType=LONGVARCHAR})
-  </insert>
+  <sql id="Base_Column">
+    t_id, t_odd, t_warehouseId, t_discount, t_paid, t_remark, t_supplierId, t_signer, t_received_time, t_create_time
+  </sql>
 
-  <insert id="insertSelective" parameterType="com.plz.modules.model.SaveRecord">
-    insert into t_save_record
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="tId != null">
-        t_id,
-      </if>
-      <if test="tOdd != null">
-        t_odd,
-      </if>
-      <if test="tWarehouseid != null">
-        t_warehouseId,
-      </if>
-      <if test="tDiscount != null">
-        t_discount,
-      </if>
-      <if test="tPaid != null">
-        t_paid,
-      </if>
-      <if test="tCreateDate != null">
-        t_create_date,
-      </if>
-      <if test="tRemark != null">
-        t_remark,
-      </if>
-      <if test="tSupplierid != null">
-        t_supplierId,
-      </if>
-      <if test="tType != null">
-        t_type,
-      </if>
-      <if test="tPhoto != null">
-        t_photo,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="tId != null">
-        #{tId,jdbcType=INTEGER},
-      </if>
-      <if test="tOdd != null">
-        #{tOdd,jdbcType=VARCHAR},
-      </if>
-      <if test="tWarehouseid != null">
-        #{tWarehouseid,jdbcType=INTEGER},
-      </if>
-      <if test="tDiscount != null">
-        #{tDiscount,jdbcType=REAL},
-      </if>
-      <if test="tPaid != null">
-        #{tPaid,jdbcType=DOUBLE},
-      </if>
-      <if test="tCreateDate != null">
-        #{tCreateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="tRemark != null">
-        #{tRemark,jdbcType=VARCHAR},
-      </if>
-      <if test="tSupplierid != null">
-        #{tSupplierid,jdbcType=INTEGER},
-      </if>
-      <if test="tType != null">
-        #{tType,jdbcType=VARCHAR},
-      </if>
-      <if test="tPhoto != null">
-        #{tPhoto,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-
-  <select id="selectList" resultType="com.plz.modules.entity.SaveRecordListDto">
+  <select id="list" resultMap="BaseResultMap">
     SELECT
-      record.t_id AS id,
-      record.t_odd AS odd,
-      record.t_paid AS paid,
-      record.t_create_date AS createTime,
-      w.t_name AS warehouse
-    FROM t_save_record record
-    LEFT JOIN t_warehouse w ON record.t_warehouseId = w.t_id
-    LEFT JOIN t_supplier s ON record.t_supplierId = s.t_id
+        <include refid="Base_Column" />
+    FROM
+        t_save_record
     WHERE 1=1
-    ORDER BY record.t_create_date DESC
-  </select>
-
-  <select id="details" resultMap="BaseResultMap">
-    SELECT t_id, t_odd, t_warehouseId, t_discount, t_paid, t_create_date, t_remark,
-           t_photo, t_supplierId, t_type
-    FROM t_save_record
-    WHERE t_id = #{id}
+    <if test="query.warehouseId != null" >
+        AND t_warehouseId = #{query.warehouseId}
+    </if>
+    <if test="query.odd != null and query.odd != ''" >
+        AND t_odd LIKE concat('%', #{query.odd}, '%')
+    </if>
+    ORDER BY t_create_time DESC
   </select>
 
 </mapper>
