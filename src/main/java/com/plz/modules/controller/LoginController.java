@@ -2,8 +2,6 @@ package com.plz.modules.controller;
 
 import com.plz.modules.model.Result;
 import com.plz.modules.model.User;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -22,11 +20,9 @@ import javax.servlet.http.HttpSession;
  * @Date: 2020-03-13
  */
 @RestController
-@Api(tags = "登录接口")
 @RequestMapping("/user")
 public class LoginController {
 
-    @ApiOperation("登录")
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public Result Login(@RequestParam("userName") String userName,
                         @RequestParam("password") String password,

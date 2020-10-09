@@ -1,5 +1,6 @@
 package com.plz.modules.config;
 
+import com.plz.modules.interceptor.ShiroLoginFilter;
 import com.plz.modules.shiro.AuthRealm;
 import com.plz.modules.shiro.CredentialsMatcher;
 import org.apache.shiro.mgt.SecurityManager;
@@ -11,7 +12,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import javax.servlet.Filter;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * @ClassName: ShiroConfig
@@ -43,6 +46,10 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/v2/**", "anon");
         // 对所有用户认证
         filterChainDefinitionMap.put("/**", "authc");
+
+        //禁止未登录请求跳转jsp(直接返回json)
+        Map<String, Filter> filters = bean.getFilters();
+        filters.put("authc", new ShiroLoginFilter());
         bean.setFilterChainDefinitionMap(filterChainDefinitionMap);
 
         return bean;

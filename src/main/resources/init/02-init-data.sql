@@ -1,8 +1,3 @@
--- 数据字典 商品类型
-INSERT INTO `t_dictionary`(`t_type`, `t_code`, `t_name`, `t_description`) VALUES ('01001', '1', '原材料', '商品类型');
-INSERT INTO `t_dictionary`(`t_type`, `t_code`, `t_name`, `t_description`) VALUES ('01001', '2', '半成品', '商品类型');
-INSERT INTO `t_dictionary`(`t_type`, `t_code`, `t_name`, `t_description`) VALUES ('01001', '3', '成品', '商品类型');
-
 -- 权限控制
 INSERT INTO `t_permission` VALUES (1, 'insert', '');
 INSERT INTO `t_permission` VALUES (2, 'delete', '');

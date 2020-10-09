@@ -49,11 +49,11 @@
   </select>
 
   <update id="deliver">
-    UPDATE t_fetch_record SET t_state = 2 WHERE t_id = #{id}
+    UPDATE t_fetch_record SET t_state = 2 WHERE t_id = #{id} AND t_state = 1
   </update>
 
   <update id="sign">
-    UPDATE t_fetch_record SET t_state = 3 WHERE t_id = #{id}
+    UPDATE t_fetch_record SET t_state = 3 WHERE t_id = #{id} AND t_state = 2
   </update>
 
 </mapper>
