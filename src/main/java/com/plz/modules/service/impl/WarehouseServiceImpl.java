@@ -50,8 +50,8 @@ public class WarehouseServiceImpl implements WarehouseService {
     }
 
     @Override
-    public List<RepertoryDto> getRepertory(RepertoryQueryVo query) {
-        List<RepertoryDto> list = repertoryMapper.getRepertory(query);
+    public List<RepertoryDto> getRepertory(Integer id) {
+        List<RepertoryDto> list = repertoryMapper.getRepertory(id);
         return list;
     }
 }

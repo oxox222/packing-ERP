@@ -4,7 +4,6 @@ import com.plz.modules.entity.RepertoryDto;
 import com.plz.modules.model.Result;
 import com.plz.modules.model.Warehouse;
 import com.plz.modules.service.WarehouseService;
-import com.plz.modules.vo.RepertoryQueryVo;
 import com.plz.modules.vo.WarehouseQueryVo;
 import org.springframework.web.bind.annotation.*;
 
@@ -66,9 +65,14 @@ public class WarehouseController {
         return Result.success(null);
     }
 
-    @RequestMapping(value = "/repertory", method = RequestMethod.GET)
-    public Result repertory(RepertoryQueryVo query) {
-        List<RepertoryDto> list = warehouseService.getRepertory(query);
+    /**
+     * 查询库存量
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/repertory/{id}", method = RequestMethod.GET)
+    public Result repertory(@PathVariable("id") Integer id) {
+        List<RepertoryDto> list = warehouseService.getRepertory(id);
         return Result.success(list);
     }
 

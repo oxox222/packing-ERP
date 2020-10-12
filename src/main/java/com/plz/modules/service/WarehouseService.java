@@ -2,7 +2,6 @@ package com.plz.modules.service;
 
 import com.plz.modules.entity.RepertoryDto;
 import com.plz.modules.model.Warehouse;
-import com.plz.modules.vo.RepertoryQueryVo;
 import com.plz.modules.vo.WarehouseQueryVo;
 
 import java.util.List;
@@ -36,8 +35,8 @@ public interface WarehouseService {
 
     /**
      * 查询库存量
-     * @param query
+     * @param id
      * @return
      */
-    List<RepertoryDto> getRepertory(RepertoryQueryVo query);
+    List<RepertoryDto> getRepertory(Integer id);
 }
