@@ -29,8 +29,8 @@ public class GoodsController {
      */
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public Result insert(@RequestBody Goods goods) {
-        goodsService.insert(goods);
-        return Result.success(null);
+        Integer id = goodsService.insert(goods);
+        return Result.success(id);
     }
 
     /**

@@ -10,8 +10,9 @@ public interface CustomService {
     /**
      * 新增客户
      * @param custom
+     * @return
      */
-    void addCustom(Custom custom);
+    Integer addCustom(Custom custom);
 
     /**
      * 编辑客户信息

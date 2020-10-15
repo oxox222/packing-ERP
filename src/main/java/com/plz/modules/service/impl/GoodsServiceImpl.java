@@ -22,9 +22,9 @@ public class GoodsServiceImpl implements GoodsService {
     private GoodsMapper goodsMapper;
 
     @Override
-    public void insert(Goods goods) {
+    public Integer insert(Goods goods) {
         goodsMapper.insert(goods);
-
+        return goods.getId();
     }
 
     @Override

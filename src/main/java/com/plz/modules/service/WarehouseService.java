@@ -11,8 +11,9 @@ public interface WarehouseService {
     /**
      * 新增仓库
      * @param warehouse
+     * @return
      */
-    void insert(Warehouse warehouse);
+    Integer insert(Warehouse warehouse);
 
     /**
      * 查询仓库列表

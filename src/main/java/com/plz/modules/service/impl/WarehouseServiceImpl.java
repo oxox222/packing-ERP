@@ -5,7 +5,6 @@ import com.plz.modules.mapper.RepertoryMapper;
 import com.plz.modules.mapper.WarehouseMapper;
 import com.plz.modules.model.Warehouse;
 import com.plz.modules.service.WarehouseService;
-import com.plz.modules.vo.RepertoryQueryVo;
 import com.plz.modules.vo.WarehouseQueryVo;
 import org.springframework.stereotype.Service;
 
@@ -29,8 +28,9 @@ public class WarehouseServiceImpl implements WarehouseService {
 
 
     @Override
-    public void insert(Warehouse warehouse) {
+    public Integer insert(Warehouse warehouse) {
         warehouseMapper.insert(warehouse);
+        return warehouse.getId();
     }
 
     @Override

@@ -22,8 +22,9 @@ public class CustomServiceImpl implements CustomService {
     private CustomMapper customMapper;
 
     @Override
-    public void addCustom(Custom custom) {
+    public Integer addCustom(Custom custom) {
         customMapper.insert(custom);
+        return custom.getId();
     }
 
     @Override

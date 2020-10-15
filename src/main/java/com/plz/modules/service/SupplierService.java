@@ -10,8 +10,9 @@ public interface SupplierService {
     /**
      * 新增供货商
      * @param supplier
+     * @return
      */
-    void insert(Supplier supplier);
+    Integer insert(Supplier supplier);
 
     /**
      * 查询供应商列表

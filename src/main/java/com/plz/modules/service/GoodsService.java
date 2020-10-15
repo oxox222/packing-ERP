@@ -10,8 +10,9 @@ public interface GoodsService {
     /**
      * 新增商品
      * @param goods
+     * @return
      */
-    void insert(Goods goods);
+    Integer insert(Goods goods);
 
     /**
      * 编辑商品

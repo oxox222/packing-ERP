@@ -22,8 +22,9 @@ public class SupplierServiceImpl implements SupplierService {
     private SupplierMapper supplierMapper;
 
     @Override
-    public void insert(Supplier supplier) {
+    public Integer insert(Supplier supplier) {
         supplierMapper.insert(supplier);
+        return supplier.getId();
     }
 
     @Override

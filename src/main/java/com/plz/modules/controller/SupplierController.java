@@ -25,11 +25,12 @@ public class SupplierController {
     /**
      * 新增供货商
      * @param supplier
+     * @return
      */
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public Result insert(@RequestBody Supplier supplier) {
-        supplierService.insert(supplier);
-        return Result.success(null);
+        Integer id = supplierService.insert(supplier);
+        return Result.success(id);
     }
 
     /**

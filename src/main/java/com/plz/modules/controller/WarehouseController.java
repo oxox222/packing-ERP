@@ -26,11 +26,12 @@ public class WarehouseController {
     /**
      * 新增仓库
      * @param warehouse
+     * @return
      */
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public Result insert(@RequestBody Warehouse warehouse) {
-        warehouseService.insert(warehouse);
-        return Result.success(null);
+        Integer id = warehouseService.insert(warehouse);
+        return Result.success(id);
     }
 
     /**

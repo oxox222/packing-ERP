@@ -25,11 +25,12 @@ public class CustomController {
     /**
      * 新增客户
      * @param custom
+     * @return
      */
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public Result addCustom(@RequestBody Custom custom) {
-        customService.addCustom(custom);
-        return Result.success(null);
+        Integer id = customService.addCustom(custom);
+        return Result.success(id);
     }
 
     /**
