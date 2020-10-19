@@ -9,7 +9,7 @@
     <result column="t_other_cost" jdbcType="DOUBLE" property="otherCost" />
     <result column="t_other_costName" jdbcType="VARCHAR" property="otherCostName" />
     <result column="t_paid" jdbcType="DOUBLE" property="paid" />
-    <result column="t_remake" jdbcType="VARCHAR" property="remark" />
+    <result column="t_remark" jdbcType="VARCHAR" property="remark" />
     <result column="t_customId" jdbcType="INTEGER" property="customId" />
     <result column="t_signer" jdbcType="VARCHAR" property="signer" />
     <result column="t_receiver" jdbcType="VARCHAR" property="receiver" />
@@ -20,6 +20,8 @@
     <result column="t_deal_time" jdbcType="TIMESTAMP" property="dealTime" />
     <result column="t_state" jdbcType="TINYINT" property="state" />
     <result column="t_create_date" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="warehouseName" jdbcType="VARCHAR" property="warehouseName" />
+    <result column="customName" jdbcType="VARCHAR" property="customName" />
     <collection property="fetchGoodsRecordList" javaType="java.util.ArrayList" ofType="com.plz.modules.model.FetchGoodsRecord"
                 select="com.plz.modules.mapper.FetchGoodsRecordMapper.selectByRecordId" column="{recordId=t_id}"/>
   </resultMap>
@@ -32,20 +34,25 @@
 
   <select id="list" resultMap="BaseResultMap">
     SELECT
-        <include refid="Base_Column" />
+        r.t_id, r.t_odd, r.t_warehouseId, r.t_discount, r.t_other_cost, r.t_other_cost_name,
+        r.t_paid, r.t_remark, r.t_customId, r.t_signer, r.t_receiver, r.t_receiver_phone,
+        r.t_receivedId, r.t_received_address, r.t_received_time, r.t_deal_time,
+        r.t_state, t_create_time, w.t_name AS warehouseName, c.t_name AS customName
     FROM
-        t_fetch_record
+        t_fetch_record r
+        LEFT JOIN t_warehouse w ON r.t_warehouseId = w.t_id
+        LEFT JOIN t_custom c ON r.t_customId = c.t_name
     WHERE 1=1
     <if test="query.warehouseId != null" >
-        AND t_warehouseId = #{query.warehouseId}
+        AND r.t_warehouseId = #{query.warehouseId}
     </if>
     <if test="query.odd != null and query.odd != ''" >
-        AND t_odd LIKE concat('%', #{query.odd}, '%')
+        AND r.t_odd LIKE concat('%', #{query.odd}, '%')
     </if>
     <if test="query.customId != null" >
-        AND t_customId = #{query.customId}
+        AND r.t_customId = #{query.customId}
     </if>
-    ORDER BY t_create_time DESC
+    ORDER BY r.t_create_time DESC
   </select>
 
   <update id="deliver">

@@ -129,6 +129,18 @@ public class FetchRecord implements Serializable {
     private Date createTime;
 
     /**
+     * 仓库名
+     */
+    @TableField(exist = false)
+    private String warehouseName;
+
+    /**
+     * 顾客名
+     */
+    @TableField(exist = false)
+    private String customName;
+
+    /**
      * 出库商品集合
      */
     @TableField(exist = false)

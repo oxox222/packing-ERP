@@ -7,11 +7,13 @@
     <result column="t_warehouseId" jdbcType="INTEGER" property="warehouseId" />
     <result column="t_discount" jdbcType="FLOAT" property="discount" />
     <result column="t_paid" jdbcType="DOUBLE" property="paid" />
-    <result column="t_remake" jdbcType="VARCHAR" property="remark" />
+    <result column="t_remark" jdbcType="VARCHAR" property="remark" />
     <result column="t_supplierId" jdbcType="INTEGER" property="supplierId" />
     <result column="t_signer" jdbcType="VARCHAR" property="signer" />
     <result column="t_received_time" jdbcType="TIMESTAMP" property="receivedTime" />
     <result column="t_create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="warehouseName" jdbcType="VARCHAR" property="warehouseName" />
+    <result column="supplierName" jdbcType="VARCHAR" property="supplierName" />
     <collection property="saveGoodsRecordList" javaType="java.util.ArrayList"
                 select="com.plz.modules.mapper.SaveGoodsRecordMapper.selectByRecordId" column="{recordId=t_id}"/>
   </resultMap>
@@ -22,17 +24,20 @@
 
   <select id="list" resultMap="BaseResultMap">
     SELECT
-        <include refid="Base_Column" />
+        r.t_id, r.t_odd, r.t_warehouseId, r.t_discount, r.t_paid, r.t_remark, r.t_supplierId, r.t_signer,
+        r.t_received_time, r.t_create_time, w.t_name AS warehouseName, s.t_name AS supplierName
     FROM
-        t_save_record
+        t_save_record r
+        LEFT JOIN t_warehouse w ON r.t_warehouseId = w.t_id
+        LEFT JOIN t_supplier s ON r.t_supplierId = s.t_id
     WHERE 1=1
     <if test="query.warehouseId != null" >
-        AND t_warehouseId = #{query.warehouseId}
+        AND r.t_warehouseId = #{query.warehouseId}
     </if>
     <if test="query.odd != null and query.odd != ''" >
-        AND t_odd LIKE concat('%', #{query.odd}, '%')
+        AND r.t_odd LIKE concat('%', #{query.odd}, '%')
     </if>
-    ORDER BY t_create_time DESC
+    ORDER BY r.t_create_time DESC
   </select>
 
 </mapper>

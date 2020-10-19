@@ -81,6 +81,18 @@ public class SaveRecord implements Serializable {
     private Date createTime;
 
     /**
+     * 仓库名
+     */
+    @TableField(exist = false)
+    private String warehouseName;
+
+    /**
+     * 供货商名
+     */
+    @TableField(exist = false)
+    private String supplierName;
+
+    /**
      * 入库商品集合
      */
     @TableField(exist = false)
