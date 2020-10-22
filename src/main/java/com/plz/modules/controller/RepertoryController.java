@@ -59,7 +59,7 @@ public class RepertoryController {
     }
 
     /**
-     * 编辑入库单
+     * 编辑出库单
      * @param fetchRecord
      * @return
      */

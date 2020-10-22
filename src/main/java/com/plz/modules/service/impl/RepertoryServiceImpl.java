@@ -78,12 +78,14 @@ public class RepertoryServiceImpl implements RepertoryService {
     @Transactional(rollbackFor = RuntimeException.class)
     public void updateFetchRecord(FetchRecord fetchRecord) {
         fetchRecordMapper.updateById(fetchRecord);
-        //全删再全加
-        fetchGoodsRecordMapper.deleteByRecordId(fetchRecord.getId());
-        fetchRecord.getFetchGoodsRecordList().stream().forEach(e -> {
-            e.setRecordId(fetchRecord.getId());
-        });
-        fetchGoodsRecordMapper.insertOfBatch(fetchRecord.getFetchGoodsRecordList());
+        if (!fetchRecord.getFetchGoodsRecordList().isEmpty()) {
+            //全删再全加
+            fetchGoodsRecordMapper.deleteByRecordId(fetchRecord.getId());
+            fetchRecord.getFetchGoodsRecordList().stream().forEach(e -> {
+                e.setRecordId(fetchRecord.getId());
+            });
+            fetchGoodsRecordMapper.insertOfBatch(fetchRecord.getFetchGoodsRecordList());
+        }
     }
 
     @Override
