@@ -2,7 +2,9 @@ package com.plz.modules.service.impl;
 
 import com.plz.modules.entity.RepertoryDto;
 import com.plz.modules.mapper.RepertoryMapper;
+import com.plz.modules.mapper.StatisticsMapper;
 import com.plz.modules.mapper.WarehouseMapper;
+import com.plz.modules.model.Statistics;
 import com.plz.modules.model.Warehouse;
 import com.plz.modules.service.WarehouseService;
 import com.plz.modules.vo.WarehouseQueryVo;
@@ -25,6 +27,9 @@ public class WarehouseServiceImpl implements WarehouseService {
 
     @Resource
     private RepertoryMapper repertoryMapper;
+
+    @Resource
+    private StatisticsMapper statisticsMapper;
 
 
     @Override
@@ -52,6 +57,12 @@ public class WarehouseServiceImpl implements WarehouseService {
     @Override
     public List<RepertoryDto> getRepertory(Integer id) {
         List<RepertoryDto> list = repertoryMapper.getRepertory(id);
+        return list;
+    }
+
+    @Override
+    public List<Statistics> getStatistics() {
+        List<Statistics> list = statisticsMapper.list();
         return list;
     }
 }

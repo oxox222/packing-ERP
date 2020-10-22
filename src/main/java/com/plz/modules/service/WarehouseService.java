@@ -1,6 +1,7 @@
 package com.plz.modules.service;
 
 import com.plz.modules.entity.RepertoryDto;
+import com.plz.modules.model.Statistics;
 import com.plz.modules.model.Warehouse;
 import com.plz.modules.vo.WarehouseQueryVo;
 
@@ -40,4 +41,10 @@ public interface WarehouseService {
      * @return
      */
     List<RepertoryDto> getRepertory(Integer id);
+
+    /**
+     * 仓库统计
+     * @return
+     */
+    List<Statistics> getStatistics();
 }

@@ -2,6 +2,7 @@ package com.plz.modules.controller;
 
 import com.plz.modules.entity.RepertoryDto;
 import com.plz.modules.model.Result;
+import com.plz.modules.model.Statistics;
 import com.plz.modules.model.Warehouse;
 import com.plz.modules.service.WarehouseService;
 import com.plz.modules.vo.WarehouseQueryVo;
@@ -74,6 +75,16 @@ public class WarehouseController {
     @RequestMapping(value = "/repertory/{id}", method = RequestMethod.GET)
     public Result repertory(@PathVariable("id") Integer id) {
         List<RepertoryDto> list = warehouseService.getRepertory(id);
+        return Result.success(list);
+    }
+
+    /**
+     * 仓库统计
+     * @return
+     */
+    @RequestMapping(value = "/statistics", method = RequestMethod.GET)
+    public Result statistics() {
+        List<Statistics> list = warehouseService.getStatistics();
         return Result.success(list);
     }
 

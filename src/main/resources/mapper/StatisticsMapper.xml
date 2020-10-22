@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.plz.modules.mapper.StatisticsMapper">
+    <resultMap id="BaseResultMap" type="com.plz.modules.model.Statistics">
+        <result column="t_warehouseId" jdbcType="INTEGER" property="warehouseId" />
+        <result column="t_warehouseName" jdbcType="VARCHAR" property="warehouseName" />
+        <result column="t_num" jdbcType="INTEGER" property="num" />
+        <result column="t_types" jdbcType="INTEGER" property="types" />
+    </resultMap>
+
+    <sql id="Base_Column">
+        t_warehouseId, t_warehouseName, t_num, t_types
+    </sql>
+
+    <select id="list" resultMap="BaseResultMap">
+        SELECT
+            <include refid="Base_Column" />
+        FROM
+            v_statistics
+        WHERE 1=1
+    </select>
+</mapper>
