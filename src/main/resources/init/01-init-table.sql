@@ -61,15 +61,15 @@ CREATE TABLE `t_fetch_record` (
     `t_odd` varchar(20) NOT NULL COMMENT '单号',
     `t_warehouseId` int(11) unsigned NOT NULL COMMENT '仓库表id',
     `t_discount` float(3,2) NOT NULL DEFAULT '1.00' COMMENT '折扣',
-    `t_other_cost` double(10,2) NOT NULL DEFAULT '0.00' COMMENT '其他费用',
+    `t_other_cost` double(10,2) DEFAULT NULL COMMENT '其他费用',
     `t_other_cost_name` varchar(20) DEFAULT NULL COMMENT '其他费用名称',
-    `t_paid` double(11,2) DEFAULT '0.00' COMMENT '实收金额',
+    `t_paid` double(11,2) DEFAULT NULL COMMENT '实收金额',
     `t_remark` varchar(255) DEFAULT NULL COMMENT '备注',
-    `t_customId` int(11) unsigned NOT NULL COMMENT '顾客id',
+    `t_customId` int(11) unsigned DEFAULT NULL COMMENT '顾客id',
     `t_signer` varchar(20) DEFAULT NULL COMMENT '签收人',
-    `t_receiver` varchar(20) NOT NULL COMMENT '交货联系人',
+    `t_receiver` varchar(20) DEFAULT NULL COMMENT '交货联系人',
     `t_receiver_phone` varchar(20) DEFAULT NULL COMMENT '交货联系人联系方式',
-    `t_receivedId` int(11) unsigned NOT NULL COMMENT '交货方id',
+    `t_receivedId` int(11) unsigned DEFAULT NULL COMMENT '交货方id',
     `t_received_address` varchar(50) DEFAULT NULL COMMENT '交货地址',
     `t_received_time` timestamp NULL DEFAULT NULL COMMENT '交货时间',
     `t_deal_time` timestamp NULL DEFAULT NULL COMMENT '开单时间',
@@ -88,7 +88,7 @@ CREATE TABLE `t_save_record` (
     `t_odd` varchar(20) DEFAULT NULL COMMENT '单号',
     `t_warehouseId` int(11) unsigned NOT NULL COMMENT '仓库表id',
     `t_discount` float(3,2) NOT NULL DEFAULT '1.00' COMMENT '折扣',
-    `t_paid` double(11,2) DEFAULT '0.00' COMMENT '实付金额',
+    `t_paid` double(11,2) DEFAULT NULL COMMENT '实付金额',
     `t_remark` varchar(255) DEFAULT NULL COMMENT '备注',
     `t_supplierId` int(11) unsigned DEFAULT NULL COMMENT '供应商id',
     `t_signer` varchar(20) DEFAULT NULL COMMENT '签收人',
@@ -126,6 +126,7 @@ CREATE TABLE `t_goods` (
     `t_brand` varchar(20) DEFAULT NULL COMMENT '商标名称',
     `t_texture` varchar(50) DEFAULT NULL COMMENT '材质',
     `t_remark` varchar(255) DEFAULT NULL COMMENT '备注',
+    `t_price` double(8,2) DEFAULT NULL COMMENT '单价',
     PRIMARY KEY (`t_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='商品表';
 
@@ -151,9 +152,9 @@ CREATE TABLE `t_save_goods_record` (
    `t_goodsId` int(11) unsigned NOT NULL COMMENT '商品id',
    `t_recordId` int(11) unsigned NOT NULL COMMENT '入库单表id',
    `t_num` int(255) DEFAULT NULL COMMENT '数量',
-   `t_price` double(8,2) DEFAULT '0.00' COMMENT '单价',
+   `t_price` double(8,2) DEFAULT NULL COMMENT '单价',
    `t_discount` float(3,2) DEFAULT '1.00' COMMENT '折扣',
-   `t_paid` double(11,2) DEFAULT '0.00' COMMENT '实付金额',
+   `t_paid` double(11,2) DEFAULT NULL COMMENT '实付金额',
     PRIMARY KEY (`t_id`),
     KEY `idx_goodsId` (`t_goodsId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='入库商品记录表';
@@ -167,9 +168,9 @@ CREATE TABLE `t_fetch_goods_record` (
     `t_goodsId` int(11) unsigned NOT NULL COMMENT '商品id',
     `t_recordId` int(11) unsigned NOT NULL COMMENT '出库单表id',
     `t_num` int(255) DEFAULT NULL COMMENT '数量',
-    `t_price` double(8,2) DEFAULT '0.00' COMMENT '单价',
+    `t_price` double(8,2) DEFAULT NULL COMMENT '单价',
     `t_discount` float(3,2) DEFAULT '1.00' COMMENT '折扣',
-    `t_paid` double(11,2) DEFAULT '0.00' COMMENT '实付金额',
+    `t_paid` double(11,2) DEFAULT NULL COMMENT '实付金额',
     PRIMARY KEY (`t_id`),
     KEY `idx_goodsId` (`t_goodsId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='出库商品记录表';

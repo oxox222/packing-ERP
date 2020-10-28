@@ -51,4 +51,10 @@ public class Goods {
      */
     @TableField(value = "t_remark")
     private String remark;
+
+    /**
+     * 单价
+     */
+    @TableField(value = "t_price")
+    private Double price;
 }

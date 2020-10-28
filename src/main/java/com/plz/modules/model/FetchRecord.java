@@ -141,6 +141,12 @@ public class FetchRecord implements Serializable {
     private String customName;
 
     /**
+     * 交货方名称
+     */
+    @TableField(exist = false)
+    private String receiverName;
+
+    /**
      * 出库商品集合
      */
     @TableField(exist = false)

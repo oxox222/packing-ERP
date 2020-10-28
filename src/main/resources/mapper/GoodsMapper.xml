@@ -8,10 +8,11 @@
     <result column="t_brand" jdbcType="VARCHAR" property="brand" />
     <result column="t_texture" jdbcType="VARCHAR" property="texture" />
     <result column="t_remark" jdbcType="VARCHAR" property="remark" />
+    <result column="t_price" jdbcType="DOUBLE" property="price" />
   </resultMap>
 
   <sql id="Base_Column_List">
-    t_id, t_name, t_size, t_brand, t_texture, t_remark
+    t_id, t_name, t_size, t_brand, t_texture, t_remark, t_price
   </sql>
 
   <select id="list" resultMap="BaseResultMap">

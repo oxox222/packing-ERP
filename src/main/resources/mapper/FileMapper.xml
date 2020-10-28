@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.plz.modules.mapper.FileMapper">
+    <resultMap id="BaseResultMap" type="com.plz.modules.model.FileModel">
+        <result column="t_id" jdbcType="INTEGER" property="id" />
+        <result column="t_url" jdbcType="VARCHAR" property="url" />
+        <result column="t_origin_name" jdbcType="VARCHAR" property="originName" />
+        <result column="t_new_name" jdbcType="VARCHAR" property="newName" />
+        <result column="t_suffix_name" jdbcType="VARCHAR" property="suffixName" />
+        <result column="t_file_type" jdbcType="TINYINT" property="fileType" />
+        <result column="t_origin_type" jdbcType="TINYINT" property="originType" />
+        <result column="t_origin_id" jdbcType="INTEGER" property="originId" />
+        <result column="t_create_time" jdbcType="TIMESTAMP" property="createTime" />
+    </resultMap>
+</mapper>
