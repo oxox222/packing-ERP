@@ -6,6 +6,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @ClassName: Goods
  * @Description: 商品
@@ -57,4 +60,10 @@ public class Goods {
      */
     @TableField(value = "t_price")
     private Double price;
+
+    /**
+     * 关联商品
+     */
+    @TableField(exist = false)
+    private List<GoodsForm> goodsFormList = new ArrayList<>();
 }

@@ -1,5 +1,6 @@
 package com.plz.modules.controller;
 
+import com.plz.modules.entity.GoodFormDto;
 import com.plz.modules.model.Goods;
 import com.plz.modules.model.Result;
 import com.plz.modules.service.GoodsService;
@@ -65,4 +66,15 @@ public class GoodsController {
         goodsService.delete(id);
         return Result.success(null);
     }
+
+    /**
+     * 查询关联商品列表
+     * @return
+     */
+    @RequestMapping(value = "/form/list", method = RequestMethod.GET)
+    public Result goodFormList() {
+        List<GoodFormDto> list = goodsService.goodFormList();
+        return Result.success(list);
+    }
+
 }

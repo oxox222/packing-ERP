@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.plz.modules.mapper.GoodsFormMapper">
+    <resultMap id="BaseResultMap" type="com.plz.modules.model.GoodsForm">
+        <result column="t_origin_goodId" jdbcType="INTEGER" property="originGoodId" />
+        <result column="t_form_goodId" jdbcType="INTEGER" property="formGoodId" />
+    </resultMap>
+
+    <resultMap id="GoodFormResultMap" type="com.plz.modules.entity.GoodFormDto">
+        <result column="t_id" jdbcType="INTEGER" property="originGoodId" />
+        <result column="t_name" jdbcType="VARCHAR" property="originGoodName" />
+        <collection column="{originGoodId=t_id}" property="formRepertoryDtoList"
+                    javaType="java.util.List" select="repertoryByOriginGoodId" />
+        <collection column="{originGoodId=t_id}" property="formGoodDtoList"
+                    javaType="java.util.List" select="selectByOriginGoodId"/>
+    </resultMap>
+
+    <sql id="Base_Column">
+        t_origin_goodId, t_form_goodId
+    </sql>
+
+
+    <insert id="insertOfBatch" parameterType="java.util.List">
+        INSERT INTO `t_goods_form`
+            (<include refid="Base_Column" />)
+        VALUES
+            <foreach collection="list" item="item" index="index" separator=",">
+                (
+                    #{item.originGoodId},
+                    #{item.formGoodId}
+                )
+            </foreach>
+    </insert>
+
+    <delete id="deleteByOriginGoodId">
+        DELETE FROM `t_goods_form` WHERE t_origin_goodId = #{originGoodId}
+    </delete>
+
+    <select id="selectGoodFormList" resultMap="GoodFormResultMap">
+        SELECT
+            t_id, t_name
+        FROM
+            t_goods
+    </select>
+
+    <select id="repertoryByOriginGoodId" resultType="com.plz.modules.entity.FormRepertoryDto">
+        SELECT
+            tmp.t_warehouseId AS warehouseId,
+            w.t_name AS warehouseName,
+            tmp.t_num AS num
+        FROM
+            (SELECT t_warehouseId, t_num FROM v_repertory WHERE t_goodsId = #{originGoodId}) AS tmp
+            LEFT JOIN t_warehouse AS w ON tmp.t_warehouseId = w.t_id
+    </select>
+
+    <select id="selectByOriginGoodId" resultType="com.plz.modules.entity.FormGoodDto">
+        SELECT
+            f.t_form_goodId AS formGoodId,
+            g.t_name AS formGoodName
+        FROM
+            `t_goods_form` AS f
+            LEFT JOIN t_goods AS g ON f.t_form_goodId = g.t_id
+        WHERE
+            f.t_origin_goodId = #{originGoodId}
+    </select>
+
+</mapper>

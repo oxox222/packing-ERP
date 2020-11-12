@@ -12,6 +12,7 @@
             g.t_brand AS goodBrand,
             g.t_texture AS goodTexture,
             g.t_remark AS goodRemark,
+            g.t_price AS goodPrice,
             r.t_num AS num
         FROM
             v_repertory r

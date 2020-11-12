@@ -1,6 +1,7 @@
 package com.plz.modules.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.plz.modules.entity.FetchGoodsRecordDto;
 import com.plz.modules.model.FetchGoodsRecord;
 import org.apache.ibatis.annotations.Param;
 
@@ -25,5 +26,5 @@ public interface FetchGoodsRecordMapper extends BaseMapper<FetchGoodsRecord> {
      * @param recordId
      * @return
      */
-    List<FetchGoodsRecord> selectByRecordId(@Param("recordId") Integer recordId);
+    List<FetchGoodsRecordDto> selectByRecordId(@Param("recordId") Integer recordId);
 }

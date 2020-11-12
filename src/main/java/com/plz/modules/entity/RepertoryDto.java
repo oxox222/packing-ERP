@@ -52,6 +52,11 @@ public class RepertoryDto {
     private String goodRemark;
 
     /**
+     * 商品单价
+     */
+    private Double goodPrice;
+
+    /**
      * 库存数量
      */
     private Integer num;

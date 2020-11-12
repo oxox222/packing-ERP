@@ -1,5 +1,6 @@
 package com.plz.modules.service;
 
+import com.plz.modules.entity.GoodFormDto;
 import com.plz.modules.model.Goods;
 import com.plz.modules.vo.GoodsQueryVo;
 
@@ -31,4 +32,11 @@ public interface GoodsService {
      * @param id
      */
     void delete(Integer id);
+
+    /**
+     * 查询关联商品列表
+     * @return
+     */
+    List<GoodFormDto> goodFormList();
+
 }
