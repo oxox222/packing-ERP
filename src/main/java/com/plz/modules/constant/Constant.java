@@ -16,5 +16,10 @@ public class Constant {
      */
     public static String rootPath = "E:/upload/";
 
+    /**
+     * 订单号 redis key
+     */
+    public static String oddKey = "ERPOdd";
+
 
 }

@@ -1,10 +1,6 @@
 -- ----------------------------
--- v2.3.2
+-- v2.3.3
 -- ----------------------------
-
--- 新增商品关联表
-DROP TABLE IF EXISTS `t_goods_form`;
-CREATE TABLE `t_goods_form` (
-    `t_origin_goodId` int(11) unsigned NOT NULL COMMENT '源商品',
-    `t_form_goodId` int(11) unsigned NOT NULL COMMENT '关联商品'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='关联商品表';
+-- 修改入库单表和出库单表单号字段大小
+ALTER TABLE t_save_record MODIFY COLUMN `t_odd` varchar(50) DEFAULT NULL COMMENT '单号';
+ALTER TABLE t_fetch_record MODIFY COLUMN `t_odd` varchar(50) DEFAULT NULL COMMENT '单号';

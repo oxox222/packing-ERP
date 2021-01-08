@@ -1,4 +1,4 @@
-package com.plz.modules.service.impl;
+package com.plz.modules.impl;
 
 import com.plz.modules.entity.RepertoryDto;
 import com.plz.modules.mapper.RepertoryMapper;

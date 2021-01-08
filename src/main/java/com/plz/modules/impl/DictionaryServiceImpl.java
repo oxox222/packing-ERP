@@ -1,4 +1,4 @@
-package com.plz.modules.service.impl;
+package com.plz.modules.impl;
 
 import com.plz.modules.mapper.DictionaryMapper;
 import com.plz.modules.model.Dictionary;

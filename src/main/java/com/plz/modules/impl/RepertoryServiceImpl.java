@@ -1,4 +1,4 @@
-package com.plz.modules.service.impl;
+package com.plz.modules.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.plz.modules.mapper.FetchGoodsRecordMapper;
@@ -8,6 +8,7 @@ import com.plz.modules.mapper.SaveRecordMapper;
 import com.plz.modules.model.FetchRecord;
 import com.plz.modules.model.SaveRecord;
 import com.plz.modules.service.RepertoryService;
+import com.plz.modules.util.OddUtils;
 import com.plz.modules.vo.FetchRecordQueryVo;
 import com.plz.modules.vo.SaveRecordQueryVo;
 import org.springframework.stereotype.Service;
@@ -36,9 +37,13 @@ public class RepertoryServiceImpl implements RepertoryService {
     @Resource
     private FetchGoodsRecordMapper fetchGoodsRecordMapper;
 
+    @Resource
+    private OddUtils oddUtils;
+
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public void insertSaveRecord(SaveRecord saveRecord) {
+        saveRecord.setOdd(oddUtils.getOdd());
         saveRecordMapper.insert(saveRecord);
         //设置商品订单号
         if (!saveRecord.getSaveGoodsRecordList().isEmpty()) {
@@ -52,6 +57,7 @@ public class RepertoryServiceImpl implements RepertoryService {
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public void insertFetchRecord(FetchRecord fetchRecord) {
+        fetchRecord.setOdd(oddUtils.getOdd());
         fetchRecordMapper.insert(fetchRecord);
         //设置商品订单号
         if (!fetchRecord.getFetchGoodsRecordList().isEmpty()) {
