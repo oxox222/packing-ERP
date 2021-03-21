@@ -48,6 +48,16 @@ public class RepertoryController {
     }
 
     /**
+     * 新增出库单时自动填充入库单信息
+     * @return
+     */
+    @RequestMapping(value = "/fetchAndSaveRecord/insert", method = RequestMethod.POST)
+    public Result insertFetchAndSaveRecord(@RequestBody FetchRecord fetchRecord) {
+        repertoryService.insertFetchAndSaveRecord(fetchRecord);
+        return Result.success(null);
+    }
+
+    /**
      * 编辑入库单
      * @param saveRecord
      * @return

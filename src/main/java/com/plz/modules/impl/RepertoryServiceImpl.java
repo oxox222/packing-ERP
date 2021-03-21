@@ -70,6 +70,14 @@ public class RepertoryServiceImpl implements RepertoryService {
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
+    public void insertFetchAndSaveRecord(FetchRecord fetchRecord) {
+        SaveRecord saveRecord = new SaveRecord(fetchRecord);
+        insertSaveRecord(saveRecord);
+        insertFetchRecord(fetchRecord);
+    }
+
+    @Override
+    @Transactional(rollbackFor = RuntimeException.class)
     public void updateSaveRecord(SaveRecord saveRecord) {
         saveRecordMapper.updateById(saveRecord);
         //全删再全加

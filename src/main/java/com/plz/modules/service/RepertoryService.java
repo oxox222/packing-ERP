@@ -21,6 +21,12 @@ public interface RepertoryService {
     void insertFetchRecord(FetchRecord fetchRecord);
 
     /**
+     * 新增出库单时自动填充入库单信息
+     * @return
+     */
+    void insertFetchAndSaveRecord(FetchRecord fetchRecord);
+
+    /**
      * 编辑入库单
      * @param saveRecord
      */
