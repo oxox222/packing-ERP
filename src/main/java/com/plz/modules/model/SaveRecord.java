@@ -98,11 +98,13 @@ public class SaveRecord implements Serializable {
     @TableField(exist = false)
     List<SaveGoodsRecord> saveGoodsRecordList = new ArrayList<>();
 
-    public SaveRecord(FetchRecord fetchRecord) {
-        this.setOdd(fetchRecord.getOdd());
-        this.setWarehouseId(fetchRecord.getWarehouseId());
-        this.setDiscount(fetchRecord.getDiscount());
-        this.setPaid(fetchRecord.getPaid());
-        this.setRemark(fetchRecord.getRemark());
+    public static SaveRecord of(FetchRecord fetchRecord) {
+        SaveRecord saveRecord = new SaveRecord();
+        saveRecord.setOdd(fetchRecord.getOdd());
+        saveRecord.setWarehouseId(fetchRecord.getWarehouseId());
+        saveRecord.setDiscount(fetchRecord.getDiscount());
+        saveRecord.setPaid(fetchRecord.getPaid());
+        saveRecord.setRemark(fetchRecord.getRemark());
+        return saveRecord;
     }
 }

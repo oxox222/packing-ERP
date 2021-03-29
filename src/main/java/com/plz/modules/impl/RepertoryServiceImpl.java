@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.Objects;
 
 /**
  * @ClassName: RepertoryServiceImpl
@@ -43,7 +44,9 @@ public class RepertoryServiceImpl implements RepertoryService {
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public void insertSaveRecord(SaveRecord saveRecord) {
-        saveRecord.setOdd(oddUtils.getOdd());
+        if (Objects.isNull(saveRecord.getOdd()) || saveRecord.getOdd().isEmpty()) {
+            saveRecord.setOdd(oddUtils.getOdd());
+        }
         saveRecordMapper.insert(saveRecord);
         //设置商品订单号
         if (!saveRecord.getSaveGoodsRecordList().isEmpty()) {
@@ -57,7 +60,9 @@ public class RepertoryServiceImpl implements RepertoryService {
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public void insertFetchRecord(FetchRecord fetchRecord) {
-        fetchRecord.setOdd(oddUtils.getOdd());
+        if (Objects.isNull(fetchRecord.getOdd()) || fetchRecord.getOdd().isEmpty()) {
+            fetchRecord.setOdd(oddUtils.getOdd());
+        }
         fetchRecordMapper.insert(fetchRecord);
         //设置商品订单号
         if (!fetchRecord.getFetchGoodsRecordList().isEmpty()) {
@@ -71,7 +76,7 @@ public class RepertoryServiceImpl implements RepertoryService {
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public void insertFetchAndSaveRecord(FetchRecord fetchRecord) {
-        SaveRecord saveRecord = new SaveRecord(fetchRecord);
+        SaveRecord saveRecord = SaveRecord.of(fetchRecord);
         insertSaveRecord(saveRecord);
         insertFetchRecord(fetchRecord);
     }

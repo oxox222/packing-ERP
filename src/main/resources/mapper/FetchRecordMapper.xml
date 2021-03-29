@@ -19,7 +19,7 @@
     <result column="t_received_time" jdbcType="TIMESTAMP" property="receivedTime" />
     <result column="t_deal_time" jdbcType="TIMESTAMP" property="dealTime" />
     <result column="t_state" jdbcType="TINYINT" property="state" />
-    <result column="t_create_date" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="t_create_time" jdbcType="TIMESTAMP" property="createTime" />
     <result column="warehouseName" jdbcType="VARCHAR" property="warehouseName" />
     <result column="customName" jdbcType="VARCHAR" property="customName" />
     <result column="receiverName" jdbcType="VARCHAR" property="receiverName" />
@@ -38,7 +38,7 @@
         r.t_id, r.t_odd, r.t_warehouseId, r.t_discount, r.t_other_cost, r.t_other_cost_name,
         r.t_paid, r.t_remark, r.t_customId, r.t_signer, r.t_receiver, r.t_receiver_phone,
         r.t_receivedId, r.t_received_address, r.t_received_time, r.t_deal_time,
-        r.t_state, t_create_time, w.t_name AS warehouseName, c.t_name AS customName, cu.t_name AS receiverName
+        r.t_state, r.t_create_time, w.t_name AS warehouseName, c.t_name AS customName, cu.t_name AS receiverName
     FROM
         t_fetch_record r
         LEFT JOIN t_warehouse w ON r.t_warehouseId = w.t_id
