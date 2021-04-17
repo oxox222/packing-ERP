@@ -1,21 +1,24 @@
 package com.plz.modules.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.plz.modules.mapper.FetchGoodsRecordMapper;
-import com.plz.modules.mapper.FetchRecordMapper;
-import com.plz.modules.mapper.SaveGoodsRecordMapper;
-import com.plz.modules.mapper.SaveRecordMapper;
+import com.plz.modules.mapper.*;
 import com.plz.modules.model.FetchRecord;
+import com.plz.modules.model.FetchSaveRecord;
+import com.plz.modules.model.SaveGoodsRecord;
 import com.plz.modules.model.SaveRecord;
 import com.plz.modules.service.RepertoryService;
 import com.plz.modules.util.OddUtils;
 import com.plz.modules.vo.FetchRecordQueryVo;
 import com.plz.modules.vo.SaveRecordQueryVo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 /**
  * @ClassName: RepertoryServiceImpl
@@ -40,6 +43,9 @@ public class RepertoryServiceImpl implements RepertoryService {
 
     @Resource
     private OddUtils oddUtils;
+
+    @Resource
+    private FetchSaveRecordMapper fetchSaveRecordMapper;
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
@@ -76,9 +82,14 @@ public class RepertoryServiceImpl implements RepertoryService {
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public void insertFetchAndSaveRecord(FetchRecord fetchRecord) {
-        SaveRecord saveRecord = SaveRecord.of(fetchRecord);
+        SaveRecord saveRecord = getSaveRecordByFetchRecord(fetchRecord);
         insertSaveRecord(saveRecord);
         insertFetchRecord(fetchRecord);
+        //新增关联信息
+        FetchSaveRecord fetchSaveRecord = new FetchSaveRecord();
+        fetchSaveRecord.setSaveId(saveRecord.getId());
+        fetchSaveRecord.setFetchId(fetchRecord.getId());
+        fetchSaveRecordMapper.insert(fetchSaveRecord);
     }
 
     @Override
@@ -105,6 +116,15 @@ public class RepertoryServiceImpl implements RepertoryService {
             });
             fetchGoodsRecordMapper.insertOfBatch(fetchRecord.getFetchGoodsRecordList());
         }
+    }
+
+    @Override
+    @Transactional(rollbackFor = RuntimeException.class)
+    public void updateFetchAndSaveRecord(FetchRecord fetchRecord) {
+        SaveRecord saveRecord = getSaveRecordByFetchRecord(fetchRecord);
+        saveRecord.setId(fetchSaveRecordMapper.selectSaveIdByFetchId(fetchRecord.getId()));
+        updateFetchRecord(fetchRecord);
+        updateSaveRecord(saveRecord);
     }
 
     @Override
@@ -135,6 +155,16 @@ public class RepertoryServiceImpl implements RepertoryService {
         fetchGoodsRecordMapper.deleteByRecordId(id);
         //删除入库单
         fetchRecordMapper.deleteById(id);
+        fetchSaveRecordMapper.deleteByFetchId(id);
+    }
+
+    @Override
+    @Transactional(rollbackFor = RuntimeException.class)
+    public void deleteFetchAndSaveRecord(Integer id) {
+        Integer saveRecordId = fetchSaveRecordMapper.selectSaveIdByFetchId(id);
+        deleteSaveRecord(saveRecordId);
+        deleteFetchRecord(id);
+
     }
 
     @Override
@@ -145,5 +175,23 @@ public class RepertoryServiceImpl implements RepertoryService {
     @Override
     public void sign(Integer id) {
         fetchRecordMapper.sign(id);
+    }
+
+    /**
+     * 通过出库单信息填充入库单信息
+     * @param fetchRecord
+     * @return
+     */
+    private SaveRecord getSaveRecordByFetchRecord(FetchRecord fetchRecord) {
+        SaveRecord saveRecord = SaveRecord.of(fetchRecord);
+        List<SaveGoodsRecord> list = new ArrayList<>();
+        Optional.ofNullable(fetchRecord.getFetchGoodsRecordList())
+                .orElse(new ArrayList<>()).stream().forEach(e -> {
+                    SaveGoodsRecord goodsRecord = new SaveGoodsRecord();
+                    BeanUtils.copyProperties(e, goodsRecord, new String[]{"id", "odd"});
+                    list.add(goodsRecord);
+        });
+        saveRecord.setSaveGoodsRecordList(list);
+        return saveRecord;
     }
 }

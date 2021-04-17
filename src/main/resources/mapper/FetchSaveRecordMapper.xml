@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.plz.modules.mapper.FetchSaveRecordMapper">
+    <resultMap id="BaseResultMap" type="com.plz.modules.model.FetchSaveRecord">
+        <result column="t_id" jdbcType="INTEGER" property="id" />
+        <result column="t_fetch_id" jdbcType="INTEGER" property="fetchId" />
+        <result column="t_save_id" jdbcType="INTEGER" property="saveId" />
+    </resultMap>
+
+    <select id="selectSaveIdByFetchId" resultType="java.lang.Integer">
+        SELECT t_save_id FROM t_fetch_save_record WHERE t_fetch_id = #{fetchId}
+    </select>
+
+    <delete id="deleteByFetchId">
+        DELETE FROM t_fetch_save_record WHERE t_fetch_id = #{fetchId}
+    </delete>
+</mapper>

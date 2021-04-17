@@ -80,6 +80,17 @@ public class RepertoryController {
     }
 
     /**
+     * 编辑出库单时编辑入库单信息
+     * @param fetchRecord
+     * @return
+     */
+    @RequestMapping(value = "/fetchAndSaveRecord/update", method = RequestMethod.PUT)
+    public Result updateFetchAndSaveRecord(@RequestBody FetchRecord fetchRecord) {
+        repertoryService.updateFetchAndSaveRecord(fetchRecord);
+        return Result.success(null);
+    }
+
+    /**
      * 查询入库单列表
      * @return
      */
@@ -109,6 +120,17 @@ public class RepertoryController {
     @RequestMapping(value = "/saveRecord/delete/{id}", method = RequestMethod.DELETE)
     public Result deleteSaveRecord(@PathVariable("id") Integer id) {
         repertoryService.deleteSaveRecord(id);
+        return Result.success(null);
+    }
+
+    /**
+     * 删除出库单时删除入库单
+     * @param id 出库单id
+     * @return
+     */
+    @RequestMapping(value = "/fetchAndSaveRecord/delete/{id}", method = RequestMethod.DELETE)
+    public Result deleteFetchAndSaveRecord(@PathVariable("id") Integer id) {
+        repertoryService.deleteFetchAndSaveRecord(id);
         return Result.success(null);
     }
 

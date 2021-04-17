@@ -33,6 +33,12 @@ public interface RepertoryService {
     void updateSaveRecord(SaveRecord saveRecord);
 
     /**
+     * 编辑出库单时编辑入库单信息
+     * @param fetchRecord
+     */
+    void updateFetchAndSaveRecord(FetchRecord fetchRecord);
+
+    /**
      * 编辑出库单
      * @param fetchRecord
      */
@@ -61,6 +67,12 @@ public interface RepertoryService {
      * @param id
      */
     void deleteFetchRecord(Integer id);
+
+    /**
+     * 删除出库单时删除入库单信息
+     * @param id 出库单id
+     */
+    void deleteFetchAndSaveRecord(Integer id);
 
     /**
      * 发货

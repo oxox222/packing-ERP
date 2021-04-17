@@ -58,7 +58,7 @@ CREATE TABLE `t_dictionary` (
 DROP TABLE IF EXISTS `t_fetch_record`;
 CREATE TABLE `t_fetch_record` (
     `t_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
-    `t_odd` varchar(50) NOT NULL COMMENT '单号',
+    `t_odd` varchar(50) NOT NULL COMMENT '单号' unique,
     `t_warehouseId` int(11) unsigned NOT NULL COMMENT '仓库表id',
     `t_discount` float(3,2) NOT NULL DEFAULT '1.00' COMMENT '折扣',
     `t_other_cost` double(10,2) DEFAULT NULL COMMENT '其他费用',
@@ -85,7 +85,7 @@ CREATE TABLE `t_fetch_record` (
 DROP TABLE IF EXISTS `t_save_record`;
 CREATE TABLE `t_save_record` (
     `t_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
-    `t_odd` varchar(50) DEFAULT NULL COMMENT '单号',
+    `t_odd` varchar(50) DEFAULT NULL COMMENT '单号' unique,
     `t_warehouseId` int(11) unsigned NOT NULL COMMENT '仓库表id',
     `t_discount` float(3,2) NOT NULL DEFAULT '1.00' COMMENT '折扣',
     `t_paid` double(11,2) DEFAULT NULL COMMENT '实付金额',
@@ -97,6 +97,18 @@ CREATE TABLE `t_save_record` (
     PRIMARY KEY (`t_id`),
     KEY `idx_supplierId` (`t_supplierId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='入库单表';
+
+-- ----------------------------
+-- Table structure for t_fetch_save_record
+-- ----------------------------
+DROP TABLE IF EXISTS t_fetch_save_record;
+CREATE TABLE `t_fetch_save_record`(
+    `t_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `t_fetch_id` int(11) DEFAULT NULL COMMENT '出库单id',
+    `t_save_id` int(11) DEFAULT NULL COMMENT '入库单id',
+    PRIMARY KEY (`t_id`),
+    KEY `idx_fetch_id` (`t_fetch_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='出入库单关联表';
 
 -- ----------------------------
 -- Table structure for t_file

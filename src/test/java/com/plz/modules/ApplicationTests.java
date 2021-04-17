@@ -1,16 +1,16 @@
 package com.plz.modules;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootTest
 class ApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
-
     public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>();
+        list.stream().forEach(System.out::println);
     }
 
 }

@@ -100,10 +100,9 @@ public class SaveRecord implements Serializable {
 
     public static SaveRecord of(FetchRecord fetchRecord) {
         SaveRecord saveRecord = new SaveRecord();
-        saveRecord.setOdd(fetchRecord.getOdd());
         saveRecord.setWarehouseId(fetchRecord.getWarehouseId());
-        saveRecord.setDiscount(fetchRecord.getDiscount());
-        saveRecord.setPaid(fetchRecord.getPaid());
+        saveRecord.setPaid(0.0);
+        saveRecord.setReceivedTime(fetchRecord.getDealTime());
         saveRecord.setRemark(fetchRecord.getRemark());
         return saveRecord;
     }
