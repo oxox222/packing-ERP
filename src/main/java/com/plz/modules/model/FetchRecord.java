@@ -57,10 +57,16 @@ public class FetchRecord implements Serializable {
     private String otherCostName;
 
     /**
-     * 实付金额
+     * 应收金额
      */
     @TableField("t_paid")
     private Double paid;
+
+    /**
+     * 已收金额
+     */
+    @TableField("t_accept_paid")
+    private Double acceptPaid;
 
     /**
      * 备注

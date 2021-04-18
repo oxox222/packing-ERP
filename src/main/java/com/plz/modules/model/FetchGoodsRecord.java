@@ -59,4 +59,22 @@ public class FetchGoodsRecord implements Serializable {
     @TableField("t_paid")
     private Double paid;
 
+    /**
+     * 手提袋数量
+     */
+    @TableField("t_reticule")
+    private Integer reticule;
+
+    /**
+     * 鞋套数量
+     */
+    @TableField("t_shoecover")
+    private Integer shoeCover;
+
+    /**
+     * 外箱数量
+     */
+    @TableField("t_container")
+    private Integer container;
+
 }

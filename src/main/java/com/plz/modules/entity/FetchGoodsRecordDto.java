@@ -65,4 +65,19 @@ public class FetchGoodsRecordDto {
      * 备注
      */
     private String remark;
+
+    /**
+     * 手提袋数量
+     */
+    private Integer reticule;
+
+    /**
+     * 鞋套数量
+     */
+    private Integer shoeCover;
+
+    /**
+     * 外箱数量
+     */
+    private Integer container;
 }

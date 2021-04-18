@@ -86,4 +86,10 @@ public interface RepertoryService {
      */
     void sign(Integer id);
 
+    /**
+     * 取消订单
+     * @param id
+     */
+    void invalid(Integer id);
+
 }

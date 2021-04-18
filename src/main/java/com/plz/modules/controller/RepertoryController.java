@@ -167,4 +167,15 @@ public class RepertoryController {
         return Result.success(null);
     }
 
+    /**
+     * 取消订单
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/fetchRecord/invalid/{id}", method = RequestMethod.PUT)
+    public Result invalid(@PathVariable("id") Integer id) {
+        repertoryService.invalid(id);
+        return Result.success(null);
+    }
+
 }

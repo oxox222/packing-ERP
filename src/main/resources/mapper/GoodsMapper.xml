@@ -9,10 +9,14 @@
     <result column="t_texture" jdbcType="VARCHAR" property="texture" />
     <result column="t_remark" jdbcType="VARCHAR" property="remark" />
     <result column="t_price" jdbcType="DOUBLE" property="price" />
+    <result column="t_reticule_state" jdbcType="TINYINT" property="ifNeedReticule" />
+    <result column="t_shoecover_state" jdbcType="TINYINT" property="ifNeedShoeCover" />
+    <result column="t_container_size" jdbcType="INTEGER" property="containerSize" />
   </resultMap>
 
   <sql id="Base_Column_List">
-    t_id, t_name, t_size, t_brand, t_texture, t_remark, t_price
+    t_id, t_name, t_size, t_brand, t_texture, t_remark, t_price, t_reticule_state,
+    t_shoecover_state, t_container_size
   </sql>
 
   <select id="list" resultMap="BaseResultMap">

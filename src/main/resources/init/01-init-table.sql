@@ -63,7 +63,8 @@ CREATE TABLE `t_fetch_record` (
     `t_discount` float(3,2) NOT NULL DEFAULT '1.00' COMMENT '折扣',
     `t_other_cost` double(10,2) DEFAULT NULL COMMENT '其他费用',
     `t_other_cost_name` varchar(20) DEFAULT NULL COMMENT '其他费用名称',
-    `t_paid` double(11,2) DEFAULT NULL COMMENT '实收金额',
+    `t_paid` double(11,2) DEFAULT NULL COMMENT '应收金额',
+    `t_accept_paid` double(11,2) DEFAULT NULL COMMENT '已收金额',
     `t_remark` varchar(255) DEFAULT NULL COMMENT '备注',
     `t_customId` int(11) unsigned DEFAULT NULL COMMENT '顾客id',
     `t_signer` varchar(20) DEFAULT NULL COMMENT '签收人',
@@ -139,6 +140,9 @@ CREATE TABLE `t_goods` (
     `t_texture` varchar(50) DEFAULT NULL COMMENT '材质',
     `t_remark` varchar(255) DEFAULT NULL COMMENT '备注',
     `t_price` double(8,2) DEFAULT NULL COMMENT '单价',
+    `t_reticule_state` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '是否需要手提袋',
+    `t_shoecover_state` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否需要鞋套',
+    `t_container_size` int(11) unsigned DEFAULT NULL COMMENT '外箱容量',
     PRIMARY KEY (`t_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='商品表';
 
@@ -192,6 +196,9 @@ CREATE TABLE `t_fetch_goods_record` (
     `t_price` double(8,2) DEFAULT NULL COMMENT '单价',
     `t_discount` float(3,2) DEFAULT '1.00' COMMENT '折扣',
     `t_paid` double(11,2) DEFAULT NULL COMMENT '实付金额',
+    `t_reticule` int(11) unsigned DEFAULT 0 COMMENT '手提袋数量',
+    `t_shoecover` int(11) unsigned DEFAULT 0 COMMENT '鞋套数量',
+    `t_container` int(11) unsigned DEFAULT 0 COMMENT '外箱数量',
     PRIMARY KEY (`t_id`),
     KEY `idx_goodsId` (`t_goodsId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='出库商品记录表';

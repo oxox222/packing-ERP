@@ -1,9 +1,6 @@
 package com.plz.modules.model;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -66,4 +63,24 @@ public class Goods {
      */
     @TableField(exist = false)
     private List<GoodsForm> goodsFormList = new ArrayList<>();
+
+    /**
+     * 是否需要手提袋
+     * 1:需要(默认);0:不需要
+     */
+    @TableField("t_reticule_state")
+    private Byte ifNeedReticule;
+
+    /**
+     * 是否需要鞋套
+     * 1:需要;0:不需要(默认)
+     */
+    @TableField("t_shoecover_state")
+    private Byte ifNeedShoeCover;
+
+    /**
+     * 外箱容量
+     */
+    @TableField(value = "t_container_size", updateStrategy = FieldStrategy.IGNORED)
+    private Integer containerSize;
 }

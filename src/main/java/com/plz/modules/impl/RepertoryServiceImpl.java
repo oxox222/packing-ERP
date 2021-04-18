@@ -177,6 +177,11 @@ public class RepertoryServiceImpl implements RepertoryService {
         fetchRecordMapper.sign(id);
     }
 
+    @Override
+    public void invalid(Integer id) {
+
+    }
+
     /**
      * 通过出库单信息填充入库单信息
      * @param fetchRecord

@@ -26,4 +26,10 @@ public interface FetchRecordMapper extends BaseMapper<FetchRecord> {
      * @param id
      */
     void sign(@Param("id") int id);
+
+    /**
+     * 取消订单
+     * @param id
+     */
+    void invalid(@Param("id") int id);
 }

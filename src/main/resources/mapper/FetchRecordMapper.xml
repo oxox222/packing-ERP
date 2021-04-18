@@ -9,6 +9,7 @@
     <result column="t_other_cost" jdbcType="DOUBLE" property="otherCost" />
     <result column="t_other_costName" jdbcType="VARCHAR" property="otherCostName" />
     <result column="t_paid" jdbcType="DOUBLE" property="paid" />
+    <result column="t_accept_paid" jdbcType="DOUBLE" property="acceptPaid" />
     <result column="t_remark" jdbcType="VARCHAR" property="remark" />
     <result column="t_customId" jdbcType="INTEGER" property="customId" />
     <result column="t_signer" jdbcType="VARCHAR" property="signer" />
@@ -36,7 +37,7 @@
   <select id="list" resultMap="BaseResultMap">
     SELECT
         r.t_id, r.t_odd, r.t_warehouseId, r.t_discount, r.t_other_cost, r.t_other_cost_name,
-        r.t_paid, r.t_remark, r.t_customId, r.t_signer, r.t_receiver, r.t_receiver_phone,
+        r.t_paid, r.t_accept_paid, r.t_remark, r.t_customId, r.t_signer, r.t_receiver, r.t_receiver_phone,
         r.t_receivedId, r.t_received_address, r.t_received_time, r.t_deal_time,
         r.t_state, r.t_create_time, w.t_name AS warehouseName, c.t_name AS customName, cu.t_name AS receiverName
     FROM
@@ -63,6 +64,10 @@
 
   <update id="sign">
     UPDATE t_fetch_record SET t_state = 3 WHERE t_id = #{id} AND t_state = 2
+  </update>
+
+  <update id="invalid">
+    UPDATE t_fetch_record SET t_state = 4 WHERE t_id = #{id}
   </update>
 
 </mapper>

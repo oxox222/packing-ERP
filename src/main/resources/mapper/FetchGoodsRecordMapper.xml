@@ -9,10 +9,13 @@
     <result column="t_price" jdbcType="DOUBLE" property="price" />
     <result column="t_discount" jdbcType="FLOAT" property="discount" />
     <result column="t_paid" jdbcType="DOUBLE" property="paid" />
+    <result column="t_reticule" jdbcType="INTEGER" property="reticule" />
+    <result column="t_shoecover" jdbcType="INTEGER" property="shoeCover" />
+    <result column="t_container" jdbcType="INTEGER" property="container" />
   </resultMap>
 
   <sql id="Base_Column">
-    t_goodsId, t_recordId, t_num, t_price, t_discount, t_paid
+    t_goodsId, t_recordId, t_num, t_price, t_discount, t_paid, t_reticule, t_shoecover, t_container
   </sql>
 
   <insert id="insertOfBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
@@ -26,7 +29,10 @@
         #{item.num},
         #{item.price},
         #{item.discount},
-        #{item.paid}
+        #{item.paid},
+        #{item.reticule},
+        #{item.shoeCover},
+        #{item.container}
       )
     </foreach>
   </insert>
@@ -43,6 +49,9 @@
       f.t_price AS price,
       f.t_discount AS discount,
       f.t_paid AS paid,
+      f.t_reticule AS reticule,
+      f.t_shoecover AS shoeCover,
+      f.t_container AS container,
       g.t_name AS name,
       g.t_size AS size,
       g.t_brand AS brand,
