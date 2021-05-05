@@ -98,19 +98,21 @@ public class RepertoryServiceImpl implements RepertoryService {
         saveRecordMapper.updateById(saveRecord);
         //全删再全加
         saveGoodsRecordMapper.deleteByRecordId(saveRecord.getId());
-        saveRecord.getSaveGoodsRecordList().stream().forEach(e -> {
-            e.setRecordId(saveRecord.getId());
-        });
-        saveGoodsRecordMapper.insertOfBatch(saveRecord.getSaveGoodsRecordList());
+        if (!saveRecord.getSaveGoodsRecordList().isEmpty()) {
+            saveRecord.getSaveGoodsRecordList().stream().forEach(e -> {
+                e.setRecordId(saveRecord.getId());
+            });
+            saveGoodsRecordMapper.insertOfBatch(saveRecord.getSaveGoodsRecordList());
+        }
     }
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public void updateFetchRecord(FetchRecord fetchRecord) {
         fetchRecordMapper.updateById(fetchRecord);
+        //全删再全加
+        fetchGoodsRecordMapper.deleteByRecordId(fetchRecord.getId());
         if (!fetchRecord.getFetchGoodsRecordList().isEmpty()) {
-            //全删再全加
-            fetchGoodsRecordMapper.deleteByRecordId(fetchRecord.getId());
             fetchRecord.getFetchGoodsRecordList().stream().forEach(e -> {
                 e.setRecordId(fetchRecord.getId());
             });

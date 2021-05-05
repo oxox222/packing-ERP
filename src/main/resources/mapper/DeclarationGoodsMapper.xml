@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.plz.modules.mapper.DeclarationGoodsMapper">
+    <resultMap id="BaseResultMap" type="com.plz.modules.model.DeclarationGoods">
+        <result column="t_id" jdbcType="INTEGER" property="id" />
+        <result column="t_goodsId" jdbcType="INTEGER" property="goodsId" />
+        <result column="t_declarationId" jdbcType="INTEGER" property="declarationId" />
+        <result column="t_num" jdbcType="INTEGER" property="num" />
+        <result column="t_reticule" jdbcType="INTEGER" property="reticule" />
+        <result column="t_shoecover" jdbcType="INTEGER" property="shoeCover" />
+        <result column="t_container" jdbcType="INTEGER" property="container" />
+        <result column="t_remark" jdbcType="VARCHAR" property="remark" />
+    </resultMap>
+
+    <sql id="Base_Column">
+        t_goodsId, t_declarationId, t_num, t_reticule, t_shoecover, t_container, t_remark
+    </sql>
+
+    <insert id="insertOfBatch" parameterType="java.util.List" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO `t_declaration_goods`
+        (<include refid="Base_Column" />)
+        VALUES
+        <foreach collection="list" index="index" item="item" separator=",">
+            (
+                #{item.goodsId},
+                #{item.declarationId},
+                #{item.num},
+                #{item.reticule},
+                #{item.shoeCover},
+                #{item.container},
+                #{item.remark}
+            )
+        </foreach>
+    </insert>
+
+    <delete id="deleteByDeclarationId">
+        DELETE FROM `t_declaration_goods` WHERE t_declarationId = #{declarationId}
+    </delete>
+
+    <select id="selectByDeclarationId" resultMap="BaseResultMap">
+        SELECT
+            t_id, <include refid="Base_Column"/>
+        FROM
+            `t_declaration_goods`
+        WHERE t_declarationId = #{declarationId}
+    </select>
+</mapper>

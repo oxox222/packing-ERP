@@ -287,5 +287,48 @@ CREATE TABLE `t_role_permission` (
     KEY `idx_rid` (`rid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色权限关系表';
 
+-- ----------------------------
+-- Table structure for t_declaration
+-- ----------------------------
+DROP TABLE IF EXISTS `t_declaration`;
+CREATE TABLE `t_declaration` (
+    `t_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `t_customId` int(11) unsigned DEFAULT NULL COMMENT '顾客id',
+    `t_receivedId` int(11) unsigned DEFAULT NULL COMMENT '交货方id',
+    `t_receiver` VARCHAR(20) DEFAULT NULL COMMENT '收货联系人',
+    `t_receiver_phone` VARCHAR(20) DEFAULT NULL COMMENT '收货联系人联系方式',
+    `t_received_address` VARCHAR(50) DEFAULT NULL COMMENT '收货地址',
+    `t_remark` varchar(255) DEFAULT NULL COMMENT '备注',
+    `t_declaration_date` TIMESTAMP NULL DEFAULT NULL COMMENT '报单日期',
+    `t_deliver_date` TIMESTAMP NULL DEFAULT NULL COMMENT '发货日期',
+    `t_createId` int(11) unsigned NOT NULL COMMENT '创建人',
+    `t_create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    `t_updateId` int(11) unsigned NOT NULL COMMENT '最后修改人',
+    `t_update_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '最后修改时间',
+    PRIMARY KEY (`t_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='报单表';
+
+-- ----------------------------
+-- Table structure for t_declaration_goods
+-- ----------------------------
+DROP TABLE IF EXISTS `t_declaration_goods`;
+CREATE TABLE `t_declaration_goods` (
+    `t_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `t_goodsId` int(11) unsigned NOT NULL COMMENT '商品表id',
+    `t_declarationId` int(11) unsigned NOT NULL COMMENT '报单表id',
+    `t_num` int(255) unsigned DEFAULT NULL COMMENT '数量',
+    `t_reticule` int(11) unsigned DEFAULT 0 COMMENT '手提袋数量',
+    `t_shoecover` int(11) unsigned DEFAULT 0 COMMENT '鞋套数量',
+    `t_container` int(11) unsigned DEFAULT 0 COMMENT '外箱数量',
+    `t_remark` varchar(255) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`t_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='报单商品记录表';
+
+DROP TABLE IF EXISTS `t_declaration_fetch`;
+CREATE TABLE `t_declaration_fetch` (
+    `t_declarationId` int(11) UNSIGNED NOT NULL COMMENT '报单表id',
+    `t_fetchId` int(11) UNSIGNED NOT NULL COMMENT '出库单id'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='报单出库单关联表';
+
 SET FOREIGN_KEY_CHECKS = 1;
 

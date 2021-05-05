@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.plz.modules.mapper.DeclarationMapper">
+    <resultMap id="BaseResultMap" type="com.plz.modules.model.Declaration">
+        <result column="t_id" jdbcType="INTEGER" property="id" />
+        <result column="t_customId" jdbcType="INTEGER" property="customId" />
+        <result column="t_receivedId" jdbcType="INTEGER" property="receivedId" />
+        <result column="t_receiver" jdbcType="VARCHAR" property="receiver" />
+        <result column="t_receiver_phone" jdbcType="VARCHAR" property="receiverPhone" />
+        <result column="t_received_address" jdbcType="VARCHAR" property="receivedAddress" />
+        <result column="t_remark" jdbcType="TIMESTAMP" property="remark" />
+        <result column="t_declaration_date" jdbcType="TIMESTAMP" property="declarationDate" />
+        <result column="t_deliver_date" jdbcType="TIMESTAMP" property="deliverDate" />
+        <result column="t_createId" jdbcType="INTEGER" property="createId" />
+        <result column="t_create_time" jdbcType="TIMESTAMP" property="createTime" />
+        <result column="t_updateId" jdbcType="INTEGER" property="updateId" />
+        <result column="t_update_time" jdbcType="TIMESTAMP" property="updateTime" />
+        <collection property="declarationGoodsList" javaType="java.util.ArrayList" ofType="com.plz.modules.model.DeclarationGoods"
+                    select="com.plz.modules.mapper.DeclarationGoodsMapper.selectByDeclarationId" column="{declarationId=t_id}"/>
+    </resultMap>
+
+    <sql id="Base_Column">
+        t_id, t_customId, t_receivedId, t_receiver, t_receiver_phone, t_received_address, t_remark,
+        t_declaration_date, t_deliver_date, t_create_time
+    </sql>
+
+    <select id="list" resultMap="BaseResultMap" >
+        SELECT
+            <include refid="Base_Column"/>
+        FROM
+            `t_declaration`
+        WHERE
+            1=1
+        ORDER BY t_create_time DESC
+    </select>
+</mapper>
