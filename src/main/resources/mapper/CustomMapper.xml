@@ -36,5 +36,9 @@
     ORDER BY t_sort DESC
   </select>
 
+  <select id="ifRepetition" resultType="java.lang.Integer">
+    SELECT t_id FROM t_custom WHERE t_name = #{name}
+  </select>
+
 
 </mapper>

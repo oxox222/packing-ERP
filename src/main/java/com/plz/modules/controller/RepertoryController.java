@@ -6,11 +6,13 @@ import com.plz.modules.model.Pagination;
 import com.plz.modules.model.Result;
 import com.plz.modules.model.SaveRecord;
 import com.plz.modules.service.RepertoryService;
+import com.plz.modules.vo.AllFetchRecordQueryVo;
 import com.plz.modules.vo.FetchRecordQueryVo;
 import com.plz.modules.vo.SaveRecordQueryVo;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @ClassName: RepertoryController
@@ -110,6 +112,16 @@ public class RepertoryController {
         Page<FetchRecord> pageInfo = repertoryService.
                 getFetchRecordList(query, new Page(query.getPageNum(), query.getPageSize()));
         return Result.success(Pagination.of(pageInfo));
+    }
+
+    /**
+     * 查询出库单列表(不分页)
+     * @return
+     */
+    @GetMapping("/fetchRecord/all/list")
+    public Result allFetchRecordList(AllFetchRecordQueryVo query) {
+        List<FetchRecord> fetchRecords = repertoryService.getAllFetchRecordList(query);
+        return Result.success(fetchRecords);
     }
 
     /**

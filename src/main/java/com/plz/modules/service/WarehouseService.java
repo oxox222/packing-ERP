@@ -14,7 +14,7 @@ public interface WarehouseService {
      * @param warehouse
      * @return
      */
-    Integer insert(Warehouse warehouse);
+    Integer insert(Warehouse warehouse) throws Exception;
 
     /**
      * 查询仓库列表

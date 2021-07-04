@@ -3,8 +3,11 @@ package com.plz.modules.service;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.plz.modules.model.FetchRecord;
 import com.plz.modules.model.SaveRecord;
+import com.plz.modules.vo.AllFetchRecordQueryVo;
 import com.plz.modules.vo.FetchRecordQueryVo;
 import com.plz.modules.vo.SaveRecordQueryVo;
+
+import java.util.List;
 
 public interface RepertoryService {
 
@@ -55,6 +58,12 @@ public interface RepertoryService {
      * @return
      */
     Page<FetchRecord> getFetchRecordList(FetchRecordQueryVo query, Page page);
+
+    /**
+     * 查询出库单列表(不分页)
+     * @return
+     */
+    List<FetchRecord> getAllFetchRecordList(AllFetchRecordQueryVo query);
 
     /**
      * 删除入库单

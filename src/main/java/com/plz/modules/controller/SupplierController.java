@@ -1,5 +1,6 @@
 package com.plz.modules.controller;
 
+import com.plz.modules.emun.ResultEnum;
 import com.plz.modules.model.Result;
 import com.plz.modules.model.Supplier;
 import com.plz.modules.service.SupplierService;
@@ -29,8 +30,13 @@ public class SupplierController {
      */
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public Result insert(@RequestBody Supplier supplier) {
-        Integer id = supplierService.insert(supplier);
-        return Result.success(id);
+        try {
+            Integer id = supplierService.insert(supplier);
+            return Result.success(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.error(ResultEnum.PARAMETER_ERROR);
     }
 
     /**

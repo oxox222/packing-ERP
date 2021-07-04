@@ -18,7 +18,8 @@ public enum ResultEnum {
     THIRD_PARTY_INTERFACE_ERROR("206", "第三方接口错误"),
     SESSION_TIMEOUT_ERROR("401", "Session过去,需重新验证"),
     PERMISSIONS_ERROR("402", "业务权限认证失败"),
-    AUTHENTICATION_ERROR("403", "认证失败");
+    AUTHENTICATION_ERROR("403", "认证失败"),
+    DATA_REPETITION_ERROR("207", "数据重复");
 
     private String statusCode;
 

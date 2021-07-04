@@ -14,4 +14,11 @@ public interface GoodsMapper extends BaseMapper<Goods> {
      * @return
      */
     List<Goods> list(@Param("query") GoodsQueryVo querye);
+
+    /**
+     * 判断是否存在
+     * @param goods
+     * @return
+     */
+    Integer ifRepetition(@Param("goods") Goods goods);
 }

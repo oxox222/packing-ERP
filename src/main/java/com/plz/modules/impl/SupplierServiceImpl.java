@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @ClassName: SupplierServiceImpl
@@ -22,7 +23,10 @@ public class SupplierServiceImpl implements SupplierService {
     private SupplierMapper supplierMapper;
 
     @Override
-    public Integer insert(Supplier supplier) {
+    public Integer insert(Supplier supplier) throws Exception {
+        if (ifRepetition(supplier.getName())) {
+            throw new Exception("该供应商已存在!");
+        }
         supplierMapper.insert(supplier);
         return supplier.getId();
     }
@@ -41,5 +45,14 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public void delete(int id) {
         supplierMapper.deleteById(id);
+    }
+
+    /**
+     * 判断是否存在重名
+     * @param name
+     * @return
+     */
+    private Boolean ifRepetition(String name) {
+        return Objects.nonNull(supplierMapper.ifRepetition(name));
     }
 }

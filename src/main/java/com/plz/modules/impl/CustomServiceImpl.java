@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @ClassName: CustomServiceImpl
@@ -22,7 +23,10 @@ public class CustomServiceImpl implements CustomService {
     private CustomMapper customMapper;
 
     @Override
-    public Integer addCustom(Custom custom) {
+    public Integer addCustom(Custom custom) throws Exception {
+        if (ifRepetition(custom.getName())) {
+            throw new Exception("该客户已存在!");
+        }
         customMapper.insert(custom);
         return custom.getId();
     }
@@ -41,5 +45,14 @@ public class CustomServiceImpl implements CustomService {
     @Override
     public void deleteById(int id) {
         customMapper.deleteById(id);
+    }
+
+    /**
+     * 判断是否存在重名
+     * @param name
+     * @return
+     */
+    private Boolean ifRepetition(String name) {
+        return Objects.nonNull(customMapper.ifRepetition(name));
     }
 }

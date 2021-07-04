@@ -1,5 +1,6 @@
 package com.plz.modules.controller;
 
+import com.plz.modules.emun.ResultEnum;
 import com.plz.modules.model.Custom;
 import com.plz.modules.model.Result;
 import com.plz.modules.service.CustomService;
@@ -29,8 +30,13 @@ public class CustomController {
      */
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public Result addCustom(@RequestBody Custom custom) {
-        Integer id = customService.addCustom(custom);
-        return Result.success(id);
+        try {
+            Integer id = customService.addCustom(custom);
+            return Result.success(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.error(ResultEnum.PARAMETER_ERROR);
     }
 
     /**

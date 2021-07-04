@@ -12,7 +12,7 @@ public interface SupplierService {
      * @param supplier
      * @return
      */
-    Integer insert(Supplier supplier);
+    Integer insert(Supplier supplier) throws Exception;
 
     /**
      * 查询供应商列表

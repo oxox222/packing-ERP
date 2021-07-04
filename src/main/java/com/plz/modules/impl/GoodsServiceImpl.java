@@ -31,7 +31,10 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
-    public Integer insert(Goods goods) {
+    public Integer insert(Goods goods) throws Exception {
+        if (ifRepetition(goods)) {
+            throw new Exception("该仓库已存在!");
+        }
         goodsMapper.insert(goods);
         if (Objects.nonNull(goods.getGoodsFormList()) && !goods.getGoodsFormList().isEmpty()) {
             insertGoodsForm(goods);
@@ -76,5 +79,14 @@ public class GoodsServiceImpl implements GoodsService {
             e.setOriginGoodId(goods.getId());
         });
         goodsFormMapper.insertOfBatch(goods.getGoodsFormList());
+    }
+
+    /**
+     * 判断是否存在重复
+     * @param goods
+     * @return
+     */
+    private Boolean ifRepetition(Goods goods) {
+        return Objects.nonNull(goodsMapper.ifRepetition(goods));
     }
 }

@@ -10,4 +10,11 @@ import java.util.List;
 public interface SupplierMapper extends BaseMapper<Supplier> {
 
     List<Supplier> list(@Param("query") SupplierQueryVo query);
+
+    /**
+     * 判断是否存在
+     * @param name
+     * @return
+     */
+    Integer ifRepetition(@Param("name") String name);
 }

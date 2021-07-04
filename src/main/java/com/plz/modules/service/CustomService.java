@@ -12,7 +12,7 @@ public interface CustomService {
      * @param custom
      * @return
      */
-    Integer addCustom(Custom custom);
+    Integer addCustom(Custom custom) throws Exception;
 
     /**
      * 编辑客户信息

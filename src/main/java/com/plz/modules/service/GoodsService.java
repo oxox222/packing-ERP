@@ -13,7 +13,7 @@ public interface GoodsService {
      * @param goods
      * @return
      */
-    Integer insert(Goods goods);
+    Integer insert(Goods goods) throws Exception;
 
     /**
      * 编辑商品

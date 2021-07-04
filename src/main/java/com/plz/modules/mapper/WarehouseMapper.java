@@ -16,4 +16,11 @@ public interface WarehouseMapper extends BaseMapper<Warehouse> {
      */
     List<Warehouse> list(@Param("query") WarehouseQueryVo query);
 
+    /**
+     * 判断是否存在
+     * @param name
+     * @return
+     */
+    Integer ifRepetition(@Param("name") String name);
+
 }

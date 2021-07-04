@@ -1,5 +1,6 @@
 package com.plz.modules.controller;
 
+import com.plz.modules.emun.ResultEnum;
 import com.plz.modules.entity.RepertoryDto;
 import com.plz.modules.model.Result;
 import com.plz.modules.model.Statistics;
@@ -31,8 +32,13 @@ public class WarehouseController {
      */
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public Result insert(@RequestBody Warehouse warehouse) {
-        Integer id = warehouseService.insert(warehouse);
-        return Result.success(id);
+        try {
+            Integer id = warehouseService.insert(warehouse);
+            return Result.success(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.error(ResultEnum.PARAMETER_ERROR);
     }
 
     /**

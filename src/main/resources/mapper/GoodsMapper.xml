@@ -31,5 +31,10 @@
     ORDER BY t_id
   </select>
 
+  <select id="ifRepetition" resultType="java.lang.Integer">
+    SELECT t_id FROM t_goods
+    WHERE t_name = #{goods.name} AND t_size = #{goods.size} AND t_brand = #{goods.brand} AND t_texture = #{goods.texture}
+  </select>
+
 
 </mapper>

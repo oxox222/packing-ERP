@@ -1,5 +1,6 @@
 package com.plz.modules.controller;
 
+import com.plz.modules.emun.ResultEnum;
 import com.plz.modules.entity.GoodFormDto;
 import com.plz.modules.model.Goods;
 import com.plz.modules.model.Result;
@@ -30,8 +31,13 @@ public class GoodsController {
      */
     @RequestMapping(value = "/insert", method = RequestMethod.POST)
     public Result insert(@RequestBody Goods goods) {
-        Integer id = goodsService.insert(goods);
-        return Result.success(id);
+        try {
+            Integer id = goodsService.insert(goods);
+            return Result.success(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return Result.error(ResultEnum.PARAMETER_ERROR);
     }
 
     /**

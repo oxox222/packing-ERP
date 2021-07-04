@@ -8,6 +8,7 @@ import com.plz.modules.model.SaveGoodsRecord;
 import com.plz.modules.model.SaveRecord;
 import com.plz.modules.service.RepertoryService;
 import com.plz.modules.util.OddUtils;
+import com.plz.modules.vo.AllFetchRecordQueryVo;
 import com.plz.modules.vo.FetchRecordQueryVo;
 import com.plz.modules.vo.SaveRecordQueryVo;
 import org.springframework.beans.BeanUtils;
@@ -139,6 +140,11 @@ public class RepertoryServiceImpl implements RepertoryService {
     public Page<FetchRecord> getFetchRecordList(FetchRecordQueryVo query, Page page) {
         Page<FetchRecord> pageInfo = fetchRecordMapper.list(query, page);
         return pageInfo;
+    }
+
+    @Override
+    public List<FetchRecord> getAllFetchRecordList(AllFetchRecordQueryVo query) {
+        return fetchRecordMapper.getAllList(query);
     }
 
     @Override
