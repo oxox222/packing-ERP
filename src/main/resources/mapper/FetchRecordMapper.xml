@@ -24,7 +24,7 @@
     <result column="warehouseName" jdbcType="VARCHAR" property="warehouseName" />
     <result column="customName" jdbcType="VARCHAR" property="customName" />
     <result column="receiverName" jdbcType="VARCHAR" property="receiverName" />
-    <collection property="fetchGoodsRecordList" javaType="java.util.ArrayList" ofType="com.plz.modules.model.FetchGoodsRecord"
+    <collection property="fetchGoodsRecordList" javaType="java.util.ArrayList"
                 select="com.plz.modules.mapper.FetchGoodsRecordMapper.selectByRecordId" column="{recordId=t_id}"/>
   </resultMap>
 
