@@ -19,7 +19,7 @@ public class AllFetchRecordQueryVo {
     private List<Integer> customIds;
 
     /**
-     * 收货方id（多选
+     * 收货方id（多选)
      */
     private List<Integer> receiverIds;
 
