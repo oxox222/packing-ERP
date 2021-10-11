@@ -101,4 +101,11 @@ public interface RepertoryService {
      */
     void invalid(Integer id);
 
+    /**
+     * 根据id查询出库单详情
+     * @param fetchId
+     * @return
+     */
+    FetchRecord getFetchRecordDetails(Integer fetchId);
+
 }

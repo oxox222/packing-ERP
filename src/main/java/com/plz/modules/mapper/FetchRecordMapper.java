@@ -42,4 +42,11 @@ public interface FetchRecordMapper extends BaseMapper<FetchRecord> {
      * @param id
      */
     void invalid(@Param("id") int id);
+
+    /**
+     * 根据id查询出库单详情
+     * @param fetchId
+     * @return
+     */
+    FetchRecord getFetchRecordDetails(@Param("fetchId") Integer fetchId);
 }

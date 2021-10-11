@@ -190,4 +190,15 @@ public class RepertoryController {
         return Result.success(null);
     }
 
+    /**
+     * 根据id查询出库单详情
+     * @param fetchId
+     * @return
+     */
+    @GetMapping("/fetchRecord/{fetchId}")
+    public Result FetchRecordDetails(@PathVariable("fetchId") Integer fetchId) {
+        FetchRecord fetchRecord = repertoryService.getFetchRecordDetails(fetchId);
+        return Result.success(fetchId);
+    }
+
 }

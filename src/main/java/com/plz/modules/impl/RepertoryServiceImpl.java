@@ -207,4 +207,10 @@ public class RepertoryServiceImpl implements RepertoryService {
         saveRecord.setSaveGoodsRecordList(list);
         return saveRecord;
     }
+
+    @Override
+    public FetchRecord getFetchRecordDetails(Integer fetchId) {
+        FetchRecord fetchRecord = fetchRecordMapper.getFetchRecordDetails(fetchId);
+        return fetchRecord;
+    }
 }
