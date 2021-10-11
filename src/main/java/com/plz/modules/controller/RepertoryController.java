@@ -198,7 +198,7 @@ public class RepertoryController {
     @GetMapping("/fetchRecord/{fetchId}")
     public Result FetchRecordDetails(@PathVariable("fetchId") Integer fetchId) {
         FetchRecord fetchRecord = repertoryService.getFetchRecordDetails(fetchId);
-        return Result.success(fetchId);
+        return Result.success(fetchRecord);
     }
 
 }
