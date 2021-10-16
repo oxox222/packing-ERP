@@ -47,6 +47,11 @@ public class CustomServiceImpl implements CustomService {
         customMapper.deleteById(id);
     }
 
+    @Override
+    public Custom details(int id) {
+        return customMapper.selectById(id);
+    }
+
     /**
      * 判断是否存在重名
      * @param name

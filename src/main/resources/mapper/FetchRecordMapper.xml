@@ -59,44 +59,46 @@
     </select>
 
     <select id="getAllList" resultMap="BaseResultMap">
-        SELECT
-          r.t_id, r.t_odd, r.t_warehouseId, r.t_discount, r.t_other_cost, r.t_other_cost_name,
-          r.t_paid, r.t_accept_paid, r.t_remark, r.t_customId, r.t_signer, r.t_receiver, r.t_receiver_phone,
-          r.t_receivedId, r.t_received_address, r.t_received_time, r.t_deal_time,
-          r.t_state, r.t_create_time, w.t_name AS warehouseName, c.t_name AS customName, cu.t_name AS receiverName
-        FROM
-          t_fetch_record r
-          LEFT JOIN t_warehouse w ON r.t_warehouseId = w.t_id
-          LEFT JOIN t_custom c ON r.t_customId = c.t_id
-          LEFT JOIN t_custom cu ON r.t_receivedId = cu.t_id
-          LEFT JOIN t_fetch_goods_record g ON r.t_id = g.t_recordId
-        WHERE 1=1
-        <if test="query.customIds != null and query.customIds.size > 0">
-            AND r.t_customId IN
-            <foreach item="item" index="index" collection="query.customIds" open="(" separator="," close=")">
-              #{item}
-            </foreach>
-        </if>
-        <if test="query.receiverIds != null and query.receiverIds.size > 0">
-            AND r.t_receivedId IN
-            <foreach item="item" index="index" collection="query.receiverIds" open="(" separator="," close=")">
-              #{item}
-            </foreach>
-        </if>
-        <if test="query.goodsIds != null and query.goodsIds.size > 0">
-            AND g.t_goodsId IN
-            <foreach item="item" index="index" collection="query.goodsIds" open="(" separator="," close=")">
-              #{item}
-            </foreach>
-        </if>
-        <if test="query.startTime != null and query.startTime != ''">
-            AND r.t_deal_time &gt;= #{query.startTime}
-        </if>
-        <if test="query.endTime != null and query.endTime != ''">
-          AND r.t_deal_time &lt;= #{query.endTime}
-        </if>
-        GROUP BY r.t_id, r.t_deal_time
-        ORDER BY r.t_deal_time DESC
+        SELECT tmp.* FROM (
+            SELECT
+                r.t_id, r.t_odd, r.t_warehouseId, r.t_discount, r.t_other_cost, r.t_other_cost_name,
+                r.t_paid, r.t_accept_paid, r.t_remark, r.t_customId, r.t_signer, r.t_receiver, r.t_receiver_phone,
+                r.t_receivedId, r.t_received_address, r.t_received_time, r.t_deal_time,
+                r.t_state, r.t_create_time, w.t_name AS warehouseName, c.t_name AS customName, cu.t_name AS receiverName
+            FROM
+                t_fetch_record r
+                LEFT JOIN t_warehouse w ON r.t_warehouseId = w.t_id
+                LEFT JOIN t_custom c ON r.t_customId = c.t_id
+                LEFT JOIN t_custom cu ON r.t_receivedId = cu.t_id
+                LEFT JOIN t_fetch_goods_record g ON r.t_id = g.t_recordId
+            WHERE 1=1
+            <if test="query.customIds != null and query.customIds.size > 0">
+                AND r.t_customId IN
+                <foreach item="item" index="index" collection="query.customIds" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="query.receiverIds != null and query.receiverIds.size > 0">
+                AND r.t_receivedId IN
+                <foreach item="item" index="index" collection="query.receiverIds" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="query.goodsIds != null and query.goodsIds.size > 0">
+                AND g.t_goodsId IN
+                <foreach item="item" index="index" collection="query.goodsIds" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="query.startTime != null and query.startTime != ''">
+                AND r.t_deal_time &gt;= #{query.startTime}
+            </if>
+            <if test="query.endTime != null and query.endTime != ''">
+                AND r.t_deal_time &lt;= #{query.endTime}
+            </if>
+            GROUP BY r.t_id
+        ) tmp
+        ORDER BY tmp.t_deal_time ASC, tmp.t_odd ASC
     </select>
 
     <update id="deliver">

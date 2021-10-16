@@ -32,4 +32,11 @@ public interface CustomService {
      * @param id
      */
     void deleteById(int id);
+
+    /**
+     * 查询客户详情
+     * @param id
+     * @return
+     */
+    Custom details(int id);
 }

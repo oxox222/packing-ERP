@@ -2,10 +2,8 @@ package com.plz.modules.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.plz.modules.mapper.*;
-import com.plz.modules.model.FetchRecord;
-import com.plz.modules.model.FetchSaveRecord;
-import com.plz.modules.model.SaveGoodsRecord;
-import com.plz.modules.model.SaveRecord;
+import com.plz.modules.model.*;
+import com.plz.modules.service.CustomService;
 import com.plz.modules.service.RepertoryService;
 import com.plz.modules.util.OddUtils;
 import com.plz.modules.vo.AllFetchRecordQueryVo;
@@ -48,6 +46,10 @@ public class RepertoryServiceImpl implements RepertoryService {
     @Resource
     private FetchSaveRecordMapper fetchSaveRecordMapper;
 
+    @Resource
+    private CustomService customService;
+
+
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public void insertSaveRecord(SaveRecord saveRecord) {
@@ -57,7 +59,7 @@ public class RepertoryServiceImpl implements RepertoryService {
         saveRecordMapper.insert(saveRecord);
         //设置商品订单号
         if (!saveRecord.getSaveGoodsRecordList().isEmpty()) {
-            saveRecord.getSaveGoodsRecordList().stream().forEach(e -> {
+            saveRecord.getSaveGoodsRecordList().forEach(e -> {
                 e.setRecordId(saveRecord.getId());
             });
             saveGoodsRecordMapper.insertOfBatch(saveRecord.getSaveGoodsRecordList());
@@ -67,6 +69,7 @@ public class RepertoryServiceImpl implements RepertoryService {
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public void insertFetchRecord(FetchRecord fetchRecord) {
+        fillReceiverInfo(fetchRecord);
         if (Objects.isNull(fetchRecord.getOdd()) || fetchRecord.getOdd().isEmpty()) {
             fetchRecord.setOdd(oddUtils.getOdd());
         }
@@ -83,9 +86,11 @@ public class RepertoryServiceImpl implements RepertoryService {
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public void insertFetchAndSaveRecord(FetchRecord fetchRecord) {
-        SaveRecord saveRecord = getSaveRecordByFetchRecord(fetchRecord);
-        insertSaveRecord(saveRecord);
         insertFetchRecord(fetchRecord);
+        SaveRecord saveRecord = getSaveRecordByFetchRecord(fetchRecord);
+        //回填出库单单号
+        saveRecord.setOdd(fetchRecord.getOdd());
+        insertSaveRecord(saveRecord);
         //新增关联信息
         FetchSaveRecord fetchSaveRecord = new FetchSaveRecord();
         fetchSaveRecord.setSaveId(saveRecord.getId());
@@ -190,6 +195,12 @@ public class RepertoryServiceImpl implements RepertoryService {
 
     }
 
+    @Override
+    public FetchRecord getFetchRecordDetails(Integer fetchId) {
+        FetchRecord fetchRecord = fetchRecordMapper.getFetchRecordDetails(fetchId);
+        return fetchRecord;
+    }
+
     /**
      * 通过出库单信息填充入库单信息
      * @param fetchRecord
@@ -198,19 +209,44 @@ public class RepertoryServiceImpl implements RepertoryService {
     private SaveRecord getSaveRecordByFetchRecord(FetchRecord fetchRecord) {
         SaveRecord saveRecord = SaveRecord.of(fetchRecord);
         List<SaveGoodsRecord> list = new ArrayList<>();
-        Optional.ofNullable(fetchRecord.getFetchGoodsRecordList())
-                .orElse(new ArrayList<>()).stream().forEach(e -> {
-                    SaveGoodsRecord goodsRecord = new SaveGoodsRecord();
-                    BeanUtils.copyProperties(e, goodsRecord, new String[]{"id", "odd"});
-                    list.add(goodsRecord);
+        Optional.ofNullable(fetchRecord.getFetchGoodsRecordList()).orElse(new ArrayList<>()).forEach(e -> {
+            SaveGoodsRecord goodsRecord = new SaveGoodsRecord();
+            BeanUtils.copyProperties(e, goodsRecord, new String[]{"id", "odd", "price", "paid"});
+            list.add(goodsRecord);
         });
         saveRecord.setSaveGoodsRecordList(list);
         return saveRecord;
     }
 
-    @Override
-    public FetchRecord getFetchRecordDetails(Integer fetchId) {
-        FetchRecord fetchRecord = fetchRecordMapper.getFetchRecordDetails(fetchId);
-        return fetchRecord;
+    /**
+     * 回填收货人信息
+     * @param fetchRecord
+     */
+    private void fillReceiverInfo(FetchRecord fetchRecord) {
+        Custom receive = Optional.ofNullable(fetchRecord.getReceiverId()).map(e -> customService.details(e)).orElse(null);
+        Custom custom = Optional.ofNullable(fetchRecord.getCustomId()).map(e -> customService.details(e)).orElse(null);
+        if (Objects.isNull(fetchRecord.getReceiver())) {
+            if (Objects.nonNull(receive)) {
+                fetchRecord.setReceiver(receive.getLeader());
+            } else if (Objects.nonNull(custom)) {
+                fetchRecord.setReceiver(custom.getLeader());
+            }
+        }
+        if (Objects.isNull(fetchRecord.getReceiverPhone())) {
+            if (Objects.nonNull(receive)) {
+                fetchRecord.setReceiverPhone(receive.getLeaderPhone());
+            } else if (Objects.nonNull(custom)) {
+                fetchRecord.setReceiverPhone(custom.getLeaderPhone());
+            }
+        }
+        if (Objects.isNull(fetchRecord.getReceivedAddress())) {
+            if (Objects.nonNull(receive)) {
+                fetchRecord.setReceivedAddress(receive.getAddressDetail());
+            } else if (Objects.nonNull(custom)) {
+                fetchRecord.setReceivedAddress(custom.getAddressDetail());
+            }
+        }
     }
+
+
 }

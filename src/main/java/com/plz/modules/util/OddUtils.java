@@ -26,15 +26,15 @@ public class OddUtils {
      * @return
      */
     public String getOdd() {
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
         StringBuilder sb = new StringBuilder(sdf.format(new Date()));
         String value = (String)redis.get(Constant.oddKey);
         if (Objects.isNull(value)) {
             //新的一天从1开始
-            value = sb.append("00001").toString();;
+            value = sb.append("0001").toString();;
         } else {
             //累加
-            value = String.format("%05d", Long.parseLong(value)+1);
+            value = String.format("%04d", Long.parseLong(value)+1);
         }
         redis.set(Constant.oddKey, value);
         return value;
