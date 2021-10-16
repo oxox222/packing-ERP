@@ -19,7 +19,7 @@ public interface FetchRecordMapper extends BaseMapper<FetchRecord> {
     Page<FetchRecord> list(@Param("query") FetchRecordQueryVo query, @Param("page") Page page);
 
     /**
-     * 查询出库单列表
+     * 查询出库单列表(不分页)
      * @param query
      * @return
      */
