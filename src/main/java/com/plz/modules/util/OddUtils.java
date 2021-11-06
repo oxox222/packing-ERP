@@ -28,15 +28,16 @@ public class OddUtils {
     public String getOdd() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
         StringBuilder sb = new StringBuilder(sdf.format(new Date()));
-        String value = (String)redis.get(Constant.oddKey);
-        if (Objects.isNull(value)) {
-            //新的一天从1开始
-            value = sb.append("0001").toString();;
+        Integer number = (Integer) redis.get(Constant.ODD_NUMBER);
+        if (Objects.isNull(number) || number.equals(Constant.ODD_NUMBER_MAX)) {
+            //从1开始
+            number = 1;
         } else {
             //累加
-            value = String.format("%04d", Long.parseLong(value)+1);
+            number++;
         }
-        redis.set(Constant.oddKey, value);
+        redis.set(Constant.ODD_NUMBER, number.toString());
+        String value = sb.append(String.format("%04d", number)).toString();
         return value;
     }
 

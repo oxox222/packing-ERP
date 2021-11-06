@@ -14,12 +14,13 @@ public class Constant {
     /**
      * 保存文件根路径
      */
-    public static String rootPath = "E:/upload/";
+    public static final String rootPath = "E:/upload/";
 
     /**
      * 订单号 redis key
      */
-    public static String oddKey = "ERPOdd";
-
+    public static final String oddKey = "ERPOdd";
+    public static final String ODD_NUMBER = "ERPNUMBER";
+    public static final Integer ODD_NUMBER_MAX = 9999;
 
 }
