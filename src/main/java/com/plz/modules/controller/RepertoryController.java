@@ -158,35 +158,15 @@ public class RepertoryController {
     }
 
     /**
-     * 发货
+     * 修改出库单状态
      * @param id
+     * @param state
      * @return
      */
-    @RequestMapping(value = "/fetchRecord/deliver/{id}", method = RequestMethod.PUT)
-    public Result deliver(@PathVariable("id") Integer id) {
-        repertoryService.deliver(id);
-        return Result.success(null);
-    }
-
-    /**
-     * 签收
-     * @param id
-     * @return
-     */
-    @RequestMapping(value = "/fetchRecord/sign/{id}", method = RequestMethod.PUT)
-    public Result sign(@PathVariable("id") Integer id) {
-        repertoryService.sign(id);
-        return Result.success(null);
-    }
-
-    /**
-     * 取消订单
-     * @param id
-     * @return
-     */
-    @RequestMapping(value = "/fetchRecord/invalid/{id}", method = RequestMethod.PUT)
-    public Result invalid(@PathVariable("id") Integer id) {
-        repertoryService.invalid(id);
+    @RequestMapping(value = "/fetchRecord/status/{id}", method = RequestMethod.PATCH)
+    public Result updateFetchStatus(@PathVariable("id") Integer id,
+                                    @RequestParam("state") Integer state) {
+        repertoryService.updateFetchStatus(id, state);
         return Result.success(null);
     }
 

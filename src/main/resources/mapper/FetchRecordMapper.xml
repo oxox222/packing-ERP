@@ -101,16 +101,8 @@
         ORDER BY tmp.t_deal_time ASC, tmp.t_odd ASC
     </select>
 
-    <update id="deliver">
-        UPDATE t_fetch_record SET t_state = 2 WHERE t_id = #{id} AND t_state = 1
-    </update>
-
-    <update id="sign">
-        UPDATE t_fetch_record SET t_state = 3 WHERE t_id = #{id} AND t_state = 2
-    </update>
-
-    <update id="invalid">
-        UPDATE t_fetch_record SET t_state = 4 WHERE t_id = #{id}
+    <update id="updateStatus">
+        UPDATE `t_fetch_record` SET t_state = #{state} WHERE t_id = #{id}
     </update>
 
     <select id="getFetchRecordDetails" resultMap="BaseResultMap">

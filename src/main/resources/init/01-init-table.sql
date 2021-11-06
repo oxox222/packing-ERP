@@ -74,7 +74,7 @@ CREATE TABLE `t_fetch_record` (
     `t_received_address` varchar(50) DEFAULT NULL COMMENT '交货地址',
     `t_received_time` timestamp NULL DEFAULT NULL COMMENT '交货时间',
     `t_deal_time` timestamp NULL DEFAULT NULL COMMENT '开单时间',
-    `t_state` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '订单状态 1备货中;2已发货;3已签收',
+    `t_state` tinyint(1) unsigned NOT NULL DEFAULT '1' COMMENT '订单状态 1备货中;2已发货;3已签收,4已收款,99已取消',
     `t_create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     PRIMARY KEY (`t_id`),
     KEY `idx_customId` (`t_customId`)

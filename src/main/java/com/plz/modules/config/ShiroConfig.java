@@ -40,6 +40,8 @@ public class ShiroConfig {
         filterChainDefinitionMap.put("/user/login", "anon");
         //登出
         filterChainDefinitionMap.put("/logout", "logout");
+        //获取用户信息
+        filterChainDefinitionMap.put("/user/info", "anon");
         // swagger
         filterChainDefinitionMap.put("/swagger**/**", "anon");
         filterChainDefinitionMap.put("/webjars/**", "anon");

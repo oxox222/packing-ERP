@@ -26,22 +26,11 @@ public interface FetchRecordMapper extends BaseMapper<FetchRecord> {
     List<FetchRecord> getAllList(@Param("query") AllFetchRecordQueryVo query);
 
     /**
-     * 发货
+     * 修改出库单状态
      * @param id
+     * @param state
      */
-    void deliver(@Param("id") int id);
-
-    /**
-     * 签收
-     * @param id
-     */
-    void sign(@Param("id") int id);
-
-    /**
-     * 取消订单
-     * @param id
-     */
-    void invalid(@Param("id") int id);
+    void updateStatus(@Param("id") Integer id, @Param("state") Integer state);
 
     /**
      * 根据id查询出库单详情

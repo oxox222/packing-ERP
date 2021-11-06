@@ -181,18 +181,8 @@ public class RepertoryServiceImpl implements RepertoryService {
     }
 
     @Override
-    public void deliver(Integer id) {
-        fetchRecordMapper.deliver(id);
-    }
-
-    @Override
-    public void sign(Integer id) {
-        fetchRecordMapper.sign(id);
-    }
-
-    @Override
-    public void invalid(Integer id) {
-
+    public void updateFetchStatus(Integer id, Integer state) {
+        fetchRecordMapper.updateStatus(id, state);
     }
 
     @Override

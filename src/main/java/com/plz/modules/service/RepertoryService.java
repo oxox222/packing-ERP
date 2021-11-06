@@ -84,22 +84,11 @@ public interface RepertoryService {
     void deleteFetchAndSaveRecord(Integer id);
 
     /**
-     * 发货
+     * 修改出库单状态
      * @param id
+     * @param state
      */
-    void deliver(Integer id);
-
-    /**
-     * 签收
-     * @param id
-     */
-    void sign(Integer id);
-
-    /**
-     * 取消订单
-     * @param id
-     */
-    void invalid(Integer id);
+    void updateFetchStatus(Integer id, Integer state);
 
     /**
      * 根据id查询出库单详情
