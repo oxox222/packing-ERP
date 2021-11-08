@@ -28,7 +28,7 @@ public class OddUtils {
     public String getOdd() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
         StringBuilder sb = new StringBuilder(sdf.format(new Date()));
-        Integer number = (Integer) redis.get(Constant.ODD_NUMBER);
+        Integer number = Integer.parseInt((String) redis.get(Constant.ODD_NUMBER));
         if (Objects.isNull(number) || number.equals(Constant.ODD_NUMBER_MAX)) {
             //从1开始
             number = 1;
