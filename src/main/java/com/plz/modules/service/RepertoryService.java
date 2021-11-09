@@ -97,4 +97,10 @@ public interface RepertoryService {
      */
     FetchRecord getFetchRecordDetails(Integer fetchId);
 
+    /**
+     * 取消出库单
+     * @param id
+     */
+    void cancel(Integer id);
+
 }

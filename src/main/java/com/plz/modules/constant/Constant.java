@@ -22,5 +22,7 @@ public class Constant {
     public static final String oddKey = "ERPOdd";
     public static final String ODD_NUMBER = "ERPNUMBER";
     public static final Integer ODD_NUMBER_MAX = 9999;
+    //取消出库单
+    public static final Integer FETCH_CANCEL = 99;
 
 }

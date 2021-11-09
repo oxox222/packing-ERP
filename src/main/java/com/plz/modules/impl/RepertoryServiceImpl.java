@@ -1,6 +1,7 @@
 package com.plz.modules.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.plz.modules.constant.Constant;
 import com.plz.modules.mapper.*;
 import com.plz.modules.model.*;
 import com.plz.modules.service.CustomService;
@@ -189,6 +190,17 @@ public class RepertoryServiceImpl implements RepertoryService {
     public FetchRecord getFetchRecordDetails(Integer fetchId) {
         FetchRecord fetchRecord = fetchRecordMapper.getFetchRecordDetails(fetchId);
         return fetchRecord;
+    }
+
+    @Override
+    @Transactional(rollbackFor = RuntimeException.class)
+    public void cancel(Integer id) {
+        fetchRecordMapper.updateStatus(id, Constant.FETCH_CANCEL);
+        //删除入库单信息
+        Integer saveRecordId = fetchSaveRecordMapper.selectSaveIdByFetchId(id);
+        fetchSaveRecordMapper.deleteByFetchId(id);
+        saveGoodsRecordMapper.deleteByRecordId(saveRecordId);
+        saveRecordMapper.deleteById(saveRecordId);
     }
 
     /**

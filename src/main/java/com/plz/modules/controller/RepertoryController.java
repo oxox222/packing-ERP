@@ -181,4 +181,15 @@ public class RepertoryController {
         return Result.success(fetchRecord);
     }
 
+    /**
+     * 取消出库单
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/fetchRecord/cancel/{id}", method = RequestMethod.PATCH)
+    public Result cancel(@PathVariable("id") Integer id) {
+        repertoryService.cancel(id);
+        return Result.success(null);
+    }
+
 }
