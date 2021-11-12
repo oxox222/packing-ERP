@@ -22,9 +22,9 @@ public class RedisSchedule {
     private RedisUtils redis;
 
     /**
-     * 每月1号00:10清空订单序号
+     * 每月1号00:00清空订单序号
      */
-    @Scheduled(cron = "0 10 0 1 * ?")
+    @Scheduled(cron = "0 0 0 1 * ?")
     public void emptyOdd() {
         redis.delete(Constant.ODD_NUMBER);
     }

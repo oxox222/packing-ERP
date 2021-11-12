@@ -186,7 +186,7 @@ public class RepertoryController {
      * @param id
      * @return
      */
-    @RequestMapping(value = "/fetchRecord/cancel/{id}", method = RequestMethod.PATCH)
+    @RequestMapping(value = "/fetchAndSaveRecord/cancel/{id}", method = RequestMethod.PATCH)
     public Result cancel(@PathVariable("id") Integer id) {
         repertoryService.cancel(id);
         return Result.success(null);
