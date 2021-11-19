@@ -67,3 +67,29 @@ CREATE TABLE `t_fetch_save_record`(
     PRIMARY KEY (`t_id`),
     KEY `idx_fetch_id` (`t_fetch_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='出入库单关联表';
+
+-- 2021/11/19
+-- 新增退货单表
+DROP TABLE IF EXISTS `t_cancel_record`;
+CREATE TABLE `t_cancel_record` (
+    `t_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `t_custom_id` int(11) unsigned DEFAULT NULL COMMENT '顾客id',
+    `t_cancel_person_id` int(11) unsigned DEFAULT NULL COMMENT '退货方id',
+    `t_cancel_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '退货时间',
+    `t_remark` varchar(255) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`t_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='退货单表';
+-- 新增退货商品记录表
+DROP TABLE IF EXISTS `t_cancel_goods_record`;
+CREATE TABLE `t_cancel_goods_record` (
+    `t_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `t_goods_id` int(11) unsigned NOT NULL COMMENT '商品id',
+    `t_cancel_id` int(11) unsigned NOT NULL COMMENT '退货单表id',
+    `t_num` int(255) DEFAULT NULL COMMENT '数量',
+    `t_price` double(8,2) DEFAULT NULL COMMENT '单价',
+    `t_reticule` int(11) unsigned DEFAULT 0 COMMENT '手提袋数量',
+    `t_shoe_cover` int(11) unsigned DEFAULT 0 COMMENT '鞋套数量',
+    `t_container` int(11) unsigned DEFAULT 0 COMMENT '外箱数量',
+    PRIMARY KEY (`t_id`),
+    KEY `idx_record_id` (`t_cancel_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='退货商品记录表';

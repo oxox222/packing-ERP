@@ -324,11 +324,44 @@ CREATE TABLE `t_declaration_goods` (
     PRIMARY KEY (`t_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='报单商品记录表';
 
+-- ----------------------------
+-- Table structure for t_declaration_fetch
+-- ----------------------------
 DROP TABLE IF EXISTS `t_declaration_fetch`;
 CREATE TABLE `t_declaration_fetch` (
     `t_declarationId` int(11) UNSIGNED NOT NULL COMMENT '报单表id',
     `t_fetchId` int(11) UNSIGNED NOT NULL COMMENT '出库单id'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='报单出库单关联表';
+
+-- ----------------------------
+-- Table structure for t_cancel_record
+-- ----------------------------
+DROP TABLE IF EXISTS `t_cancel_record`;
+CREATE TABLE `t_cancel_record` (
+    `t_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `t_custom_id` int(11) unsigned DEFAULT NULL COMMENT '顾客id',
+    `t_cancel_person_id` int(11) unsigned DEFAULT NULL COMMENT '退货方id',
+    `t_cancel_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '退货时间',
+    `t_remark` varchar(255) DEFAULT NULL COMMENT '备注',
+    PRIMARY KEY (`t_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='退货单表';
+
+-- ----------------------------
+-- Table structure for t_cancel_goods_record
+-- ----------------------------
+DROP TABLE IF EXISTS `t_cancel_goods_record`;
+CREATE TABLE `t_cancel_goods_record` (
+    `t_id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `t_goods_id` int(11) unsigned NOT NULL COMMENT '商品id',
+    `t_cancel_id` int(11) unsigned NOT NULL COMMENT '退货单表id',
+    `t_num` int(255) DEFAULT NULL COMMENT '数量',
+    `t_price` double(8,2) DEFAULT NULL COMMENT '单价',
+    `t_reticule` int(11) unsigned DEFAULT 0 COMMENT '手提袋数量',
+    `t_shoe_cover` int(11) unsigned DEFAULT 0 COMMENT '鞋套数量',
+    `t_container` int(11) unsigned DEFAULT 0 COMMENT '外箱数量',
+    PRIMARY KEY (`t_id`),
+    KEY `idx_record_id` (`t_cancel_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='退货商品记录表';
 
 SET FOREIGN_KEY_CHECKS = 1;
 
