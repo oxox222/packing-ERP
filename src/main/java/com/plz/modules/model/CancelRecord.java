@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 退货单表
@@ -44,5 +46,11 @@ public class CancelRecord {
      */
     @TableField(value = "t_remark")
     private String remark;
+
+    /**
+     * 退货商品集合
+     */
+    @TableField(exist = false)
+    List<CancelGoodsRecord> cancelGoodsRecordList = new ArrayList<>();
 
 }

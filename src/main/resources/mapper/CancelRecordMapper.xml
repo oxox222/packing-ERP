@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.plz.modules.mapper.CancelRecordMapper">
+    <resultMap id="BaseResultMap" type="com.plz.modules.model.CancelRecord">
+        <result column="t_id" jdbcType="INTEGER" property="id" />
+        <result column="t_custom_id" jdbcType="INTEGER" property="customId" />
+        <result column="t_cancel_person_id" jdbcType="INTEGER" property="cancelPersonId" />
+        <result column="t_cancel_time" jdbcType="TIMESTAMP" property="cancelTime" />
+        <result column="t_remark" jdbcType="VARCHAR" property="remark" />
+        <collection property="cancelGoodsRecordList" javaType="java.util.ArrayList"
+                    select="com.plz.modules.mapper.CancelGoodsRecordMapper.selectByCancelId" column="{cancelId=t_id}"/>
+    </resultMap>
+
+    <sql id="Base_Column">
+        t_id, t_custom_id, t_cancel_person_id, t_cancel_time, t_remark
+    </sql>
+
+    <select id="queryByPage" resultMap="BaseResultMap">
+        SELECT tcr.* FROM
+            `t_cancel_record` tcr
+            LEFT JOIN t_cancel_goods_record tcgr on tcr.t_id = tcgr.t_cancel_id
+        WHERE 1=1
+        <if test="query.customIds != null and query.customIds.size > 0">
+            AND tcr.t_custom_id IN
+            <foreach item="item" index="index" collection="query.customIds" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="query.cancelPersonIds != null and query.cancelPersonIds.size > 0">
+            AND tcr.t_cancel_person_id IN
+            <foreach item="item" index="index" collection="query.cancelPersonIds" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="query.goodsIds != null and query.goodsIds.size > 0">
+            AND tcgr.t_goods_id IN
+            <foreach item="item" index="index" collection="query.goodsIds" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="query.startTime != null and query.startTime != ''">
+            AND tcr.t_cancel_time &gt;= #{query.startTime}
+        </if>
+        <if test="query.endTime != null and query.endTime != ''">
+            AND tcr.t_cancel_time &lt;= #{query.endTime}
+        </if>
+        ORDER BY tcr.t_cancel_time DESC
+    </select>
+
+    <select id="queryByAll" resultMap="BaseResultMap">
+        SELECT tcr.* FROM
+            `t_cancel_record` tcr
+            LEFT JOIN t_cancel_goods_record tcgr on tcr.t_id = tcgr.t_cancel_id
+        WHERE 1=1
+        <if test="query.customIds != null and query.customIds.size > 0">
+            AND tcr.t_custom_id IN
+            <foreach item="item" index="index" collection="query.customIds" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="query.cancelPersonIds != null and query.cancelPersonIds.size > 0">
+            AND tcr.t_cancel_person_id IN
+            <foreach item="item" index="index" collection="query.cancelPersonIds" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="query.goodsIds != null and query.goodsIds.size > 0">
+            AND tcgr.t_goods_id IN
+            <foreach item="item" index="index" collection="query.goodsIds" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="query.startTime != null and query.startTime != ''">
+            AND tcr.t_cancel_time &gt;= #{query.startTime}
+        </if>
+        <if test="query.endTime != null and query.endTime != ''">
+            AND tcr.t_cancel_time &lt;= #{query.endTime}
+        </if>
+        ORDER BY tcr.t_cancel_time DESC
+    </select>
+
+
+</mapper>
