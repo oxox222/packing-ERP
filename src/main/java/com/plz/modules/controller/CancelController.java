@@ -72,8 +72,8 @@ public class CancelController {
      * @param query
      * @return
      */
-    @GetMapping("/all")
-    public Result queryByAll(CancelQueryVo query) {
+    @PostMapping("/all/list")
+    public Result queryByAll(@RequestBody CancelQueryVo query) {
         List<CancelRecord> list = cancelService.queryByAll(query);
         return Result.success(list);
     }
