@@ -118,8 +118,8 @@ public class RepertoryController {
      * 查询出库单列表(不分页)
      * @return
      */
-    @GetMapping("/fetchRecord/all/list")
-    public Result allFetchRecordList(AllFetchRecordQueryVo query) {
+    @PostMapping("/fetchRecord/all/list")
+    public Result allFetchRecordList(@RequestBody AllFetchRecordQueryVo query) {
         List<FetchRecord> fetchRecords = repertoryService.getAllFetchRecordList(query);
         return Result.success(fetchRecords);
     }
