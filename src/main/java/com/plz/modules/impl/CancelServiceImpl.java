@@ -40,13 +40,13 @@ public class CancelServiceImpl implements CancelService {
     @Override
     @Transactional(rollbackFor = RuntimeException.class)
     public void update(CancelRecord cancelRecord) {
-        if (cancelRecord.getCancelGoodsRecordList().size() > 0) {
-            cancelRecord.getCancelGoodsRecordList().forEach(e -> {
-                e.setCancelId(cancelRecord.getId());
-                cancelGoodsRecordMapper.updateById(e);
-            });
-        }
         cancelRecordMapper.updateById(cancelRecord);
+        //全删再全加
+        cancelGoodsRecordMapper.deleteByCancelId(cancelRecord.getId());
+        if (cancelRecord.getCancelGoodsRecordList().size() > 0) {
+            cancelRecord.getCancelGoodsRecordList().forEach(e -> e.setCancelId(cancelRecord.getId()));
+            cancelGoodsRecordMapper.insertOfBatch(cancelRecord.getCancelGoodsRecordList());
+        }
     }
 
     @Override

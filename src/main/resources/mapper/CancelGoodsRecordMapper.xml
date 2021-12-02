@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.plz.modules.mapper.CancelGoodsRecordMapper">
-    <resultMap id="BaseResultMap" type="com.plz.modules.model.CancelGoodsRecord">
+    <resultMap id="BaseResultMap" type="com.plz.modules.entity.CancelGoodsRecordDto">
         <result column="t_id" jdbcType="INTEGER" property="id" />
         <result column="t_goods_id" jdbcType="INTEGER" property="goodsId" />
         <result column="t_cancel_id" jdbcType="INTEGER" property="cancelId" />
@@ -10,6 +10,11 @@
         <result column="t_reticule" jdbcType="INTEGER" property="reticule" />
         <result column="t_shoe_cover" jdbcType="INTEGER" property="shoeCover" />
         <result column="t_container" jdbcType="INTEGER" property="container" />
+        <result column="t_name" jdbcType="VARCHAR" property="name" />
+        <result column="t_size" jdbcType="VARCHAR" property="size" />
+        <result column="t_brand" jdbcType="VARCHAR" property="brand" />
+        <result column="t_texture" jdbcType="VARCHAR" property="texture" />
+        <result column="t_remark" jdbcType="VARCHAR" property="remark" />
     </resultMap>
 
     <sql id="Base_Column">
@@ -39,9 +44,15 @@
 
     <select id="selectByCancelId" resultMap="BaseResultMap">
         SELECT
-            *
+            *,
+            tg.t_name,
+            tg.t_size,
+            tg.t_brand,
+            tg.t_texture,
+            tg.t_remark
         FROM
-            `t_cancel_goods_record`
+            `t_cancel_goods_record` tcgr
+            LEFT JOIN t_goods tg ON tcgr.t_goods_id = tg.t_id
         WHERE t_cancel_id = #{cancelId}
     </select>
 
