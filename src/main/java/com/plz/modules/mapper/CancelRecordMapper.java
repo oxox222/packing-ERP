@@ -2,6 +2,7 @@ package com.plz.modules.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.plz.modules.entity.CancelRecordDto;
 import com.plz.modules.model.CancelRecord;
 import com.plz.modules.vo.CancelQueryVo;
 import org.apache.ibatis.annotations.Param;
@@ -19,14 +20,14 @@ public interface CancelRecordMapper extends BaseMapper<CancelRecord> {
      * @param page
      * @return
      */
-    Page<CancelRecord> queryByPage(@Param("query") CancelQueryVo query, @Param("page") Page page);
+    Page<CancelRecordDto> queryByPage(@Param("query") CancelQueryVo query, @Param("page") Page page);
 
     /**
      * 查询(不分页)
      * @param query
      * @return
      */
-    List<CancelRecord> queryByAll(@Param("query") CancelQueryVo query);
+    List<CancelRecordDto> queryByAll(@Param("query") CancelQueryVo query);
 
 
 }

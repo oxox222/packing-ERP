@@ -1,6 +1,7 @@
 package com.plz.modules.controller;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.plz.modules.entity.CancelRecordDto;
 import com.plz.modules.model.CancelRecord;
 import com.plz.modules.model.Pagination;
 import com.plz.modules.model.Result;
@@ -62,7 +63,7 @@ public class CancelController {
      */
     @GetMapping("/page")
     public Result queryByPage(CancelQueryVo query) {
-        Page<CancelRecord> pageInfo = cancelService.
+        Page<CancelRecordDto> pageInfo = cancelService.
                 queryByPage(query, new Page(query.getPageNum(), query.getPageSize()));
         return Result.success(Pagination.of(pageInfo));
     }
@@ -74,7 +75,7 @@ public class CancelController {
      */
     @PostMapping("/all/list")
     public Result queryByAll(@RequestBody CancelQueryVo query) {
-        List<CancelRecord> list = cancelService.queryByAll(query);
+        List<CancelRecordDto> list = cancelService.queryByAll(query);
         return Result.success(list);
     }
 

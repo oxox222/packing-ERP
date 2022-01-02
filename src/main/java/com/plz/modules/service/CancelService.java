@@ -1,6 +1,7 @@
 package com.plz.modules.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.plz.modules.entity.CancelRecordDto;
 import com.plz.modules.model.CancelRecord;
 import com.plz.modules.vo.CancelQueryVo;
 
@@ -35,13 +36,13 @@ public interface CancelService {
      * @param page
      * @return
      */
-    Page<CancelRecord> queryByPage(CancelQueryVo query, Page page);
+    Page<CancelRecordDto> queryByPage(CancelQueryVo query, Page page);
 
     /**
      * 退货单查询(不分页)
      * @param query
      * @return
      */
-    List<CancelRecord> queryByAll(CancelQueryVo query);
+    List<CancelRecordDto> queryByAll(CancelQueryVo query);
 
 }

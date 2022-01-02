@@ -93,3 +93,15 @@ CREATE TABLE `t_cancel_goods_record` (
     PRIMARY KEY (`t_id`),
     KEY `idx_record_id` (`t_cancel_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='退货商品记录表';
+
+-- 2022/01/02 新增收款功能
+DROP TABLE IF EXISTS `t_collection_record`;
+CREATE TABLE `t_collection_record` (
+    `t_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `t_custom_id` int(11) unsigned DEFAULT NULL COMMENT '顾客id',
+    `t_received_id` int(11) unsigned DEFAULT NULL COMMENT '收货方id',
+    `t_collection` double(11,2) DEFAULT NULL COMMENT '收款金额',
+    `t_collection_time` timestamp NULL DEFAULT NULL COMMENT '收款时间',
+    `t_goods_time` timestamp NULL DEFAULT NULL COMMENT '货款时间',
+    PRIMARY KEY (`t_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='出库单表';

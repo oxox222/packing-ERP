@@ -1,6 +1,7 @@
 package com.plz.modules.impl;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.plz.modules.entity.CancelRecordDto;
 import com.plz.modules.mapper.CancelGoodsRecordMapper;
 import com.plz.modules.mapper.CancelRecordMapper;
 import com.plz.modules.model.CancelRecord;
@@ -57,14 +58,14 @@ public class CancelServiceImpl implements CancelService {
     }
 
     @Override
-    public Page<CancelRecord> queryByPage(CancelQueryVo query, Page page) {
+    public Page<CancelRecordDto> queryByPage(CancelQueryVo query, Page page) {
         Page pageInfo = cancelRecordMapper.queryByPage(query, page);
         return pageInfo;
     }
 
     @Override
-    public List<CancelRecord> queryByAll(CancelQueryVo query) {
-        List<CancelRecord> list = cancelRecordMapper.queryByAll(query);
+    public List<CancelRecordDto> queryByAll(CancelQueryVo query) {
+        List<CancelRecordDto> list = cancelRecordMapper.queryByAll(query);
         return list;
     }
 

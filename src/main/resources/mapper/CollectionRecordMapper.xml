@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.plz.modules.mapper.CollectionRecordMapper">
+    <resultMap id="BaseResultMap" type="com.plz.modules.entity.CollectionRecordDto">
+        <result column="t_id" jdbcType="INTEGER" property="id" />
+        <result column="t_custom_id" jdbcType="INTEGER" property="customId" />
+        <result column="t_received_id" jdbcType="INTEGER" property="receiverId" />
+        <result column="t_collection" jdbcType="DOUBLE" property="collection" />
+        <result column="t_collection_time" jdbcType="TIMESTAMP" property="collectionTime" />
+        <result column="t_goods_time" jdbcType="TIMESTAMP" property="goodsTime" />
+        <result column="customName" jdbcType="VARCHAR" property="customName" />
+        <result column="receiverName" jdbcType="VARCHAR" property="receiverName" />
+    </resultMap>
+
+    <select id="queryByPage" resultMap="BaseResultMap">
+        SELECT * FROM(
+            SELECT
+                tcr.*, c.t_name AS customName, cu.t_name AS receiverName
+            FROM
+                `t_collection_record` tcr
+                LEFT JOIN t_custom c ON tcr.t_custom_id = c.t_id
+                LEFT JOIN t_custom cu ON tcr.t_received_id = cu.t_id
+            WHERE 1=1
+            <if test="query.customIds != null and query.customIds.size > 0">
+                AND tcr.t_custom_id IN
+                <foreach item="item" index="index" collection="query.customIds" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="query.receiverIds != null and query.receiverIds.size > 0">
+                AND tcr.t_received_id IN
+                <foreach item="item" index="index" collection="query.receiverIds" open="(" separator="," close=")">
+                    #{item}
+                </foreach>
+            </if>
+            <if test="query.startTime != null and query.startTime != ''">
+                AND tcr.t_goods_time &gt;= #{query.startTime}
+            </if>
+            <if test="query.endTime != null and query.endTime != ''">
+                AND tcr.t_goods_time &lt;= #{query.endTime}
+            </if>
+            GROUP BY tcr.t_id
+            ) tmp
+        ORDER BY tmp.t_collection_time DESC, tmp.t_custom_id ASC, tmp.t_received_id ASC, tmp.t_goods_time ASC, tmp.t_collection ASC
+    </select>
+
+    <select id="queryByAll" resultMap="BaseResultMap">
+        SELECT * FROM(
+        SELECT
+        tcr.*, c.t_name AS customName, cu.t_name AS receiverName
+        FROM
+        `t_collection_record` tcr
+        LEFT JOIN t_custom c ON tcr.t_custom_id = c.t_id
+        LEFT JOIN t_custom cu ON tcr.t_received_id = cu.t_id
+        WHERE 1=1
+        <if test="query.customIds != null and query.customIds.size > 0">
+            AND tcr.t_custom_id IN
+            <foreach item="item" index="index" collection="query.customIds" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="query.receiverIds != null and query.receiverIds.size > 0">
+            AND tcr.t_received_id IN
+            <foreach item="item" index="index" collection="query.receiverIds" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="query.startTime != null and query.startTime != ''">
+            AND tcr.t_goods_time &gt;= #{query.startTime}
+        </if>
+        <if test="query.endTime != null and query.endTime != ''">
+            AND tcr.t_goods_time &lt;= #{query.endTime}
+        </if>
+        GROUP BY tcr.t_id
+        ) tmp
+        ORDER BY tmp.t_collection_time DESC, tmp.t_custom_id ASC, tmp.t_received_id ASC, tmp.t_goods_time ASC, tmp.t_collection ASC
+    </select>
+</mapper>
