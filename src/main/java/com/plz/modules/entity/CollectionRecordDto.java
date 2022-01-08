@@ -29,16 +29,6 @@ public class CollectionRecordDto {
     private String customName;
 
     /**
-     * 收货方id
-     */
-    private Integer receiverId;
-
-    /**
-     * 收货方名称
-     */
-    private String receiverName;
-
-    /**
      * 收款金额
      */
     private Double collection;

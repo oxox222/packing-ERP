@@ -30,12 +30,6 @@ public class CollectionRecord {
     private Integer customId;
 
     /**
-     * 收货方id
-     */
-    @TableField("t_received_id")
-    private Integer receiverId;
-
-    /**
      * 收款金额
      */
     @TableField("t_collection")

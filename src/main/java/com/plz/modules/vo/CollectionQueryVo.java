@@ -21,11 +21,6 @@ public class CollectionQueryVo extends PageBase {
     private List<Integer> customIds = new ArrayList<>();
 
     /**
-     * 收货方id(多选)
-     */
-    private List<Integer> receiverIds = new ArrayList<>();
-
-    /**
      * 开始时间
      */
     private String startTime;
